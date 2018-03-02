@@ -1,0 +1,17 @@
+Challenges:
+  Test:
+    Title: "§eテスト実績"
+    Description:
+      - "§a取得条件:"
+      - "§r§f10回生き残る。"
+    DisplayItemType: 1
+    DisplayItemDamage: 1
+    Slot: 0
+    Open:
+      生存:
+        Key: "Win"
+        Name: "All"
+        Count: 10
+
+Settings:
+  InventoryRows: 3

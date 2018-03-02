@@ -1,0 +1,22 @@
+name: MinecraftJinro
+version: ${project.version}
+main: io.github.axtuki1.jinro.Jinro
+permissions:
+    axtuki1.Jinro.GameMaster:
+        description: GameMaster
+        default: op
+    axtuki1.Jinro.Spectator:
+        description: Spectator
+        default: false
+    axtuki1.Jinro.Player:
+        description: Player
+        default: true
+commands:
+    jinro:
+        description: Player
+        permission: axtuki1.Jinro.Player
+        usage: 一般向けのコマンドやで だれでも使えるやで
+    jinro_ad:
+        description: GameMaster
+        permission: axtuki1.Jinro.GameMaster
+        usage: GM向けのコマンドやで 一般会員は使えないやで

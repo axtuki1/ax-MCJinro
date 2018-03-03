@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.yaml.snakeyaml.error.YAMLException;
 
 public class Jinro extends JavaPlugin {
 	
@@ -463,13 +464,7 @@ public class Jinro extends JavaPlugin {
 					sender.sendMessage(getPrefix() + args[1] + "のカミングアウトを取り消しました。");
 				} else {
 					if(Yakusyoku.getNameToYaku(args[2]) == null){
-						sender.sendMessage(Jinro.getPrefix() + ChatColor.AQUA + "役職指定に使用できる文字は以下の通りです。");
-						sender.sendMessage(ChatColor.AQUA + "村人:murabito 人狼:jinro 占い師:uranai");
-						sender.sendMessage(ChatColor.AQUA + "狂人:kyoujin 狩人:kariudo 共有者:kyouyu");
-						sender.sendMessage(ChatColor.AQUA + "霊能者:reinou 妖狐:yoko 爆弾魔:bakudan");
-						sender.sendMessage(ChatColor.AQUA + "コスプレイヤー:cosplayer 人形使い:ningyou");
-						sender.sendMessage(ChatColor.AQUA + "ニワトリ:niwatori");
-						sender.sendMessage(ChatColor.AQUA + "白[○]:siro 黒[●]:kuro");
+						ComingOut.sendCOHelp(sender);
 					} else if(args[2].equalsIgnoreCase("siro")) {
 						if(Jinro.getMain().getConfig().getBoolean("ShowComingOut")) {
 							p.setPlayerListName("[○] " + p.getName() + " ");
@@ -1201,18 +1196,27 @@ public class Jinro extends JavaPlugin {
 				} else if(args[1].equalsIgnoreCase("play")){
 					sender.sendMessage(ChatColor.RED + "===========================================");
 					sender.sendMessage("総参加回数: " + ChatColor.YELLOW + Stats.getPlay((Player)sender) +"回 (P)" + ChatColor.GRAY + " | " + ChatColor.WHITE +"総勝利回数: " + ChatColor.YELLOW + Stats.getWin( (Player)sender ) +"回 (W)");
-					sender.sendMessage("村人: " + ChatColor.YELLOW + "P:" + Stats.getPlay((Player)sender, Yakusyoku.getYakuToName(Yakusyoku.村人)) + "回 W:" + Stats.getWin( (Player)sender, Yakusyoku.getYakuToName(Yakusyoku.村人) ) +"回 "+
-							ChatColor.WHITE + "占い: " + ChatColor.YELLOW + "P:" + Stats.getPlay((Player)sender, Yakusyoku.getYakuToName(Yakusyoku.占い師)) + "回 W:" + Stats.getWin( (Player)sender, Yakusyoku.getYakuToName(Yakusyoku.占い師) ) +"回");
-					sender.sendMessage("霊能: " + ChatColor.YELLOW + "P:" + Stats.getPlay((Player)sender, Yakusyoku.getYakuToName(Yakusyoku.霊能者)) + "回 W:" + Stats.getWin( (Player)sender, Yakusyoku.getYakuToName(Yakusyoku.霊能者) ) +"回 " +
-							ChatColor.WHITE + "共有: " + ChatColor.YELLOW + "P:" + Stats.getPlay((Player)sender, Yakusyoku.getYakuToName(Yakusyoku.共有者)) + "回 W:" + Stats.getWin( (Player)sender, Yakusyoku.getYakuToName(Yakusyoku.共有者) ) +"回");
-					sender.sendMessage("爆弾: " + ChatColor.YELLOW + "P:" + Stats.getPlay((Player)sender, Yakusyoku.getYakuToName(Yakusyoku.爆弾魔)) + "回 W:" + Stats.getWin( (Player)sender, Yakusyoku.getYakuToName(Yakusyoku.爆弾魔) ) +"回 " +
-							ChatColor.WHITE + "狩人: " + ChatColor.YELLOW + "P:" + Stats.getPlay((Player)sender, Yakusyoku.getYakuToName(Yakusyoku.狩人)) + "回 W:" + Stats.getWin( (Player)sender, Yakusyoku.getYakuToName(Yakusyoku.狩人) ) +"回");
-					sender.sendMessage(ChatColor.WHITE + "コス: " + ChatColor.YELLOW + "P:" + Stats.getPlay((Player)sender, Yakusyoku.getYakuToName(Yakusyoku.コスプレイヤー)) + "回 W:" + Stats.getWin( (Player)sender, Yakusyoku.getYakuToName(Yakusyoku.コスプレイヤー) ) +"回 " +
-							ChatColor.WHITE + "人形: " + ChatColor.YELLOW + "P:" + Stats.getPlay((Player)sender, Yakusyoku.getYakuToName(Yakusyoku.人形使い)) + "回 W:" + Stats.getWin( (Player)sender, Yakusyoku.getYakuToName(Yakusyoku.人形使い) ) +"回");
-					sender.sendMessage("ﾆﾜﾄﾘ: " + ChatColor.YELLOW + "P:" + Stats.getPlay((Player)sender, Yakusyoku.getYakuToName(Yakusyoku.ニワトリ)) + "回 W:" + Stats.getWin( (Player)sender, Yakusyoku.getYakuToName(Yakusyoku.ニワトリ) ) +"回 " );
-					sender.sendMessage("人狼: " + ChatColor.YELLOW + "P:" + Stats.getPlay((Player)sender, Yakusyoku.getYakuToName(Yakusyoku.人狼)) + "回 W:" + Stats.getWin( (Player)sender, Yakusyoku.getYakuToName(Yakusyoku.人狼) ) +"回 " +
-							ChatColor.WHITE + "狂人: " + ChatColor.YELLOW + "P:" + Stats.getPlay((Player)sender, Yakusyoku.getYakuToName(Yakusyoku.狂人)) + "回 W:" + Stats.getWin( (Player)sender, Yakusyoku.getYakuToName(Yakusyoku.狩人) ) +"回");
-					sender.sendMessage("妖狐: " + ChatColor.YELLOW + "P:" + Stats.getPlay((Player)sender, Yakusyoku.getYakuToName(Yakusyoku.妖狐)) + "回 W:" + Stats.getWin( (Player)sender, Yakusyoku.getYakuToName(Yakusyoku.妖狐) ) +"回 " );
+					int r = -1;
+					ArrayList<String> out = new ArrayList<String>();
+					String tmp = "";
+					for( String yn : Yakusyoku.getYakuList() ){
+						Yakusyoku y = Yakusyoku.getNameToYaku(yn);
+						if( r >= 2 ) {
+							r = 0;
+							out.add(tmp);
+							tmp = "";
+						} else {
+							r++;
+						}
+//						Jinro.getMain().getLogger().info("===========");
+//						Jinro.getMain().getLogger().info(yn);
+//						Jinro.getMain().getLogger().info(y.toString());
+						tmp = tmp + ChatColor.WHITE + Yakusyoku.getYaku2moji(y) + ": " + ChatColor.YELLOW + "P:" + Stats.getPlay((Player)sender, Yakusyoku.getYakuToName(y)) + "回 W:" + Stats.getWin( (Player)sender, Yakusyoku.getYakuToName(y) ) +"回 ";
+					}
+					for( String o : out ){
+						sender.sendMessage(o);
+					}
+					sender.sendMessage(tmp);
 					sender.sendMessage(ChatColor.RED + "===========================================");
 				} else if(args[1].equalsIgnoreCase("Action")){
 					sender.sendMessage(ChatColor.RED + "===================================");
@@ -1631,7 +1635,10 @@ public class Jinro extends JavaPlugin {
 					return view;
 				} else if(args.length == 3){
 					String arg = args[2].toLowerCase();
-					for ( String name : new String[]{"siro","kuro","murabito","jinro","uranai","reinou","kyoujin","kariudo","kyouyu","yoko", "bakudan", "cosplayer", "ningyou", "niwatori", "del"} ) {
+					ArrayList<String> a = new ArrayList<String>();
+					Collections.addAll(a, Yakusyoku.getCOList());
+					a.add("del");
+					for ( String name : a ) {
 						if ( name.toLowerCase().startsWith(arg) ) {
 							view.add(name);
 						}
@@ -1641,7 +1648,10 @@ public class Jinro extends JavaPlugin {
 			} else if(args[0].equalsIgnoreCase("yakusyoku")){
 				if(args.length == 2){
 					String arg = args[1].toLowerCase();
-					for ( String name : new String[]{"murabito","jinro","uranai","reinou","kyoujin","kariudo","kyouyu","yoko","bakudan", "cosplayer", "ningyou", "niwatori","del","random"} ) {
+					ArrayList<String> a = new ArrayList<String>();
+					Collections.addAll(a, Yakusyoku.getYakuList());
+					a.add("del");
+					for ( String name : a ) {
 						if ( name.toLowerCase().startsWith(arg) ) {
 							view.add(name);
 						}

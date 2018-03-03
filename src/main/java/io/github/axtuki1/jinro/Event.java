@@ -167,7 +167,8 @@ public class Event implements Listener {
 			// 人狼 アオォォォォォォォォォン
 			if( Yakusyoku.getYaku(e.getPlayer()) == Yakusyoku.人狼 ) {
 				for(Player p : Bukkit.getOnlinePlayers()) {
-					if( Yakusyoku.getYaku( p ) == Yakusyoku.人狼) {
+					Yakusyoku py = Yakusyoku.getYaku( p );
+					if( py.equals(Yakusyoku.人狼) || py.equals(Yakusyoku.聴狂人) ) {
 						y = Yakusyoku.getYaku(e.getPlayer());
 						yaku = "";
 						if(y != null){
@@ -176,7 +177,7 @@ public class Event implements Listener {
 						p.sendMessage(Yakusyoku.getYakuColor( y ) + "[" + yaku + "] <"+e.getPlayer().getName()+"> " + e.getMessage());
 						p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WOLF_GROWL, (float)0.1, 1);
 					} else if(p.hasPermission("axtuki1.Jinro.GameMaster")){
-
+						// do nothing.
 					} else {
 						p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "アオォォーン....");
 						p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WOLF_GROWL, (float)0.1, 1);

@@ -11,7 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public enum Yakusyoku {
-	村人, 人狼, 占い師, 霊能者, 狂人, 狩人, 共有者, 妖狐, 爆弾魔, コスプレイヤー, 人形使い, ニワトリ, 白, 黒;
+	村人, 人狼, 占い師, 霊能者, 狂人, 聴狂人, 狂信者, 狩人, 共有者, 妖狐, 爆弾魔, コスプレイヤー, 人形使い, ニワトリ, 白, 黒;
 	
 	// プレイヤーの役職等 内部処理担当	
 
@@ -19,8 +19,8 @@ public enum Yakusyoku {
 	
 	private static Player Execution = null;
 	
-	private static String[] YakuList = new String[]{"murabito","jinro","uranai","reinou","kyoujin","kariudo","kyouyu","yoko","bakudan","cosplayer", "ningyou", "niwatori"};
-	private static String[] COList = new String[]{"murabito","jinro","uranai","reinou","kyoujin","kariudo","kyouyu","yoko","bakudan","cosplayer", "ningyou", "niwatori","siro","kuro"};
+	private static String[] YakuList = new String[]{"murabito","uranai","reinou","kariudo","kyouyu","bakudan","cosplayer","ningyou","niwatori","jinro","kyoujin","tyoukyoujin","kyousinja","yoko"};
+	private static String[] COList = new String[]{"murabito","uranai","reinou","kariudo","kyouyu","bakudan","cosplayer","ningyou","niwatori","jinro","kyoujin","tyoukyoujin","kyousinja","yoko","siro","kuro"};
 
 	public static List<String> getPlayingPlayersName(){
 		ArrayList<String> out = new ArrayList<>();
@@ -292,6 +292,12 @@ public enum Yakusyoku {
 			case 狂人:
 				out = ChatColor.BLUE;
 				break;
+			case 聴狂人:
+				out = ChatColor.BLUE;
+				break;
+			case 狂信者:
+				out = ChatColor.BLUE;
+				break;
 			case 共有者:
 				out = ChatColor.GOLD;
 				break;
@@ -332,6 +338,10 @@ public enum Yakusyoku {
 			yaku = 霊能者;
 		} else if(name.equalsIgnoreCase("kyoujin")){
 			yaku = 狂人;
+		} else if(name.equalsIgnoreCase("tyoukyoujin")){
+			yaku = 聴狂人;
+		} else if(name.equalsIgnoreCase("kyousinja")){
+			yaku = 狂信者;
 		} else if(name.equalsIgnoreCase("kariudo")){
 			yaku = 狩人;
 		} else if(name.equalsIgnoreCase("kyouyu")){
@@ -371,6 +381,12 @@ public enum Yakusyoku {
 				break;
 			case 狂人:
 				out = "kyoujin";
+				break;
+			case 聴狂人:
+				out = "tyoukyoujin";
+				break;
+			case 狂信者:
+				out = "kyousinja";
 				break;
 			case 共有者:
 				out = "kyouyu";
@@ -420,6 +436,12 @@ public enum Yakusyoku {
 				break;
 			case 狂人:
 				out = "狂人";
+				break;
+			case 聴狂人:
+				out = "聴狂";
+				break;
+			case 狂信者:
+				out = "狂信";
 				break;
 			case 共有者:
 				out = "共有";
@@ -583,19 +605,23 @@ public enum Yakusyoku {
 	}
 
 	public static void setYakuFromTool(JSONArray players, Yakusyoku y) {
-
+		Jinro.getMain().getLogger().info( "===================["+y.toString()+"]" );
 		for(Object a : players){
 			//System.out.print(p);
 			String p = a.toString();
+
 			if(p.equalsIgnoreCase("初日犠牲者")){
 				setSyoniti(y);
+				Jinro.getMain().getLogger().info( p );
 				return;
 			}
 			Player pp = Bukkit.getPlayer(p);
 			if (pp != null) {
 				pp.sendMessage(ChatColor.RED + "=== " + ChatColor.WHITE + "あなたは " + Yakusyoku.getYakuColor(y) + "[" + y.name() + "]" + ChatColor.WHITE + " です。" + ChatColor.RED + " ===");
 				addYaku(pp,y);
+				Jinro.getMain().getLogger().info( p );
 			} else {
+				Jinro.getMain().getLogger().info( p + " [Not Found]" );
 				//Jinro.getMain().getLogger().log(Level.WARNING,p + "というプレイヤーは存在しません");
 			}
 		}
@@ -617,30 +643,28 @@ public enum Yakusyoku {
 		}
 
 		if (args.length <= 2) {
-			Jinro.sendMessage(sender, "役職指定に使用できる文字は以下の通りです。", LogLevel.INFO);
-			Jinro.sendMessage(sender, "村人:murabito 人狼:jinro 占い師:uranai", LogLevel.INFO);
-			Jinro.sendMessage(sender, "狂人:kyoujin 狩人:kariudo 共有者:kyouyu", LogLevel.INFO);
-			Jinro.sendMessage(sender, "霊能者:reinou 妖狐:yoko 爆弾魔:bakudan", LogLevel.INFO);
-			Jinro.sendMessage(sender, "コスプレイヤー:cosplayer 人形使い:ningyou", LogLevel.INFO);
-			Jinro.sendMessage(sender, "ニワトリ:niwatori", LogLevel.INFO);
+			sendYakuHelp(sender);
 			return true;
 		} else {
 			if(args[1].equalsIgnoreCase("ToolImport") ){
 				if(args.length >= 3){
 					JSONObject jsonObject = new JSONObject(Utility.CommandText(args, 2));
 					// jinro_ad yakusyoku ToolImport 村人2   占い師3   霊能者4   共有者5   狩人6   爆弾魔7   人狼8   狂人9
-					setYakuFromTool(jsonObject.getJSONArray("murabito"), Yakusyoku.村人);
-					setYakuFromTool(jsonObject.getJSONArray("uranai"), Yakusyoku.占い師);
-					setYakuFromTool(jsonObject.getJSONArray("reinou"), Yakusyoku.霊能者);
-					setYakuFromTool(jsonObject.getJSONArray("kyouyu"), Yakusyoku.共有者);
-					setYakuFromTool(jsonObject.getJSONArray("kariudo"), Yakusyoku.狩人);
-					setYakuFromTool(jsonObject.getJSONArray("bakudan"), Yakusyoku.爆弾魔);
-					setYakuFromTool(jsonObject.getJSONArray("jinro"), Yakusyoku.人狼);
-					setYakuFromTool(jsonObject.getJSONArray("kyoujin"), Yakusyoku.狂人);
-					setYakuFromTool(jsonObject.getJSONArray("yoko"), Yakusyoku.妖狐);
-					setYakuFromTool(jsonObject.getJSONArray("ningyou"), Yakusyoku.人形使い);
-					setYakuFromTool(jsonObject.getJSONArray("niwatori"), Yakusyoku.ニワトリ);
-					setYakuFromTool(jsonObject.getJSONArray("cosplayer"), Yakusyoku.コスプレイヤー);
+//					setYakuFromTool(jsonObject.getJSONArray("murabito"), Yakusyoku.村人);
+//					setYakuFromTool(jsonObject.getJSONArray("uranai"), Yakusyoku.占い師);
+//					setYakuFromTool(jsonObject.getJSONArray("reinou"), Yakusyoku.霊能者);
+//					setYakuFromTool(jsonObject.getJSONArray("kyouyu"), Yakusyoku.共有者);
+//					setYakuFromTool(jsonObject.getJSONArray("kariudo"), Yakusyoku.狩人);
+//					setYakuFromTool(jsonObject.getJSONArray("bakudan"), Yakusyoku.爆弾魔);
+//					setYakuFromTool(jsonObject.getJSONArray("jinro"), Yakusyoku.人狼);
+//					setYakuFromTool(jsonObject.getJSONArray("kyoujin"), Yakusyoku.狂人);
+//					setYakuFromTool(jsonObject.getJSONArray("yoko"), Yakusyoku.妖狐);
+//					setYakuFromTool(jsonObject.getJSONArray("ningyou"), Yakusyoku.人形使い);
+//					setYakuFromTool(jsonObject.getJSONArray("niwatori"), Yakusyoku.ニワトリ);
+//					setYakuFromTool(jsonObject.getJSONArray("cosplayer"), Yakusyoku.コスプレイヤー);
+					for( String k : YakuList ){
+						setYakuFromTool(jsonObject.getJSONArray(k), getNameToYaku(k));
+					}
 					sender.sendMessage(ChatColor.RED + "===================================");
 					sender.sendMessage(ChatColor.GREEN + "役は以下のようにセットされました。");
 					yaku = Yakusyoku.getSyoniti();
@@ -679,12 +703,7 @@ public enum Yakusyoku {
 				}
 				yaku = getNameToYaku(args[1]);
 				if(yaku == null){
-					Jinro.sendMessage(sender, "役職指定に使用できる文字は以下の通りです。", LogLevel.INFO);
-					Jinro.sendMessage(sender, "村人:murabito 人狼:jinro 占い師:uranai", LogLevel.INFO);
-					Jinro.sendMessage(sender, "狂人:kyoujin 狩人:kariudo 共有者:kyouyu", LogLevel.INFO);
-					Jinro.sendMessage(sender, "霊能者:reinou 妖狐:yoko 爆弾魔:bakudan", LogLevel.INFO);
-					Jinro.sendMessage(sender, "コスプレイヤー:cosplayer 人形使い:ningyou", LogLevel.INFO);
-					Jinro.sendMessage(sender, "ニワトリ:niwatori", LogLevel.INFO);
+					sendYakuHelp(sender);
 					return true;
 				}
 				if( ( yaku == Yakusyoku.人狼 || yaku == Yakusyoku.妖狐 ) && !Jinro.getDebug() ){
@@ -750,12 +769,7 @@ public enum Yakusyoku {
 				return true;
 			}
 			if (yaku == null) {
-				Jinro.sendMessage(sender, "役職指定に使用できる文字は以下の通りです。", LogLevel.INFO);
-				Jinro.sendMessage(sender, "村人:murabito 人狼:jinro 占い師:uranai", LogLevel.INFO);
-				Jinro.sendMessage(sender, "狂人:kyoujin 狩人:kariudo 共有者:kyouyu", LogLevel.INFO);
-				Jinro.sendMessage(sender, "霊能者:reinou 妖狐:yoko 爆弾魔:bakudan", LogLevel.INFO);
-				Jinro.sendMessage(sender, "コスプレイヤー:cosplayer 人形使い:ningyou", LogLevel.INFO);
-				Jinro.sendMessage(sender, "ニワトリ:niwatori", LogLevel.INFO);
+				sendYakuHelp(sender);
 				return true;
 			}
 			// [DEBUG] sender.sendMessage(p.toString());
@@ -767,5 +781,18 @@ public enum Yakusyoku {
 			return true;
 		}
 		return true;
+	}
+
+	public static void sendYakuHelp(CommandSender sender) {
+		sendYakuHelp( ((Player) sender) );
+	}
+
+	public static void sendYakuHelp( Player sender ){
+		Jinro.sendMessage(sender, "役職指定に使用できる文字は以下の通りです。", LogLevel.INFO);
+		Jinro.sendMessage(sender, "村人:murabito 占い師:uranai 霊能者:reinou", LogLevel.INFO);
+		Jinro.sendMessage(sender, "狩人:kariudo 共有者:kyouyu 爆弾魔:bakudan", LogLevel.INFO);
+		Jinro.sendMessage(sender, "ｺｽﾌﾟﾚｲﾔｰ:cosplayer 人形使い:ningyou 妖狐:yoko ", LogLevel.INFO);
+		Jinro.sendMessage(sender, "ニワトリ:niwatori 人狼:jinro 狂人:kyoujin", LogLevel.INFO);
+		Jinro.sendMessage(sender, "聴狂人:tyoukyoujin 狂信者:kyousinja", LogLevel.INFO);
 	}
 }

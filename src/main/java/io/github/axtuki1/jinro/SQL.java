@@ -122,6 +122,8 @@ public class SQL {
                         "`cosplayer` INT(255)," +
                         "`ningyou` INT(255)," +
                         "`niwatori` INT(255)" +
+                        "`kyousinja` INT(255)" +
+                        "`tyoukyoujin` INT(255)" +
                         ");");
                 Jinro.getMain().getLogger().info("Create Table `Jinro-UserStats-Win`");
             }
@@ -142,6 +144,8 @@ public class SQL {
                         "`cosplayer` INT(255)," +
                         "`ningyou` INT(255)," +
                         "`niwatori` INT(255)" +
+                        "`kyousinja` INT(255)" +
+                        "`tyoukyoujin` INT(255)" +
                         ");");
                 Jinro.getMain().getLogger().info("Create Table `Jinro-UserStats-Play`");
             }

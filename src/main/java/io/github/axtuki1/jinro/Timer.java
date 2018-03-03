@@ -328,6 +328,30 @@ public class Timer extends BukkitRunnable {
                             p.sendMessage(yc + "推理力とトークスキルで人狼を勝利へ導いてください。");
                             p.sendMessage(yc + "目標: 人狼の勝利");
                             break;
+                        case 聴狂人:
+                            p.sendMessage(yc + "あなたは 聴狂人 です。");
+                            p.sendMessage(yc + "人狼の会話を聴くことができます。");
+                            p.sendMessage(yc + "空気を読む力とトークスキルで人狼を勝利へ導いてください。");
+                            p.sendMessage(yc + "目標: 人狼の勝利");
+                            if (day == 1) {
+                                p.sendMessage(ChatColor.RED + "====[今回の人狼は]====");
+                                for (Player a : Yakusyoku.getPlayers(Yakusyoku.人狼)) {
+                                    p.sendMessage(ChatColor.RED + "[ " + a.getName() + " ]");
+                                }
+                            }
+                            break;
+                        case 狂信者:
+                            p.sendMessage(yc + "あなたは 狂信者 です。");
+                            p.sendMessage(yc + "能力は人狼のメンバーを把握することのみです。");
+                            p.sendMessage(yc + "空気を読む力とトークスキルで人狼を勝利へ導いてください。");
+                            p.sendMessage(yc + "目標: 人狼の勝利");
+                            if (day == 1) {
+                                p.sendMessage(ChatColor.RED + "====[今回の人狼は]====");
+                                for (Player a : Yakusyoku.getPlayers(Yakusyoku.人狼)) {
+                                    p.sendMessage(ChatColor.RED + "[ " + a.getName() + " ]");
+                                }
+                            }
+                            break;
                         case 妖狐:
                             p.sendMessage(yc + "あなたは 妖狐 です。");
                             p.sendMessage(yc + "人狼に襲われても死にませんが占い師に占われると死んでしまいます。");
@@ -573,6 +597,8 @@ public class Timer extends BukkitRunnable {
                 Bukkit.broadcastMessage(ChatColor.DARK_RED + "====[人狼が勝利しました]====");
                 Stats.setWin(Yakusyoku.人狼);
                 Stats.setWin(Yakusyoku.狂人);
+                Stats.setWin(Yakusyoku.狂信者);
+                Stats.setWin(Yakusyoku.聴狂人);
             }
             setGameEndFlag(true);
             return;

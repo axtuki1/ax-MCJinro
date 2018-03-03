@@ -23,13 +23,7 @@ public class ComingOut extends JavaPlugin {
 		if(Status.getStatus() == Status.GamePlaying && Cycle.getStatus() == Cycle.Discussion){
 			if(args.length == 1){
 				// jinro co
-				sender.sendMessage(Jinro.getPrefix() + ChatColor.AQUA + "役職指定に使用できる文字は以下の通りです。");
-				sender.sendMessage(ChatColor.AQUA + "村人:murabito 人狼:jinro 占い師:uranai");
-				sender.sendMessage(ChatColor.AQUA + "狂人:kyoujin 狩人:kariudo 共有者:kyouyu");
-				sender.sendMessage(ChatColor.AQUA + "霊能者:reinou 妖狐:yoko 爆弾魔:bakudan");
-				sender.sendMessage(ChatColor.AQUA + "コスプレイヤー:cosplayer 人形使い:ningyou");
-				sender.sendMessage(ChatColor.AQUA + "ニワトリ:niwatori");
-				sender.sendMessage(ChatColor.AQUA + "白[○]:siro 黒[●]:kuro");
+				sendCOHelp(sender);
 			} else if(args.length == 2){
 				// jinro co いえｊんぎうぇごんｇ
 				Player p = Utility.getPlayer(sender.getName());
@@ -48,13 +42,7 @@ public class ComingOut extends JavaPlugin {
 				} else {
 					Yakusyoku yaku = Yakusyoku.getNameToYaku(args[1]);
 					if(yaku == null){
-						sender.sendMessage(Jinro.getPrefix() + ChatColor.AQUA + "役職指定に使用できる文字は以下の通りです。");
-						sender.sendMessage(ChatColor.AQUA + "村人:murabito 人狼:jinro 占い師:uranai");
-						sender.sendMessage(ChatColor.AQUA + "狂人:kyoujin 狩人:kariudo 共有者:kyouyu");
-						sender.sendMessage(ChatColor.AQUA + "霊能者:reinou 妖狐:yoko 爆弾魔:bakudan");
-						sender.sendMessage(ChatColor.AQUA + "コスプレイヤー:cosplayer 人形使い:ningyou");
-						sender.sendMessage(ChatColor.AQUA + "ニワトリ:niwatori");
-						sender.sendMessage(ChatColor.AQUA + "白[○]:siro 黒[●]:kuro");
+						sendCOHelp(sender);
 						return true;
 					}
 					setComingOut(p, yaku);
@@ -64,13 +52,7 @@ public class ComingOut extends JavaPlugin {
 					}
 				}
 			} else {
-				sender.sendMessage(Jinro.getPrefix() + ChatColor.AQUA + "役職指定に使用できる文字は以下の通りです。");
-				sender.sendMessage(ChatColor.AQUA + "村人:murabito 人狼:jinro 占い師:uranai");
-				sender.sendMessage(ChatColor.AQUA + "狂人:kyoujin 狩人:kariudo 共有者:kyouyu");
-				sender.sendMessage(ChatColor.AQUA + "霊能者:reinou 妖狐:yoko 爆弾魔:bakudan");
-				sender.sendMessage(ChatColor.AQUA + "コスプレイヤー:cosplayer 人形使い:ningyou");
-				sender.sendMessage(ChatColor.AQUA + "ニワトリ:niwatori");
-				sender.sendMessage(ChatColor.AQUA + "白[○]:siro 黒[●]:kuro");
+				sendCOHelp(sender);
 			}
 		} else {
 			sender.sendMessage(Jinro.getPrefix() + "現在カミングアウトは出来ません。");
@@ -99,6 +81,15 @@ public class ComingOut extends JavaPlugin {
 		Data.set("Players." + p.getName() + ".co", null);
 		Data.saveConfig();
 		return;
+	}
+
+	public static void sendCOHelp(CommandSender sender) {
+		sendCOHelp( ((Player) sender) );
+	}
+
+	public static void sendCOHelp( Player sender ){
+		Yakusyoku.sendYakuHelp(sender);
+		Jinro.sendMessage(sender, "白[○]:siro 黒[●]:kuro", LogLevel.INFO);
 	}
 
 }

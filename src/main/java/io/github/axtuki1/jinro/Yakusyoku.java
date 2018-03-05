@@ -637,7 +637,7 @@ public enum Yakusyoku {
 			sender.sendMessage(a);
 		}
 		*/
-		if( Status.getStatus() != Status.GameStandby ){
+		if( !Status.getStatus().equals(Status.GameStandby) ){
 			Jinro.sendMessage(sender, "現在役を振ることはできません。", LogLevel.ERROR );
 			return true;
 		}
@@ -649,19 +649,6 @@ public enum Yakusyoku {
 			if(args[1].equalsIgnoreCase("ToolImport") ){
 				if(args.length >= 3){
 					JSONObject jsonObject = new JSONObject(Utility.CommandText(args, 2));
-					// jinro_ad yakusyoku ToolImport 村人2   占い師3   霊能者4   共有者5   狩人6   爆弾魔7   人狼8   狂人9
-//					setYakuFromTool(jsonObject.getJSONArray("murabito"), Yakusyoku.村人);
-//					setYakuFromTool(jsonObject.getJSONArray("uranai"), Yakusyoku.占い師);
-//					setYakuFromTool(jsonObject.getJSONArray("reinou"), Yakusyoku.霊能者);
-//					setYakuFromTool(jsonObject.getJSONArray("kyouyu"), Yakusyoku.共有者);
-//					setYakuFromTool(jsonObject.getJSONArray("kariudo"), Yakusyoku.狩人);
-//					setYakuFromTool(jsonObject.getJSONArray("bakudan"), Yakusyoku.爆弾魔);
-//					setYakuFromTool(jsonObject.getJSONArray("jinro"), Yakusyoku.人狼);
-//					setYakuFromTool(jsonObject.getJSONArray("kyoujin"), Yakusyoku.狂人);
-//					setYakuFromTool(jsonObject.getJSONArray("yoko"), Yakusyoku.妖狐);
-//					setYakuFromTool(jsonObject.getJSONArray("ningyou"), Yakusyoku.人形使い);
-//					setYakuFromTool(jsonObject.getJSONArray("niwatori"), Yakusyoku.ニワトリ);
-//					setYakuFromTool(jsonObject.getJSONArray("cosplayer"), Yakusyoku.コスプレイヤー);
 					for( String k : YakuList ){
 						setYakuFromTool(jsonObject.getJSONArray(k), getNameToYaku(k));
 					}

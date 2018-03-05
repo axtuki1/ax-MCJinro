@@ -4,7 +4,7 @@
   <groupId>io.github.axtuki1</groupId>
   <artifactId>MinecraftJinro</artifactId>
   <name>MinecraftJinro</name>
-  <version>1.1</version>
+  <version>1.2</version>
   <build>
     <defaultGoal>clean package</defaultGoal>
     <resources>

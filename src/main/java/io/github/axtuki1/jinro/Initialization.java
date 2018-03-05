@@ -84,6 +84,11 @@ public class Initialization extends JavaPlugin {
 	}
 	
 	public static boolean Admin(CommandSender sender, String commandLabel, String[] args) {
+		if( Status.getStatus().equals(Status.GamePlaying) ){
+			Jinro.sendMessage(sender, "ゲーム中に初期化はできません。", LogLevel.ERROR, true);
+			Jinro.sendMessage(sender, "初期化する場合はゲームを終了させてください。", LogLevel.ERROR, true);
+			return true;
+		}
 		sender.sendMessage(Jinro.getPrefix() + "初期化します。");
 		Admin();
 	    sender.sendMessage(Jinro.getPrefix() + "初期化しました。");

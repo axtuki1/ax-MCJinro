@@ -98,7 +98,7 @@ public class Touhyou extends JavaPlugin {
 				Map<Player, Integer> touhyouC = new HashMap<Player, Integer>();
 				int max = 0;
 
-				Bukkit.broadcastMessage(ChatColor.RED + "========[投票結果]========");
+				Bukkit.broadcastMessage(ChatColor.RED + "============[投票結果]============");
 
 				for(Player p : alive){
 					Player touhyoup = getTouhyou(p);
@@ -122,7 +122,7 @@ public class Touhyou extends JavaPlugin {
 				}
 
 
-				Bukkit.broadcastMessage(ChatColor.RED + "=========================");
+				Bukkit.broadcastMessage(ChatColor.RED + "=================================");
 
 				Player syokei = null;
 
@@ -146,7 +146,7 @@ public class Touhyou extends JavaPlugin {
 
 				max_found = false;
 
-				Bukkit.broadcastMessage(ChatColor.RED + "=========================");
+				Bukkit.broadcastMessage(ChatColor.RED + "=================================");
 
 				boolean touhyou_again = false;
 				for(int a : touhyouC.values()){
@@ -167,7 +167,7 @@ public class Touhyou extends JavaPlugin {
 					Cycle.setStatus(Cycle.Vote);
 					Timer.NextCycle();
 				}
-				Bukkit.broadcastMessage(ChatColor.RED + "=========================");
+				Bukkit.broadcastMessage(ChatColor.RED + "=================================");
 				if(touhyou_again){
 					Cycle.setStatus(Cycle.VoteAgain);
 				}
@@ -178,7 +178,7 @@ public class Touhyou extends JavaPlugin {
 				touhyouC = new HashMap<Player, Integer>();
 				max = 0;
 
-				sender.sendMessage(ChatColor.RED + "=======[投票結果]=======");
+				sender.sendMessage(ChatColor.RED + "============[投票結果]============");
 
 				for(Player p : alive){
 					Player touhyoup = getTouhyou(p);
@@ -202,7 +202,7 @@ public class Touhyou extends JavaPlugin {
 				}
 
 
-				sender.sendMessage(ChatColor.RED + "=========================");
+				sender.sendMessage(ChatColor.RED + "=================================");
 
 				syokei = null;
 

@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.yaml.snakeyaml.error.YAMLException;
 
 public class Jinro extends JavaPlugin {
 	
@@ -277,7 +276,7 @@ public class Jinro extends JavaPlugin {
                 	if(!p.hasPermission("axtuki1.Jinro.GameMaster")){
 						if( Data.getBoolean("Players." + p.getName() + ".Spectator") ){
 							p.sendMessage(ChatColor.GREEN + "観戦モードです。");
-							p.sendMessage(ChatColor.GREEN + "チャットは一切できません。");
+							p.sendMessage(ChatColor.GREEN + "観戦者と霊界でチャットができます。");
 							p.setGameMode(GameMode.SPECTATOR);
 						} else {
 							playerC++;
@@ -1260,6 +1259,8 @@ public class Jinro extends JavaPlugin {
 			sender.sendMessage(ChatColor.RED + "===================================");
 			if(out.size() == 1 && out.get("none") != null){
 				sender.sendMessage(ChatColor.RED + "まだ役は振られていません。");
+				sender.sendMessage(ChatColor.RED + "===================================");
+				return true;
 			} else {
 				sender.sendMessage(ChatColor.GREEN + "本ゲームの役職は以下の通りです。");
 			}
@@ -1268,6 +1269,12 @@ public class Jinro extends JavaPlugin {
 					continue;
 				}
 				sender.sendMessage( Yakusyoku.getYakuNameC( Yakusyoku.getNameToYaku(key) ) + ChatColor.GREEN + ": " + ChatColor.YELLOW + out.get(key) + "人");
+			}
+			Yakusyoku py = Yakusyoku.getYaku(((Player)sender));
+			if( py != null){
+				sender.sendMessage(ChatColor.YELLOW + "あなたの役職: " + Yakusyoku.getYakuColor(py) + "[" + Yakusyoku.getYaku2moji(py) + "]");
+			} else {
+				sender.sendMessage(ChatColor.YELLOW + "あなたの役職: " + ChatColor.WHITE + "[なし]");
 			}
 			sender.sendMessage(ChatColor.RED + "===================================");
 			return true;

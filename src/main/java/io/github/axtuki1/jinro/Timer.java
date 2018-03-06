@@ -101,7 +101,7 @@ public class Timer extends BukkitRunnable {
                         continue;
                     }
                 } else if(Yakusyoku.getYaku(p) == Yakusyoku.占い師 ) {
-                    if(!Data.getBoolean("Status.uranai."+ p.getName() +"." + getDay())) {
+                    if(!Data.getBoolean("Status.uranai."+ p.getUniqueId() +"." + getDay())) {
                         bar.setText(ChatColor.GREEN + "能力を使用できます。");
                         bar.send(p);
                         continue;
@@ -111,7 +111,7 @@ public class Timer extends BukkitRunnable {
                         continue;
                     }
                 } else if(Yakusyoku.getYaku(p) == Yakusyoku.狩人) {
-                    if(Data.getString("Players." + p.getName() + ".goei") == null) {
+                    if(Data.getString("Players." + p.getUniqueId() + ".goei") == null) {
                         bar.setText(ChatColor.GREEN + "能力を使用できます。");
                         bar.send(p);
                         continue;
@@ -154,6 +154,8 @@ public class Timer extends BukkitRunnable {
 			for(Player p : Bukkit.getOnlinePlayers()){
 				Jinro.TeleportToRespawn(p);
 			}
+            Status.setStatus(Status.GameEnd);
+            Cycle.setStatus(Cycle.Standby);
 			cancel();
 		}
 		if(TimerStopFlag){
@@ -268,8 +270,8 @@ public class Timer extends BukkitRunnable {
                 }
             }
             for (Player p : Bukkit.getOnlinePlayers()) {
-                Data.set("Players."+p.getName()+".hitouhyou",null);
-                Data.set("Players."+p.getName()+".touhyou",null);
+                Data.set("Players."+p.getUniqueId()+".hitouhyou",null);
+                Data.set("Players."+p.getUniqueId()+".touhyou",null);
             }
         } else if(Cycle.getStatus() == Cycle.Vote){
             Cycle.setStatus(Cycle.Execution);
@@ -365,7 +367,7 @@ public class Timer extends BukkitRunnable {
                             p.sendMessage(yc + "なお、護衛先を変えることはできません。");
                             p.sendMessage(yc + "※ 15秒以内に対象を決めないと噛み殺される可能性があります。");
                             p.sendMessage(yc + "目標: 村人の勝利");
-                            Data.set("Players." + p.getName() + ".goei", null);
+                            Data.set("Players." + p.getUniqueId() + ".goei", null);
                             break;
                         case 霊能者:
                             p.sendMessage(yc + "あなたは 霊能者 です。");

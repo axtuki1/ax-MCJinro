@@ -122,7 +122,7 @@ public class Touhyou extends JavaPlugin {
 				}
 
 
-				Bukkit.broadcastMessage(ChatColor.RED + "=================================");
+				Bukkit.broadcastMessage(ChatColor.RED + "==================================");
 
 				Player syokei = null;
 
@@ -146,7 +146,7 @@ public class Touhyou extends JavaPlugin {
 
 				max_found = false;
 
-				Bukkit.broadcastMessage(ChatColor.RED + "=================================");
+				Bukkit.broadcastMessage(ChatColor.RED + "==================================");
 
 				boolean touhyou_again = false;
 				for(int a : touhyouC.values()){
@@ -167,7 +167,7 @@ public class Touhyou extends JavaPlugin {
 					Cycle.setStatus(Cycle.Vote);
 					Timer.NextCycle();
 				}
-				Bukkit.broadcastMessage(ChatColor.RED + "=================================");
+				Bukkit.broadcastMessage(ChatColor.RED + "==================================");
 				if(touhyou_again){
 					Cycle.setStatus(Cycle.VoteAgain);
 				}
@@ -202,7 +202,7 @@ public class Touhyou extends JavaPlugin {
 				}
 
 
-				sender.sendMessage(ChatColor.RED + "=================================");
+				sender.sendMessage(ChatColor.RED + "==================================");
 
 				syokei = null;
 
@@ -270,32 +270,32 @@ public class Touhyou extends JavaPlugin {
 	}
 
 	public static Integer getHiTouhyou(Player p) {
-		int a = Data.getInt("Players." + p.getName() + ".hitouhyou");
+		int a = Data.getInt("Players." + p.getUniqueId() + ".hitouhyou");
 		return a;
 	}
 
 	public static Player getTouhyou(Player p) {
 		Data.reloadConfig();
-		String a = Data.getString("Players." + p.getName() + ".touhyou");
+		String a = Data.getString("Players." + p.getUniqueId() + ".touhyou");
 		if(a==null){
 			return null;
 		}
-		return Utility.getPlayer( a );
+		return Bukkit.getPlayer( UUID.fromString(a) );
 	}
 
 	public static void setTouhyou(Player p, Player hp) {
-		String a = Data.getString("Players." + p.getName() + ".touhyou");
+		String a = Data.getString("Players." + p.getUniqueId() + ".touhyou");
 		if(a != null){
 			Data.set("Players." + a + ".hitouhyou", Data.getInt("Players." + a + ".hitouhyou") - 1);
 		}
-		Data.set("Players." + p.getName() + ".touhyou", hp.getName());
-		Data.set("Players." + hp.getName() + ".hitouhyou", Data.getInt("Players." + hp.getName() + ".hitouhyou") + 1);
+		Data.set("Players." + p.getUniqueId() + ".touhyou", hp.getUniqueId().toString());
+		Data.set("Players." + hp.getUniqueId() + ".hitouhyou", Data.getInt("Players." + hp.getUniqueId() + ".hitouhyou") + 1);
 		Data.saveConfig();
 		return;
 	}
 
 	public static void removeComingOut(Player p) {
-		Data.set("Players." + p.getName() + ".touhyou", null);
+		Data.set("Players." + p.getUniqueId() + ".touhyou", null);
 		Data.saveConfig();
 		return;
 	}

@@ -100,9 +100,9 @@ public class Debug extends JavaPlugin {
 				if (Yakusyoku.getGoei(Timer.getDay(), p)) {
 					kami = false;
 					Bukkit.broadcast(getPrefix() + ChatColor.GRAY + "[噛み:護衛成功]" + sender.getName() + " -->✘[" + Yakusyoku.getGoei_sender(p).getName() + "] " + p.getName() + "(" + Yakusyoku.getYakuColor(yaku) + yaku.toString() + ChatColor.GRAY + ")", "axtuki1.Jinro.GameMaster");
-				} else if( Yakusyoku.getYaku(p) == Yakusyoku.人形使い && !Data.getBoolean("Players." + p.getName() + ".Ningyou.Use") ){
+				} else if( Yakusyoku.getYaku(p) == Yakusyoku.人形使い && !Data.getBoolean("Players." + p.getUniqueId() + ".Ningyou.Use") ){
 					kami = false;
-					Data.set("Players." + p.getName() + ".Ningyou.Use", true);
+					Data.set("Players." + p.getUniqueId() + ".Ningyou.Use", true);
 					Bukkit.broadcast(getPrefix() + ChatColor.GRAY + "[噛み:身代わり]" + sender.getName() + " -->✘ " + p.getName() + ChatColor.GRAY + "(" + Yakusyoku.getYakuColor(yaku) + yaku.toString() + ChatColor.GRAY + ")", "axtuki1.Jinro.GameMaster");
 				} else if(Yakusyoku.getYaku(p) == Yakusyoku.妖狐){
 					kami = false;
@@ -124,7 +124,7 @@ public class Debug extends JavaPlugin {
 			}
 			return true;
 		}
-		return false;
+		return true;
 	}
 
 }

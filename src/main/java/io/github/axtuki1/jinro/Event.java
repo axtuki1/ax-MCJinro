@@ -68,13 +68,13 @@ public class Event implements Listener {
 		if( Yakusyoku.getDeath(e.getPlayer()) && Status.getStatus() == Status.GamePlaying){
 			Bukkit.broadcast(ChatColor.BLUE +"[霊界] <"+e.getPlayer().getName()+"> " + e.getMessage(),"axtuki1.Jinro.GameMaster");
 			for(Player p : Yakusyoku.getDeathPlayers()){
-				boolean b = Data.getBoolean("Players." + p.getName() + ".HideReikai");
+				boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideReikai");
 				if( !b ){
 					p.sendMessage( ChatColor.BLUE +"[霊界] <"+e.getPlayer().getName()+"> " + e.getMessage() );
 				}
 			}
 			for( Player p : Yakusyoku.getSpecPlayers() ){
-				boolean b = Data.getBoolean("Players." + p.getName() + ".HideReikai");
+				boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideReikai");
 				if( !b ){
 					p.sendMessage( ChatColor.BLUE +"[霊界] <"+e.getPlayer().getName()+"> " + e.getMessage() );
 				}
@@ -86,13 +86,13 @@ public class Event implements Listener {
 		if( Yakusyoku.getSpecPlayers().contains(e.getPlayer()) && Status.getStatus() == Status.GamePlaying){
 			Bukkit.broadcast(ChatColor.WHITE +"[観戦] <"+e.getPlayer().getName()+"> " + e.getMessage(),"axtuki1.Jinro.GameMaster");
 			for(Player p : Yakusyoku.getDeathPlayers()){
-				boolean b = Data.getBoolean("Players." + p.getName() + ".HideSpec");
+				boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideSpec");
 				if( !b ){
 					p.sendMessage( ChatColor.WHITE +"[観戦] <"+e.getPlayer().getName()+"> " + e.getMessage() );
 				}
 			}
 			for( Player p : Yakusyoku.getSpecPlayers() ){
-				boolean b = Data.getBoolean("Players." + p.getName() + ".HideSpec");
+				boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideSpec");
 				if( !b ){
 					p.sendMessage( ChatColor.WHITE +"[観戦] <"+e.getPlayer().getName()+"> " + e.getMessage() );
 				}
@@ -261,7 +261,7 @@ public class Event implements Listener {
 		if(Status.getStatus() == Status.GamePlaying ) {
 			if ( Yakusyoku.getYaku(p) == null && Jinro.getMain().getConfig().getBoolean("LoginSpectatorMode") && !p.hasPermission("axtuki1.Jinro.GameMaster") ) {
 				p.setGameMode(GameMode.SPECTATOR);
-				Data.set("Players." + p.getName() + ".Spectator", true);
+				Data.set("Players." + p.getUniqueId() + ".Spectator", true);
 				p.sendMessage(ChatColor.GREEN + "==== 現在観戦モードです ====");
 				// p.sendTitle(ChatColor.GREEN + "現在観戦モードです", ChatColor.AQUA + "" + Timer.getDay() + "日目 " + Cycle.getStatusLocalize(), 20, 50, 10);
 				e.setJoinMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + Utility.myReplaceAll(ChatColor.YELLOW.toString(),"",e.getJoinMessage()));

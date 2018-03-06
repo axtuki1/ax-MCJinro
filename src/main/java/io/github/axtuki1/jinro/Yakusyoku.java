@@ -87,13 +87,13 @@ public enum Yakusyoku {
 
 	public static void setGoei(Player me, Player p) {
 		List<String> n = Data.getStringList("Status.Goei."+Timer.getDay());
-		String name = Data.getString("Players." + me.getName() + ".goei");
+		String name = Data.getString("Players." + me.getUniqueId() + ".goei");
 		if(n == null){
 			n = new ArrayList<String>();
 		}
 		n.remove( Utility.getPlayer( name ) );
 		n.add(p.getName());
-		Data.set("Players." + me.getName() + ".goei", p.getName());
+		Data.set("Players." + me.getUniqueId() + ".goei", p.getName());
 		Data.set("Status.Goei."+Timer.getDay(), n);
 		
 		return;
@@ -109,7 +109,7 @@ public enum Yakusyoku {
 
 	public static Player getGoei_sender(Player p) {
 		for(Player sender : Yakusyoku.getAlivePlayers()){
-			String name = Data.getString("Players." + sender.getName() + ".goei");
+			String name = Data.getString("Players." + sender.getUniqueId() + ".goei");
 			if( name != null ){
 				if( name.equalsIgnoreCase(p.getName()) ){
 					return sender;
@@ -125,20 +125,20 @@ public enum Yakusyoku {
 	}
 
 	public static void addYaku(Player p, Yakusyoku y){
-		Data.set("Players."+p.getName()+".yaku", getYakuToName(y).toString());
+		Data.set("Players."+p.getUniqueId()+".yaku", getYakuToName(y).toString());
 		
 		return;
 	}
 	
 	public static void removeYaku(Player p){
-		Data.set("Players." + p.getName() + ".yaku", null);
+		Data.set("Players." + p.getUniqueId() + ".yaku", null);
 		
 		return;
 	}
 	
 	public static void resetYaku(){
 		for(Player p : Bukkit.getOnlinePlayers()) {
-			Data.set("Players." + p.getName() + ".yaku", null);
+			Data.set("Players." + p.getUniqueId() + ".yaku", null);
 		}
 		
 		return;
@@ -148,7 +148,7 @@ public enum Yakusyoku {
 		ArrayList<Player> out = new ArrayList<Player>();
 		for(Player p : Bukkit.getOnlinePlayers()){
 			boolean a = getDeath(p);
-			if( !Data.getBoolean("Players." + p.getName() + ".Spectator") && !a && !p.hasPermission("axtuki1.Jinro.GameMaster")){
+			if( !Data.getBoolean("Players." + p.getUniqueId() + ".Spectator") && !a && !p.hasPermission("axtuki1.Jinro.GameMaster")){
 				out.add(p);
 			}
 		}
@@ -159,7 +159,7 @@ public enum Yakusyoku {
 		ArrayList<Player> out = new ArrayList<Player>();
 		for(Player p : Bukkit.getOnlinePlayers()){
 			boolean a = getDeath(p);
-			if( !Data.getBoolean("Players." + p.getName() + ".Spectator") && a && !p.hasPermission("axtuki1.Jinro.GameMaster")){
+			if( !Data.getBoolean("Players." + p.getUniqueId() + ".Spectator") && a && !p.hasPermission("axtuki1.Jinro.GameMaster")){
 				out.add(p);
 			}
 		}
@@ -169,7 +169,7 @@ public enum Yakusyoku {
 	public static ArrayList<Player> getAllPlayers() {
 		ArrayList<Player> out = new ArrayList<Player>();
 		for(Player p : Bukkit.getOnlinePlayers()){
-			if( !Data.getBoolean("Players." + p.getName() + ".Spectator") && !p.hasPermission("axtuki1.Jinro.GameMaster")){
+			if( !Data.getBoolean("Players." + p.getUniqueId() + ".Spectator") && !p.hasPermission("axtuki1.Jinro.GameMaster")){
 				out.add(p);
 			}
 		}
@@ -180,7 +180,7 @@ public enum Yakusyoku {
 		ArrayList<Player> out = new ArrayList<Player>();
 		for(Player p : Bukkit.getOnlinePlayers()){
 			if(!p.hasPermission("axtuki1.Jinro.GameMaster")){
-				if( getYaku(p) == null && !Data.getBoolean("Players." + p.getName() + ".Spectator") ){
+				if( getYaku(p) == null && !Data.getBoolean("Players." + p.getUniqueId() + ".Spectator") ){
 					out.add(p);
 				}
 			}
@@ -192,7 +192,7 @@ public enum Yakusyoku {
 		ArrayList<Player> out = new ArrayList<Player>();
 		for(Player p : Bukkit.getOnlinePlayers()){
 			if(!p.hasPermission("axtuki1.Jinro.GameMaster")){
-				if( Data.getBoolean("Players." + p.getName() + ".Spectator") ){
+				if( Data.getBoolean("Players." + p.getUniqueId() + ".Spectator") ){
 					out.add(p);
 				}
 			}
@@ -216,17 +216,17 @@ public enum Yakusyoku {
 	}
 
 	public static boolean getDeath(Player p) {
-		return Data.getBoolean("Players." + p.getName() + ".death");
+		return Data.getBoolean("Players." + p.getUniqueId() + ".death");
 	}
 
 	public static void setDeath(Player p) {
-		Data.set("Players." + p.getName() + ".death", true);
+		Data.set("Players." + p.getUniqueId() + ".death", true);
 		p.setPlayerListName(ChatColor.BLACK + "[霊界] "+ p.getName() + " ");
 		return;
 	}
 
 	public static void removeDeath(Player p) {
-		Data.set("Players." + p.getName() + ".death", false);
+		Data.set("Players." + p.getUniqueId() + ".death", false);
 		
 		return;
 	}
@@ -235,7 +235,7 @@ public enum Yakusyoku {
 		if(p == null){
 			throw new NullPointerException("'getYaku'関数にnullを渡すことは許されません。(半ギレ)");
 		}
-		String yaku = Data.getString("Players."+p.getName()+".yaku");
+		String yaku = Data.getString("Players."+p.getUniqueId()+".yaku");
 		Yakusyoku y = null;
 		if(yaku != null){
 			y = getNameToYaku( yaku );
@@ -244,7 +244,7 @@ public enum Yakusyoku {
 	}
 	
 	public static String getYakuName(Player p){
-		String yaku = Data.getString("Players."+p.getName()+".yaku");
+		String yaku = Data.getString("Players."+p.getUniqueId()+".yaku");
 		if(yaku != null){
 			yaku = getNameToYaku( yaku ).toString();
 		}
@@ -252,7 +252,7 @@ public enum Yakusyoku {
 	}
 	
 	public static String getYakuNameC(Player p){
-		String s = Data.getString("Players."+p.getName()+".yaku");
+		String s = Data.getString("Players."+p.getUniqueId()+".yaku");
 		if(s == null){
 			return null;
 		}
@@ -269,7 +269,7 @@ public enum Yakusyoku {
 	}
 	
 	public static ChatColor getYakuColor(Player p){
-		return getYakuColor( getNameToYaku( Data.getString("Players."+p.getName()+".yaku") ) );
+		return getYakuColor( getNameToYaku( Data.getString("Players."+p.getUniqueId()+".yaku") ) );
 	}
 	
 	public static ChatColor getYakuColor(Yakusyoku yaku){
@@ -548,10 +548,10 @@ public enum Yakusyoku {
 			a = Stats.getAction(attacker, Stats.action.Kami_Fail);
 			Stats.setAction(attacker, Stats.action.Kami_Fail, (a + 1));
 			Bukkit.broadcast(Jinro.getPrefix() + ChatColor.GRAY + "[噛み:護衛成功]" + attacker.getName() + " -->✘[" + Yakusyoku.getGoei_sender(p).getName() + "] " + p.getName() + "(" + Yakusyoku.getYakuColor(yaku) + yaku.toString() + ChatColor.GRAY + ")", "axtuki1.Jinro.GameMaster");
-		} else if (Yakusyoku.getYaku(p) == Yakusyoku.人形使い && !Data.getBoolean("Players." + p.getName() + ".Ningyou.Use")) {
+		} else if (Yakusyoku.getYaku(p) == Yakusyoku.人形使い && !Data.getBoolean("Players." + p.getUniqueId() + ".Ningyou.Use")) {
 			// 人形を身代わりに
 			kami = false;
-			Data.set("Players." + p.getName() + ".Ningyou.Use", true);
+			Data.set("Players." + p.getUniqueId() + ".Ningyou.Use", true);
 			int a = Stats.getAction(attacker, Stats.action.Kami_Fail);
 			Stats.setAction(attacker, Stats.action.Kami_Fail, (a + 1));
 			Bukkit.broadcast(Jinro.getPrefix() + ChatColor.GRAY + "[噛み:身代わり]" + attacker.getName() + " -->✘ " + p.getName() + ChatColor.GRAY + "(" + Yakusyoku.getYakuColor(yaku) + yaku.toString() + ChatColor.GRAY + ")", "axtuki1.Jinro.GameMaster");

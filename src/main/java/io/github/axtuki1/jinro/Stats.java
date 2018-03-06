@@ -73,8 +73,8 @@ public enum Stats {
                 Bukkit.broadcast(Jinro.getPrefix() + "setWin(): SQLException: ["+e.getErrorCode()+"] " + e.getLocalizedMessage(), "axtuki1.Jinro.GameMaster");
             }
         } else {
-            set("Stats."+ p.getName() +".Win."+yaku, win);
-            set("Stats."+ p.getName() +".Win.All", allwin);
+            set("Stats."+ p.getUniqueId() +".Win."+yaku, win);
+            set("Stats."+ p.getUniqueId() +".Win.All", allwin);
         }
     }
 
@@ -92,7 +92,7 @@ public enum Stats {
                 Bukkit.broadcast(Jinro.getPrefix() + "setWin(): SQLException: ["+e.getErrorCode()+"] " + e.getLocalizedMessage(), "axtuki1.Jinro.GameMaster");
             }
         } else {
-            set("Stats."+ p.getName() +".Win."+yaku, win);
+            set("Stats."+ p.getUniqueId() +".Win."+yaku, win);
         }
     }
 
@@ -107,7 +107,7 @@ public enum Stats {
             } catch(SQLException e) {
                 Bukkit.broadcast(Jinro.getPrefix() + "getWin(): SQLException: ["+e.getErrorCode()+"] " + e.getLocalizedMessage(), "axtuki1.Jinro.GameMaster");            }
         } else {
-            win = getInt("Stats." + p.getName() + ".Win." + yaku);
+            win = getInt("Stats." + p.getUniqueId() + ".Win." + yaku);
         }
         return win;
     }
@@ -123,7 +123,7 @@ public enum Stats {
             } catch(SQLException e) {
                 Bukkit.broadcast(Jinro.getPrefix() + "getWin(): SQLException: ["+e.getErrorCode()+"] " + e.getLocalizedMessage(), "axtuki1.Jinro.GameMaster");            }
         } else {
-            win = getInt("Stats." + p.getName() + ".Win.All");
+            win = getInt("Stats." + p.getUniqueId() + ".Win.All");
         }
         return win;
     }
@@ -154,8 +154,8 @@ public enum Stats {
                 Bukkit.broadcast(Jinro.getPrefix() + "setWin(): SQLException: ["+e.getErrorCode()+"] " + e.getLocalizedMessage(), "axtuki1.Jinro.GameMaster");
             }
         } else {
-            set("Stats."+ p.getName() +".Play."+yaku, win);
-            set("Stats."+ p.getName() +".Play.All", allwin);
+            set("Stats."+ p.getUniqueId() +".Play."+yaku, win);
+            set("Stats."+ p.getUniqueId() +".Play.All", allwin);
         }
     }
 
@@ -173,7 +173,7 @@ public enum Stats {
                 Bukkit.broadcast(Jinro.getPrefix() + "setPlay(): SQLException: ["+e.getErrorCode()+"] " + e.getLocalizedMessage(), "axtuki1.Jinro.GameMaster");
             }
         } else {
-            set("Stats."+ p.getName() +".Play."+yaku, win);
+            set("Stats."+ p.getUniqueId() +".Play."+yaku, win);
         }
     }
 
@@ -188,7 +188,7 @@ public enum Stats {
             } catch(SQLException e) {
                 Bukkit.broadcast(Jinro.getPrefix() + "getPlay(): SQLException: ["+e.getErrorCode()+"] " + e.getLocalizedMessage(), "axtuki1.Jinro.GameMaster");            }
         } else {
-            win = getInt("Stats." + p.getName() + ".Play." + yaku);
+            win = getInt("Stats." + p.getUniqueId() + ".Play." + yaku);
         }
         return win;
     }
@@ -204,7 +204,7 @@ public enum Stats {
             } catch(SQLException e) {
                 Bukkit.broadcast(Jinro.getPrefix() + "getPlay(): SQLException: ["+e.getErrorCode()+"] " + e.getLocalizedMessage(), "axtuki1.Jinro.GameMaster");            }
         } else {
-            win = getInt("Stats." + p.getName() + ".Play.All");
+            win = getInt("Stats." + p.getUniqueId() + ".Play.All");
         }
         return win;
     }
@@ -222,7 +222,7 @@ public enum Stats {
                 Bukkit.broadcast(Jinro.getPrefix() + "SQLException: ["+e.getErrorCode()+"]" + e.getSQLState() + " " + e.getLocalizedMessage() , "axtuki1.Jinro.GameMaster");
             }
         } else {
-            Death = getInt("Stats." + p.getName() + ".Death." + d.toString());
+            Death = getInt("Stats." + p.getUniqueId() + ".Death." + d.toString());
         }
         return Death;
     }
@@ -246,8 +246,8 @@ public enum Stats {
                 Bukkit.broadcast(Jinro.getPrefix() + "SQLException: ["+e.getErrorCode()+"]" + e.getSQLState() + " " + e.getLocalizedMessage() , "axtuki1.Jinro.GameMaster");
             }
         } else {
-            set("Stats."+ p.getName() +".Death."+d.toString(), de);
-            set("Stats."+ p.getName() +".Death.All", getInt("Stats."+ p.getName() +".Death.All") + 1);
+            set("Stats."+ p.getUniqueId() +".Death."+d.toString(), de);
+            set("Stats."+ p.getUniqueId() +".Death.All", getInt("Stats."+ p.getUniqueId() +".Death.All") + 1);
         }
     }
 
@@ -264,7 +264,7 @@ public enum Stats {
                 Bukkit.broadcast(Jinro.getPrefix() + "SQLException: ["+e.getErrorCode()+"]" + e.getSQLState() + " " + e.getLocalizedMessage() , "axtuki1.Jinro.GameMaster");
             }
         } else {
-            Death = getInt("Stats." + p.getName() + ".Action." + d.toString());
+            Death = getInt("Stats." + p.getUniqueId() + ".Action." + d.toString());
         }
         return Death;
     }
@@ -283,7 +283,7 @@ public enum Stats {
                 Bukkit.broadcast(Jinro.getPrefix() + "SQLException: ["+e.getErrorCode()+"]" + e.getSQLState() + " " + e.getLocalizedMessage() , "axtuki1.Jinro.GameMaster");
             }
         } else {
-            set("Stats."+ p.getName() +".Action."+d.toString(), de);
+            set("Stats."+ p.getUniqueId() +".Action."+d.toString(), de);
         }
     }
 
@@ -309,7 +309,7 @@ public enum Stats {
         if(Jinro.getSQLEnable()){
             out = getChallenge(p.getUniqueId(), d);
         } else {
-            out = getBoolean("Stats." + p.getName() + ".Challenges." + d);
+            out = getBoolean("Stats." + p.getUniqueId() + ".Challenges." + d);
         }
         return out;
     }
@@ -338,7 +338,7 @@ public enum Stats {
                         "WHERE `UUID` = '"+p.getUniqueId().toString()+"'");
             }
         } else {
-            set("Stats."+ p.getName() +".Challenges."+d, de);
+            set("Stats."+ p.getUniqueId() +".Challenges."+d, de);
         }
     }
 
@@ -454,7 +454,7 @@ public enum Stats {
                 data = getPlay(p, name);
             }
         } else {
-            data = getInt("Stats."+ p.getName() +"."+ key.toString() +"."+ name);
+            data = getInt("Stats."+ p.getUniqueId() +"."+ key.toString() +"."+ name);
         }
         return data;
     }

@@ -258,7 +258,7 @@ public class Jinro extends JavaPlugin {
 					return true;
 				}
 				for(Player p : Bukkit.getOnlinePlayers()){
-					if( Yakusyoku.getYaku( p ) == null && !p.hasPermission("axtuki1.Jinro.GameMaster") && !Data.getBoolean("Players." + p.getName() + ".Spectator")){
+					if( Yakusyoku.getYaku( p ) == null && !p.hasPermission("axtuki1.Jinro.GameMaster") && !Data.getBoolean("Players." + p.getUniqueId() + ".Spectator")){
 						sender.sendMessage(Jinro.getPrefix() + ChatColor.RED + "まだ役を振っていない人がいます。");
 						return true;
 					}
@@ -274,7 +274,7 @@ public class Jinro extends JavaPlugin {
                 int playerC = 1;
                 for(Player p : Bukkit.getOnlinePlayers()){
                 	if(!p.hasPermission("axtuki1.Jinro.GameMaster")){
-						if( Data.getBoolean("Players." + p.getName() + ".Spectator") ){
+						if( Data.getBoolean("Players." + p.getUniqueId() + ".Spectator") ){
 							p.sendMessage(ChatColor.GREEN + "観戦モードです。");
 							p.sendMessage(ChatColor.GREEN + "観戦者と霊界でチャットができます。");
 							p.setGameMode(GameMode.SPECTATOR);
@@ -282,7 +282,7 @@ public class Jinro extends JavaPlugin {
 							playerC++;
 						}
 					} else {
-						Data.set("Players." + p.getName() + ".GameMaster", true);
+						Data.set("Players." + p.getUniqueId() + ".GameMaster", true);
 					}
 					Stats.setPlayerData(p);
 				}
@@ -358,7 +358,7 @@ public class Jinro extends JavaPlugin {
 			boolean rep = Initialization.Admin(sender,commandLabel, args);
 			return rep;
 		} else if(arg0.equalsIgnoreCase("Spec")){
-			//Data.set("Players." + p.getName() + ".Spectator", true);
+			//Data.set("Players." + p.getUniqueId() + ".Spectator", true);
 			if( args.length == 1 ){
 				sendMessage(sender, "プレイヤー名を指定してください。", LogLevel.ERROR, true);
 				return true;
@@ -374,27 +374,27 @@ public class Jinro extends JavaPlugin {
 			}
 			if( args.length == 3 ){
 				if( args[2].equalsIgnoreCase("join") ){
-					sendMessage(sender, ""+p.getName()+" を参加者モードに設定しました。", LogLevel.SUCCESSFUL, true);
-					p.sendMessage(Jinro.getPrefix() + ChatColor.GREEN + "参加モードになりました。");
-					Data.set("Players." + p.getName() + ".Spectator", null);
+					sendMessage(p, "参加モードになりました。", LogLevel.SUCCESSFUL, true);
+					Bukkit.broadcast(Jinro.getPrefix() + ChatColor.GREEN + p.getName() + " が参加モードになりました。", "axtuki1.Jinro.GameMaster");
+					Data.set("Players." + p.getUniqueId() + ".Spectator", null);
 					return true;
 				} else if( args[2].equalsIgnoreCase("spec") ){
-					sendMessage(sender, ""+p.getName()+" を観戦モードに設定しました。", LogLevel.SUCCESSFUL, true);
-					p.sendMessage(Jinro.getPrefix() + ChatColor.GREEN + "観戦モードになりました。");
-					Data.set("Players." + p.getName() + ".Spectator", true);
+                    sendMessage(p, "観戦モードになりました。", LogLevel.SUCCESSFUL, true);
+                    Bukkit.broadcast(Jinro.getPrefix() + ChatColor.GREEN + p.getName() + " が観戦モードになりました。", "axtuki1.Jinro.GameMaster");
+                    Data.set("Players." + p.getUniqueId() + ".Spectator", true);
 					return true;
 				}
 			} else {
-				boolean spec = Data.getBoolean("Players." + p.getName() + ".Spectator");
+				boolean spec = Data.getBoolean("Players." + p.getUniqueId() + ".Spectator");
 				if( spec ){
-					sendMessage(sender, ""+p.getName()+" を参加者モードに設定しました。", LogLevel.SUCCESSFUL, true);
-					p.sendMessage(Jinro.getPrefix() + ChatColor.GREEN + "参加モードになりました。");
-					Data.set("Players." + p.getName() + ".Spectator", null);
+                    sendMessage(p, "参加モードになりました。", LogLevel.SUCCESSFUL, true);
+                    Bukkit.broadcast(Jinro.getPrefix() + ChatColor.GREEN + p.getName() + " が参加モードになりました。", "axtuki1.Jinro.GameMaster");
+					Data.set("Players." + p.getUniqueId() + ".Spectator", null);
 					return true;
 				} else {
-					sendMessage(sender, ""+p.getName()+" を観戦モードに設定しました。", LogLevel.SUCCESSFUL, true);
-					p.sendMessage(Jinro.getPrefix() + ChatColor.GREEN + "観戦モードになりました。");
-					Data.set("Players." + p.getName() + ".Spectator", true);
+                    sendMessage(p, "観戦モードになりました。", LogLevel.SUCCESSFUL, true);
+                    Bukkit.broadcast(Jinro.getPrefix() + ChatColor.GREEN + p.getName() + " が観戦モードになりました。", "axtuki1.Jinro.GameMaster");
+					Data.set("Players." + p.getUniqueId() + ".Spectator", true);
 					return true;
 				}
 			}
@@ -521,12 +521,16 @@ public class Jinro extends JavaPlugin {
 			} else if(args.length == 2){
 				Player p = Bukkit.getPlayer(args[1]);
 				if(p == null){
-					if(Data.get("Players." + args[1]) == null){
-						sender.sendMessage(getPrefix() + ChatColor.RED + "このプレイヤーは参加していません。");
-						return true;
+					try {
+						if(Data.get("Players." + UUIDFetcher.getUUIDOf(args[1])) == null){
+                            sender.sendMessage(getPrefix() + ChatColor.RED + "このプレイヤーは参加していません。");
+                            return true;
+                        }
+					Bukkit.broadcastMessage(ChatColor.DARK_RED + args[1] + " さんが無残な姿で発見されました。");
+					Data.set("Players." + UUIDFetcher.getUUIDOf(args[1]) + ".death", true);
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-					Bukkit.broadcastMessage(ChatColor.DARK_RED + p.getName() + " さんが無残な姿で発見されました。");
-					Data.set("Players." + args[1] + ".death", true);
 					int Alive = Data.getConfig().getInt("Status.Alive");
 					int Death = Data.getConfig().getInt("Status.Death");
 					Data.set("Status.Alive", Alive - 1);
@@ -1079,7 +1083,7 @@ public class Jinro extends JavaPlugin {
 					sendMessage(sender, "夜ではありません。", LogLevel.ERROR);
 					return true;
 				}
-				if( Data.getConfig().getString("Players." + sender.getName() + ".goei") != null ){
+				if( Data.getConfig().getString("Players." + ((Player) sender).getUniqueId() + ".goei") != null ){
 					sendMessage(sender, "護衛先を変えることはできません。", LogLevel.ERROR);
 					return true;
 				}
@@ -1117,22 +1121,22 @@ public class Jinro extends JavaPlugin {
 				return true;
 			} else if(args.length == 2){
 				if(args[1].equalsIgnoreCase("reikai")){
-					if(Data.getBoolean("Players." + sender.getName() + ".HideReikai")){
-						Data.set("Players." + sender.getName() + ".HideReikai", false);
+					if(Data.getBoolean("Players." + ((Player) sender).getUniqueId() + ".HideReikai")){
+						Data.set("Players." + ((Player) sender).getUniqueId() + ".HideReikai", false);
 						sendMessage(sender, "霊界のチャットを\"表示\"にしました。", LogLevel.SUCCESSFUL);
 						return true;
 					} else {
-						Data.set("Players." + sender.getName() + ".HideReikai", true);
+						Data.set("Players." + ((Player) sender).getUniqueId() + ".HideReikai", true);
 						sendMessage(sender, "霊界のチャットを\"非表示\"にしました。", LogLevel.SUCCESSFUL);
 						return true;
 					}
 				} else if(args[1].equalsIgnoreCase("spec")){
-					if(Data.getBoolean("Players." + sender.getName() + ".HideSpec")){
-						Data.set("Players." + sender.getName() + ".HideSpec", false);
+					if(Data.getBoolean("Players." + ((Player) sender).getUniqueId() + ".HideSpec")){
+						Data.set("Players." + ((Player) sender).getUniqueId() + ".HideSpec", false);
 						sendMessage(sender, "観戦者のチャットを\"表示\"にしました。", LogLevel.SUCCESSFUL);
 						return true;
 					} else {
-						Data.set("Players." + sender.getName() + ".HideSpec", true);
+						Data.set("Players." + ((Player) sender).getUniqueId() + ".HideSpec", true);
 						sendMessage(sender, "観戦者のチャットを\"非表示\"にしました。", LogLevel.SUCCESSFUL);
 						return true;
 					}
@@ -1140,21 +1144,21 @@ public class Jinro extends JavaPlugin {
 			} else if(args.length == 3){
 				if(args[1].equalsIgnoreCase("reikai")){
 					if(args[2].equalsIgnoreCase("on")){
-						Data.set("Players." + sender.getName() + ".HideReikai", false);
+						Data.set("Players." + ((Player) sender).getUniqueId() + ".HideReikai", false);
 						sendMessage(sender, "観戦者のチャットを\"表示\"にしました。", LogLevel.SUCCESSFUL);
 						return true;
 					} else if(args[2].equalsIgnoreCase("off")) {
-						Data.set("Players." + sender.getName() + ".HideReikai", true);
+						Data.set("Players." + ((Player) sender).getUniqueId() + ".HideReikai", true);
 						sendMessage(sender, "観戦者のチャットを\"非表示\"にしました。", LogLevel.SUCCESSFUL);
 						return true;
 					}
 				} else if(args[1].equalsIgnoreCase("spec")){
 					if(args[2].equalsIgnoreCase("on")){
-						Data.set("Players." + sender.getName() + ".HideSpec", false);
+						Data.set("Players." + ((Player) sender).getUniqueId() + ".HideSpec", false);
 						sendMessage(sender, "観戦者のチャットを\"表示\"にしました。", LogLevel.SUCCESSFUL);
 						return true;
 					} else if(args[2].equalsIgnoreCase("off")) {
-						Data.set("Players." + sender.getName() + ".HideSpec", true);
+						Data.set("Players." + ((Player) sender).getUniqueId() + ".HideSpec", true);
 						sendMessage(sender, "観戦者のチャットを\"非表示\"にしました。", LogLevel.SUCCESSFUL);
 						return true;
 					}

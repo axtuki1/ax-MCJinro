@@ -72,13 +72,13 @@ public class ComingOut extends JavaPlugin {
 	}
 
 	public static void setComingOut(Player p, Yakusyoku y) {
-		Data.set("Players." + p.getName() + ".co", Yakusyoku.getYakuToName(y));
+		Data.set("Players." + p.getUniqueId() + ".co", Yakusyoku.getYakuToName(y));
 		Data.saveConfig();
 		return;
 	}
 
 	public static void removeComingOut(Player p) {
-		Data.set("Players." + p.getName() + ".co", null);
+		Data.set("Players." + p.getUniqueId() + ".co", null);
 		Data.saveConfig();
 		return;
 	}

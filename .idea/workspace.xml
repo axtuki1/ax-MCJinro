@@ -5,8 +5,12 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dependency-reduced-pom.xml" afterPath="$PROJECT_DIR$/dependency-reduced-pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Initialization.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Initialization.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/ComingOut.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/ComingOut.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Debug.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Debug.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Event.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Event.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Stats.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Stats.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Timer.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Timer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Touhyou.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Touhyou.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Yakusyoku.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Yakusyoku.java" />
     </list>
@@ -32,11 +36,16 @@
       <file leaf-file-name="Jinro.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11771">
-              <caret line="1137" column="21" lean-forward="true" selection-start-line="1137" selection-start-column="21" selection-end-line="1137" selection-end-column="21" />
+            <state relative-caret-position="-122">
+              <caret line="297" column="35" lean-forward="false" selection-start-line="297" selection-start-column="35" selection-end-line="297" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#52966#52983#0" expanded="true" />
+                <element signature="e#7236#7244#0" expanded="true" />
+                <element signature="e#22519#22527#0" expanded="true" />
+                <element signature="e#50446#50454#0" expanded="true" />
+                <element signature="e#53546#53563#0" expanded="true" />
+                <element signature="e#66692#66700#0" expanded="true" />
+                <element signature="e#67076#67084#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -45,18 +54,8 @@
       <file leaf-file-name="Initialization.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Initialization.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="86" column="60" lean-forward="true" selection-start-line="86" selection-start-column="60" selection-end-line="86" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="16" lean-forward="false" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+            <state relative-caret-position="581">
+              <caret line="86" column="60" lean-forward="false" selection-start-line="86" selection-start-column="60" selection-end-line="86" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -65,17 +64,10 @@
       <file leaf-file-name="Yakusyoku.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Yakusyoku.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1686">
-              <caret line="718" column="20" lean-forward="false" selection-start-line="718" selection-start-column="20" selection-end-line="718" selection-end-column="20" />
+            <state relative-caret-position="277">
+              <caret line="550" column="87" lean-forward="false" selection-start-line="550" selection-start-column="79" selection-end-line="550" selection-end-column="87" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3846#3854#0" expanded="true" />
-                <element signature="e#4187#4195#0" expanded="true" />
-                <element signature="e#4525#4533#0" expanded="true" />
-                <element signature="e#4831#4839#0" expanded="true" />
-                <element signature="e#5173#5181#0" expanded="true" />
-                <element signature="e#10961#10969#0" expanded="true" />
-                <element signature="e#19888#19896#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -84,21 +76,38 @@
       <file leaf-file-name="ComingOut.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/ComingOut.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="33" column="56" lean-forward="false" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
-              <folding>
-                <element signature="e#2546#2547#0" expanded="true" />
-                <element signature="e#2584#2585#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="401">
+              <caret line="80" column="45" lean-forward="false" selection-start-line="80" selection-start-column="45" selection-end-line="80" selection-end-column="45" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Touhyou.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Touhyou.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Touhyou.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1865">
-              <caret line="100" column="88" lean-forward="false" selection-start-line="100" selection-start-column="88" selection-end-line="100" selection-end-column="88" />
+            <state relative-caret-position="456">
+              <caret line="289" column="9" lean-forward="true" selection-start-line="289" selection-start-column="9" selection-end-line="289" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UUIDFetcher.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/UUIDFetcher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-418">
+              <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Debug.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Debug.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="528">
+              <caret line="126" column="19" lean-forward="false" selection-start-line="126" selection-start-column="19" selection-end-line="126" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -107,28 +116,28 @@
       <file leaf-file-name="Timer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Timer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-870">
-              <caret line="432" column="34" lean-forward="false" selection-start-line="432" selection-start-column="34" selection-end-line="432" selection-end-column="34" />
+            <state relative-caret-position="387">
+              <caret line="54" column="29" lean-forward="true" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Event.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Stats.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Stats.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Event.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Event.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="607">
-              <caret line="341" column="49" lean-forward="false" selection-start-line="341" selection-start-column="49" selection-end-line="341" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Utility.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Utility.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1005">
-              <caret line="82" column="5" lean-forward="false" selection-start-line="82" selection-start-column="5" selection-end-line="82" selection-end-column="5" />
+            <state relative-caret-position="277">
+              <caret line="70" column="53" lean-forward="false" selection-start-line="70" selection-start-column="45" selection-end-line="70" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -166,6 +175,9 @@
       <find>sender</find>
       <find>syoniti</find>
       <find>login</find>
+      <find>&quot;Player.</find>
+      <find>&quot;Players.</find>
+      <find>Players.</find>
     </findStrings>
     <replaceStrings>
       <replace>Utility.setConfig</replace>
@@ -175,6 +187,7 @@
       <replace>sendMessage(sender, $1+&quot;$2&quot;, LogLevel.SUCCESSFUL);</replace>
       <replace>private static Config Data = Jinro.getData();</replace>
       <replace>attacker</replace>
+      <replace>&quot;Players.&quot; + ((Player) sender).getUniqueId()</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -221,27 +234,27 @@
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Cycle.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Random.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/andom.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Debug.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/ComingOut.java" />
         <option value="$PROJECT_DIR$/src/main/resources/ruleset.yml" />
         <option value="$USER_HOME$/Downloads/ArrowRemover/me/joseph/arrow/remover/Main.class" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setting.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/UUIDFetcher.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/SQL.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Stats.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Challenge.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Help.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Utility.java" />
         <option value="$PROJECT_DIR$/src/main/resources/config.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Event.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Timer.java" />
         <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Yakusyoku.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Touhyou.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Initialization.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Yakusyoku.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/ComingOut.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Event.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Stats.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Debug.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Timer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Touhyou.java" />
       </list>
     </option>
   </component>
@@ -261,8 +274,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1215" />
-    <option name="y" value="402" />
+    <option name="x" value="1048" />
+    <option name="y" value="491" />
     <option name="width" value="1463" />
     <option name="height" value="1019" />
   </component>
@@ -298,9 +311,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -349,6 +359,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -652,7 +665,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520072678324</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="update Command v1.2&#10;初期化コマンドの安全装置を設置。(StatusがGamePlayingだと初期化できない)&#10;ゲームスタート時の観戦者へのメッセージを変更。&#10;/jinro listで自分の役職を表示するよう変更。&#10;投票結果のイコールを増量。お値段変わらず。&#10;Yakusyokuクラスのコメントアウト部分の除去。邪魔やし。&#10;あと役振りできるかの条件式をequalsで比較するよう変更。">
+      <created>1520251191266</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1520251191266</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -665,7 +685,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1215" y="402" width="1463" height="1019" extended-state="0" />
+    <frame x="1048" y="491" width="1463" height="1019" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -675,12 +695,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32923368" sideWeight="0.48713" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21557271" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2651515" sideWeight="0.5295405" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26406926" sideWeight="0.5295405" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23701298" sideWeight="0.51287" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32734153" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20971148" sideWeight="0.5937888" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2125264" sideWeight="0.5937888" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.252639" sideWeight="0.54545456" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24903475" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -758,7 +778,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="README.md 追加&#10;&#10;忘れてたんやで" />
     <MESSAGE value="FileAdd gitignore, update pom.yml" />
-    <option name="LAST_COMMIT_MESSAGE" value="FileAdd gitignore, update pom.yml" />
+    <MESSAGE value="update Command&#10;初期化コマンドの安全装置を設置。(StatusがGamePlayingだと初期化できない)&#10;ゲームスタート時の観戦者へのメッセージを変更。&#10;/jinro listで自分の役職を表示するよう変更。&#10;投票結果のイコールを増量。お値段変わらず。&#10;Yakusyokuクラスのコメントアウト部分の除去。邪魔やし。&#10;あと役振りできるかの条件式をequalsで比較するよう変更。" />
+    <MESSAGE value="update Command v1.2&#10;初期化コマンドの安全装置を設置。(StatusがGamePlayingだと初期化できない)&#10;ゲームスタート時の観戦者へのメッセージを変更。&#10;/jinro listで自分の役職を表示するよう変更。&#10;投票結果のイコールを増量。お値段変わらず。&#10;Yakusyokuクラスのコメントアウト部分の除去。邪魔やし。&#10;あと役振りできるかの条件式をequalsで比較するよう変更。" />
+    <option name="LAST_COMMIT_MESSAGE" value="update Command v1.2&#10;初期化コマンドの安全装置を設置。(StatusがGamePlayingだと初期化できない)&#10;ゲームスタート時の観戦者へのメッセージを変更。&#10;/jinro listで自分の役職を表示するよう変更。&#10;投票結果のイコールを増量。お値段変わらず。&#10;Yakusyokuクラスのコメントアウト部分の除去。邪魔やし。&#10;あと役振りできるかの条件式をequalsで比較するよう変更。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -775,13 +797,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/ScoreBoard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="17" column="40" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -873,13 +888,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Status.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="12" lean-forward="false" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/ActionBar.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.11.2-R0.1-SNAPSHOT/spigot-api-1.11.2-R0.1-SNAPSHOT-sources.jar!/org/bukkit/event/inventory/InventoryType.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -916,13 +924,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Debug.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="99" column="59" lean-forward="false" selection-start-line="99" selection-start-column="59" selection-end-line="99" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/ruleset.yml" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.11.2-R0.1-SNAPSHOT/spigot-api-1.11.2-R0.1-SNAPSHOT-sources.jar!/org/bukkit/event/entity/ProjectileHitEvent.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -933,63 +934,10 @@
     </entry>
     <entry file="file://$USER_HOME$/Downloads/ArrowRemover/me/joseph/arrow/remover/versions/Arrow1_12.class" />
     <entry file="file://$USER_HOME$/Downloads/ArrowRemover/me/joseph/arrow/remover/Main.class" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="39" column="29" lean-forward="false" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/UUIDFetcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/SQL.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2115">
           <caret line="149" column="87" lean-forward="false" selection-start-line="149" selection-start-column="87" selection-end-line="149" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Stats.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6600">
-          <caret line="458" column="20" lean-forward="false" selection-start-line="458" selection-start-column="20" selection-end-line="458" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Challenge.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2070">
-          <caret line="163" column="51" lean-forward="false" selection-start-line="163" selection-start-column="51" selection-end-line="163" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setting.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="86" column="46" lean-forward="false" selection-start-line="86" selection-start-column="46" selection-end-line="86" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Help.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5580">
-          <caret line="376" column="7" lean-forward="false" selection-start-line="376" selection-start-column="7" selection-end-line="376" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Utility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1005">
-          <caret line="82" column="5" lean-forward="false" selection-start-line="82" selection-start-column="5" selection-end-line="82" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1009,69 +957,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Timer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-870">
-          <caret line="432" column="34" lean-forward="false" selection-start-line="432" selection-start-column="34" selection-end-line="432" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Touhyou.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1865">
-          <caret line="100" column="88" lean-forward="false" selection-start-line="100" selection-start-column="88" selection-end-line="100" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/ComingOut.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="33" column="56" lean-forward="false" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
-          <folding>
-            <element signature="e#2546#2547#0" expanded="true" />
-            <element signature="e#2584#2585#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Yakusyoku.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1686">
-          <caret line="718" column="20" lean-forward="false" selection-start-line="718" selection-start-column="20" selection-end-line="718" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3846#3854#0" expanded="true" />
-            <element signature="e#4187#4195#0" expanded="true" />
-            <element signature="e#4525#4533#0" expanded="true" />
-            <element signature="e#4831#4839#0" expanded="true" />
-            <element signature="e#5173#5181#0" expanded="true" />
-            <element signature="e#10961#10969#0" expanded="true" />
-            <element signature="e#19888#19896#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Initialization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="86" column="60" lean-forward="true" selection-start-line="86" selection-start-column="60" selection-end-line="86" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1083,21 +972,156 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Initialization.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11771">
-          <caret line="1137" column="21" lean-forward="true" selection-start-line="1137" selection-start-column="21" selection-end-line="1137" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#52966#52983#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="581">
+          <caret line="86" column="60" lean-forward="false" selection-start-line="86" selection-start-column="60" selection-end-line="86" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Utility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="815">
+          <caret line="82" column="5" lean-forward="false" selection-start-line="82" selection-start-column="5" selection-end-line="82" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Help.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="338" column="27" lean-forward="true" selection-start-line="338" selection-start-column="27" selection-end-line="338" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Challenge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="823">
+          <caret line="163" column="51" lean-forward="false" selection-start-line="163" selection-start-column="51" selection-end-line="163" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Status.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="12" lean-forward="false" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="39" column="29" lean-forward="false" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="86" column="46" lean-forward="false" selection-start-line="86" selection-start-column="46" selection-end-line="86" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/ScoreBoard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="17" column="40" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Event.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
-          <caret line="341" column="49" lean-forward="false" selection-start-line="341" selection-start-column="49" selection-end-line="341" selection-end-column="49" />
+        <state relative-caret-position="277">
+          <caret line="70" column="53" lean-forward="false" selection-start-line="70" selection-start-column="45" selection-end-line="70" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Stats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="38" lean-forward="true" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Debug.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="126" column="19" lean-forward="false" selection-start-line="126" selection-start-column="19" selection-end-line="126" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-122">
+          <caret line="297" column="35" lean-forward="false" selection-start-line="297" selection-start-column="35" selection-end-line="297" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7236#7244#0" expanded="true" />
+            <element signature="e#22519#22527#0" expanded="true" />
+            <element signature="e#50446#50454#0" expanded="true" />
+            <element signature="e#53546#53563#0" expanded="true" />
+            <element signature="e#66692#66700#0" expanded="true" />
+            <element signature="e#67076#67084#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/ComingOut.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="80" column="45" lean-forward="false" selection-start-line="80" selection-start-column="45" selection-end-line="80" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Timer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="54" column="29" lean-forward="true" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Yakusyoku.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="550" column="87" lean-forward="false" selection-start-line="550" selection-start-column="79" selection-end-line="550" selection-end-column="87" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/UUIDFetcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-418">
+          <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Touhyou.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="289" column="9" lean-forward="true" selection-start-line="289" selection-start-column="9" selection-end-line="289" selection-end-column="9" />
           <folding />
         </state>
       </provider>

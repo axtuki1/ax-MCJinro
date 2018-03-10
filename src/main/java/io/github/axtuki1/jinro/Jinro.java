@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 
 public class Jinro extends JavaPlugin {
 	
@@ -33,7 +34,14 @@ public class Jinro extends JavaPlugin {
 	@Override
     public void onEnable() {
 		main = this;
-		world = Bukkit.getWorlds().get(0);
+		try {
+			world = Bukkit.getWorld(Jinro.getMain().getConfig().getString("spawnpoint.world"));
+			if (world == null) {
+				world = Bukkit.getWorlds().get(0);
+			}
+		} catch (IllegalArgumentException e) {
+			world = Bukkit.getWorlds().get(0);
+		}
 
 		Data = new Config("data.yml");
 		challenge = new Config("challenge.yml");
@@ -70,18 +78,37 @@ public class Jinro extends JavaPlugin {
 		Jinro.getMain().getConfig().get("spawnpoint.y") == null ||
 				Jinro.getMain().getConfig().get("spawnpoint.z") == null) {
 			setRespawnLoc( world.getSpawnLocation() );
+			this.getConfig().set("spawnpoint.world", world.getName() );
 			this.getConfig().set("spawnpoint.x", world.getSpawnLocation().getX() );
 			this.getConfig().set("spawnpoint.y", world.getSpawnLocation().getY() );
 			this.getConfig().set("spawnpoint.z", world.getSpawnLocation().getZ() );
 			this.saveConfig();
 		} else if( Jinro.getMain().getConfig().get("spawnpoint.yaw") == null ||
 		Jinro.getMain().getConfig().get("spawnpoint.pitch") == null ) {
-			setRespawnLoc(new Location((World) Bukkit.getWorlds().get(0), Jinro.getMain().getConfig().getDouble("spawnpoint.x"),
+			World w;
+			try {
+				w = Bukkit.getWorld(Jinro.getMain().getConfig().getString("spawnpoint.world"));
+				if (w == null) {
+					w = Bukkit.getWorlds().get(0);
+				}
+			} catch (IllegalArgumentException e) {
+				w = Bukkit.getWorlds().get(0);
+			}
+			setRespawnLoc(new Location(w, Jinro.getMain().getConfig().getDouble("spawnpoint.x"),
 					Jinro.getMain().getConfig().getDouble("spawnpoint.y"),
 					Jinro.getMain().getConfig().getDouble("spawnpoint.z")
 			));
 		} else {
-			setRespawnLoc(new Location((World) Bukkit.getWorlds().get(0), Jinro.getMain().getConfig().getDouble("spawnpoint.x"),
+			World w;
+			try {
+				w = Bukkit.getWorld(Jinro.getMain().getConfig().getString("spawnpoint.world"));
+				if (w == null) {
+					w = Bukkit.getWorlds().get(0);
+				}
+			} catch (IllegalArgumentException e) {
+				w = Bukkit.getWorlds().get(0);
+			}
+			setRespawnLoc(new Location(w, Jinro.getMain().getConfig().getDouble("spawnpoint.x"),
 					Jinro.getMain().getConfig().getDouble("spawnpoint.y"),
 					Jinro.getMain().getConfig().getDouble("spawnpoint.z"),
 					Float.parseFloat(Jinro.getMain().getConfig().getString("spawnpoint.yaw")),
@@ -91,12 +118,30 @@ public class Jinro extends JavaPlugin {
 
 		if( Jinro.getMain().getConfig().get("reikai.yaw") == null ||
 				Jinro.getMain().getConfig().get("reikai.pitch") == null ) {
-			setReikaiLoc(new Location((World)Bukkit.getWorlds().get(0), Jinro.getMain().getConfig().getDouble("reikai.x"),
+			World w;
+			try {
+				w = Bukkit.getWorld(Jinro.getMain().getConfig().getString("reikai.world"));
+				if (w == null) {
+					w = Bukkit.getWorlds().get(0);
+				}
+			} catch (IllegalArgumentException e) {
+				w = Bukkit.getWorlds().get(0);
+			}
+			setReikaiLoc(new Location(w, Jinro.getMain().getConfig().getDouble("reikai.x"),
 					Jinro.getMain().getConfig().getDouble("reikai.y"),
 					Jinro.getMain().getConfig().getDouble("reikai.z")
 			));
 		} else {
-			setReikaiLoc(new Location((World)Bukkit.getWorlds().get(0), Jinro.getMain().getConfig().getDouble("reikai.x"),
+			World w;
+			try {
+				w = Bukkit.getWorld(Jinro.getMain().getConfig().getString("reikai.world"));
+				if (w == null) {
+					w = Bukkit.getWorlds().get(0);
+				}
+			} catch (IllegalArgumentException e) {
+				w = Bukkit.getWorlds().get(0);
+			}
+			setReikaiLoc(new Location(w, Jinro.getMain().getConfig().getDouble("reikai.x"),
 					Jinro.getMain().getConfig().getDouble("reikai.y"),
 					Jinro.getMain().getConfig().getDouble("reikai.z"),
 					Float.parseFloat(Jinro.getMain().getConfig().getString("reikai.yaw")),
@@ -613,22 +658,32 @@ public class Jinro extends JavaPlugin {
 			Player p = (Player)sender;
 			sender.sendMessage( p.getInventory().getItemInMainHand().getType().toString() );
 			return true;
-		} else if(arg0.equalsIgnoreCase("test")){
-			Player p = (Player) sender;
-			try {
-				Class<?> CPClass = Class.forName("org.bukkit.craftbukkit." + serverVersion + ".entity.CraftPlayer");
-				Object CraftPlayer = CPClass.cast(p);
-				for( Field f : CraftPlayer.getClass().getDeclaredFields() ){
-					f.setAccessible(true);
-					sender.sendMessage( f.getName() + " -> " + f.get(CraftPlayer) );
-				}
-				sender.sendMessage(p.getListeningPluginChannels().toString());
-				return true;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			p.sendRawMessage("");
-			return true;
+//		} else if(arg0.equalsIgnoreCase("test")){
+//			Player p = (Player) sender;
+////			try {
+////				Class<?> CPClass = Class.forName("org.bukkit.craftbukkit." + serverVersion + ".entity.CraftPlayer");
+////				Object CraftPlayer = CPClass.cast(p);
+////				for( Field f : CraftPlayer.getClass().getDeclaredFields() ){
+////					f.setAccessible(true);
+////					sender.sendMessage( f.getName() + " -> " + f.get(CraftPlayer) );
+////				}
+////				sender.sendMessage(p.getListeningPluginChannels().toString());
+////				return true;
+////			} catch (Exception e) {
+////				e.printStackTrace();
+////			}
+////			p.sendRawMessage("");
+//			try {
+//				p.setVelocity( new Vector( Double.parseDouble(args[1]) ,Double.parseDouble(args[2]) ,Double.parseDouble(args[3]) ) );
+//			} catch ( Exception e) {
+//
+//			}
+//			Vector pv = p.getVelocity();
+//			p.sendMessage(ChatColor.GREEN + "[" + ChatColor.AQUA + "Vector" + ChatColor.GREEN + "] " + ChatColor.WHITE + "getVelocity: " +  pv);
+//			p.sendMessage(ChatColor.GREEN + "[" + ChatColor.AQUA + "Vector" + ChatColor.GREEN + "] " + ChatColor.WHITE + "getVelocity.getX: " + pv.getX() );
+//			p.sendMessage(ChatColor.GREEN + "[" + ChatColor.AQUA + "Vector" + ChatColor.GREEN + "] " + ChatColor.WHITE + "getVelocity.getY: " + pv.getY() );
+//			p.sendMessage(ChatColor.GREEN + "[" + ChatColor.AQUA + "Vector" + ChatColor.GREEN + "] " + ChatColor.WHITE + "getVelocity.getZ: " + pv.getZ() );
+//			return true;
 		} else if(arg0.equalsIgnoreCase("ping")){
 			if(args.length == 1){
 				sendMessage(sender, "Ping: " + getPing( (Player)sender ) + "ms", LogLevel.INFO,true);
@@ -1389,6 +1444,16 @@ public class Jinro extends JavaPlugin {
 			out = text + ": " + on;
 		} else {
 			out = text + ": " + off;
+		}
+		return out;
+	}
+
+	public static String IfText(boolean flag, String on, String off){
+		String out = "";
+		if(flag){
+			out = on;
+		} else {
+			out = off;
 		}
 		return out;
 	}

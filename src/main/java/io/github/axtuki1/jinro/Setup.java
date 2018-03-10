@@ -19,6 +19,7 @@ public class Setup extends JavaPlugin {
 		Player p = (Player)sender;
 		switch(args[1]){
 		case "spawn":
+			Jinro.set("spawnpoint.world", p.getLocation().getWorld().getName());
 			Jinro.set("spawnpoint.x", p.getLocation().getX());
 			Jinro.set("spawnpoint.y", p.getLocation().getY());
 			Jinro.set("spawnpoint.z", p.getLocation().getZ());
@@ -33,6 +34,7 @@ public class Setup extends JavaPlugin {
 			Jinro.sendMessage(sender, "この座標にスポーンポイントを設定しました。", LogLevel.SUCCESSFUL);
 			return true;
 		case "reikai":
+			Jinro.set("reikai.world", p.getLocation().getWorld().getName());
 			Jinro.set("reikai.x", p.getLocation().getX());
 			Jinro.set("reikai.y", p.getLocation().getY());
 			Jinro.set("reikai.z", p.getLocation().getZ());

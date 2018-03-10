@@ -182,7 +182,6 @@ public class Setting {
         }
 
 
-
         if(args[1].equalsIgnoreCase("ChatCounter")){
             if(args.length == 2){
                 if(Jinro.getMain().getConfig().getBoolean("ChatCounterEnable")){

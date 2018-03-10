@@ -45,7 +45,7 @@ public class Setup extends JavaPlugin {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			Jinro.setRespawnLoc(p.getLocation());
+			Jinro.setReikaiLoc(p.getLocation());
 			Jinro.sendMessage(sender, "この座標に霊界のスポーンポイントを設定しました。", LogLevel.SUCCESSFUL);
 			return true;
 		}

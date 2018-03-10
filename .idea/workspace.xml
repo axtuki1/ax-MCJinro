@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5af5beee-6096-447d-8a9b-fb381c74d809" name="Default" comment="update UUID Support&#10;ゲーム中のデータ管理を(今更)UUIDで管理するように変更。&#10;観戦モード切替のメッセージをGM全体に通知するように変更。">
+    <list default="true" id="5af5beee-6096-447d-8a9b-fb381c74d809" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dependency-reduced-pom.xml" afterPath="$PROJECT_DIR$/dependency-reduced-pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setting.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setting.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setup.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setup.java" />
     </list>
     <list id="9dbb00f8-89aa-43a0-a686-fc029d98ec97" name="README.md 追加 忘れてたんやで (cherry picked from commit 24d75aa)" comment="README.md 追加&#10;&#10;忘れてたんやで&#10;&#10;(cherry picked from commit 24d75aa)" />
@@ -28,27 +25,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Jinro.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Jinro.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="77" column="66" lean-forward="true" selection-start-line="77" selection-start-column="66" selection-end-line="77" selection-end-column="66" />
+            <state relative-caret-position="15">
+              <caret line="27" column="43" lean-forward="false" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#8405#8413#0" expanded="true" />
-                <element signature="e#23688#23696#0" expanded="true" />
-                <element signature="e#52470#52478#0" expanded="true" />
-                <element signature="e#55570#55587#0" expanded="true" />
-                <element signature="e#68874#68882#0" expanded="true" />
-                <element signature="e#69258#69266#0" expanded="true" />
-                <element signature="e#75176#75177#0" expanded="true" />
-                <element signature="e#75209#75210#0" expanded="true" />
-                <element signature="e#75253#75254#0" expanded="true" />
-                <element signature="e#75287#75288#0" expanded="true" />
-                <element signature="e#75330#75331#0" expanded="true" />
-                <element signature="e#75352#75353#0" expanded="true" />
-                <element signature="e#75396#75397#0" expanded="true" />
-                <element signature="e#75419#75420#0" expanded="true" />
+                <element signature="e#75145#75146#0" expanded="true" />
+                <element signature="e#75178#75179#0" expanded="true" />
+                <element signature="e#75222#75223#0" expanded="true" />
+                <element signature="e#75256#75257#0" expanded="true" />
+                <element signature="e#75299#75300#0" expanded="true" />
+                <element signature="e#75321#75322#0" expanded="true" />
+                <element signature="e#75365#75366#0" expanded="true" />
+                <element signature="e#75388#75389#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -84,11 +75,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Setup.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Setup.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="49" column="24" lean-forward="false" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="24" />
+            <state relative-caret-position="339">
+              <caret line="33" column="38" lean-forward="true" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -234,9 +225,9 @@
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Touhyou.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setting.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Event.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setup.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -256,8 +247,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="869" />
-    <option name="y" value="605" />
+    <option name="x" value="741" />
+    <option name="y" value="689" />
     <option name="width" value="1314" />
     <option name="height" value="885" />
   </component>
@@ -293,7 +284,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
@@ -340,7 +331,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -657,7 +648,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520310178029</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update Multi World Support v1.4&#10;スポーンポイントと霊界の座標にワールドを指定できるよう変更">
+      <created>1520662761913</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1520662761913</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -670,7 +668,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="869" y="605" width="1314" height="885" extended-state="0" />
+    <frame x="741" y="689" width="1314" height="885" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -685,7 +683,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32734153" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16509435" sideWeight="0.5937888" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16745283" sideWeight="0.5937888" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16902515" sideWeight="0.54545456" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24903475" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -766,7 +764,9 @@
     <MESSAGE value="update Command&#10;初期化コマンドの安全装置を設置。(StatusがGamePlayingだと初期化できない)&#10;ゲームスタート時の観戦者へのメッセージを変更。&#10;/jinro listで自分の役職を表示するよう変更。&#10;投票結果のイコールを増量。お値段変わらず。&#10;Yakusyokuクラスのコメントアウト部分の除去。邪魔やし。&#10;あと役振りできるかの条件式をequalsで比較するよう変更。" />
     <MESSAGE value="update Command v1.2&#10;初期化コマンドの安全装置を設置。(StatusがGamePlayingだと初期化できない)&#10;ゲームスタート時の観戦者へのメッセージを変更。&#10;/jinro listで自分の役職を表示するよう変更。&#10;投票結果のイコールを増量。お値段変わらず。&#10;Yakusyokuクラスのコメントアウト部分の除去。邪魔やし。&#10;あと役振りできるかの条件式をequalsで比較するよう変更。" />
     <MESSAGE value="update UUID Support&#10;ゲーム中のデータ管理を(今更)UUIDで管理するように変更。&#10;観戦モード切替のメッセージをGM全体に通知するように変更。" />
-    <option name="LAST_COMMIT_MESSAGE" value="update UUID Support&#10;ゲーム中のデータ管理を(今更)UUIDで管理するように変更。&#10;観戦モード切替のメッセージをGM全体に通知するように変更。" />
+    <MESSAGE value="update Multi World Support&#10;スポーンポイントと霊界の座標にワールドを指定できるよう変更" />
+    <MESSAGE value="update Multi World Support v1.4&#10;スポーンポイントと霊界の座標にワールドを指定できるよう変更" />
+    <option name="LAST_COMMIT_MESSAGE" value="update Multi World Support v1.4&#10;スポーンポイントと霊界の座標にワールドを指定できるよう変更" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1067,7 +1067,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="38" lean-forward="true" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1075,14 +1074,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="49" column="24" lean-forward="false" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -1097,25 +1088,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="77" column="66" lean-forward="true" selection-start-line="77" selection-start-column="66" selection-end-line="77" selection-end-column="66" />
+        <state relative-caret-position="15">
+          <caret line="27" column="43" lean-forward="false" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8405#8413#0" expanded="true" />
-            <element signature="e#23688#23696#0" expanded="true" />
-            <element signature="e#52470#52478#0" expanded="true" />
-            <element signature="e#55570#55587#0" expanded="true" />
-            <element signature="e#68874#68882#0" expanded="true" />
-            <element signature="e#69258#69266#0" expanded="true" />
-            <element signature="e#75176#75177#0" expanded="true" />
-            <element signature="e#75209#75210#0" expanded="true" />
-            <element signature="e#75253#75254#0" expanded="true" />
-            <element signature="e#75287#75288#0" expanded="true" />
-            <element signature="e#75330#75331#0" expanded="true" />
-            <element signature="e#75352#75353#0" expanded="true" />
-            <element signature="e#75396#75397#0" expanded="true" />
-            <element signature="e#75419#75420#0" expanded="true" />
+            <element signature="e#75145#75146#0" expanded="true" />
+            <element signature="e#75178#75179#0" expanded="true" />
+            <element signature="e#75222#75223#0" expanded="true" />
+            <element signature="e#75256#75257#0" expanded="true" />
+            <element signature="e#75299#75300#0" expanded="true" />
+            <element signature="e#75321#75322#0" expanded="true" />
+            <element signature="e#75365#75366#0" expanded="true" />
+            <element signature="e#75388#75389#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="33" column="38" lean-forward="true" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>

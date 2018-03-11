@@ -34,10 +34,22 @@ public enum Yakusyoku {
 	}
 
 	public static String[] getYakuList(){
+		switch(GameMode.getGameMode()){
+			case OneNightJinro:
+				return OneNightYakusyoku.getYakuList();
+			case MinecraftJinro:
+				return YakuList;
+		}
 		return YakuList;
 	}
 
 	public static String[] getCOList(){
+		switch(GameMode.getGameMode()){
+			case OneNightJinro:
+				return OneNightYakusyoku.getCOList();
+			case MinecraftJinro:
+				return COList;
+		}
 		return COList;
 	}
 
@@ -771,15 +783,15 @@ public enum Yakusyoku {
 	}
 
 	public static void sendYakuHelp(CommandSender sender) {
-		sendYakuHelp( ((Player) sender) );
-	}
-
-	public static void sendYakuHelp( Player sender ){
 		Jinro.sendMessage(sender, "役職指定に使用できる文字は以下の通りです。", LogLevel.INFO);
 		Jinro.sendMessage(sender, "村人:murabito 占い師:uranai 霊能者:reinou", LogLevel.INFO);
 		Jinro.sendMessage(sender, "狩人:kariudo 共有者:kyouyu 爆弾魔:bakudan", LogLevel.INFO);
 		Jinro.sendMessage(sender, "ｺｽﾌﾟﾚｲﾔｰ:cosplayer 人形使い:ningyou 妖狐:yoko ", LogLevel.INFO);
 		Jinro.sendMessage(sender, "ニワトリ:niwatori 人狼:jinro 狂人:kyoujin", LogLevel.INFO);
 		Jinro.sendMessage(sender, "聴狂人:tyoukyoujin 狂信者:kyousinja", LogLevel.INFO);
+	}
+
+	public static void sendYakuHelp( Player sender ){
+		sendYakuHelp( ((CommandSender) sender) );
 	}
 }

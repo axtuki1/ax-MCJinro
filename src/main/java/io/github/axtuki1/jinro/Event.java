@@ -46,12 +46,6 @@ public class Event implements Listener {
 			return;
 		}
 
-		Yakusyoku y = Yakusyoku.getYaku(e.getPlayer());
-		String yaku = "";
-		if(y != null){
-			yaku = y.toString();
-		}
-
 		if(e.getPlayer().hasPermission("axtuki1.Jinro.GameMaster")){
 			Bukkit.broadcastMessage(ChatColor.YELLOW + "[GM] <"+e.getPlayer().getName()+"> " + e.getMessage());
 			e.setCancelled(true);
@@ -102,7 +96,16 @@ public class Event implements Listener {
 		}
 
 		if(Cycle.getStatus() == Cycle.Discussion){
-			if(Timer.getGameElapsedTime() < 5){
+			int ElapsedTime = 0;
+			switch (GameMode.getGameMode()){
+				case OneNightJinro:
+					ElapsedTime = OneNightTimer.getGameElapsedTime();
+					break;
+				case MinecraftJinro:
+					ElapsedTime = Timer.getGameElapsedTime();
+					break;
+			}
+			if(ElapsedTime < 5){
 				e.getPlayer().sendMessage(Jinro.getPrefix() + ChatColor.RED + "最初の5秒間は発言できません。");
 				e.setCancelled(true);
 				return;
@@ -126,45 +129,93 @@ public class Event implements Listener {
 	    	@SuppressWarnings("deprecation")
 			Score score = ScoreBoard.getChatCounterObj().getScore( e.getPlayer().getPlayer() );
 	    	score.setScore(score.getScore() + 1);
-	    	y = ComingOut.getComingOut(e.getPlayer());
-	    	if(y == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
-				Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
-				Bukkit.broadcastMessage(ChatColor.WHITE +"<"+e.getPlayer().getName()+"> " + e.getMessage());
-			} else {
-	    		yaku = "";
-	    		if(y == Yakusyoku.白){
-	    			yaku = "○";
-				} else if(y == Yakusyoku.黒){
-	    			yaku = "●";
-				} else {
-					yaku = y.toString();
-				}
-				Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
-				Bukkit.broadcastMessage(Yakusyoku.getYakuColor( y ) + "[" + getYaku2moji(y) + "]" + ChatColor.WHITE +" <"+e.getPlayer().getName()+"> " + e.getMessage());
+			switch (GameMode.getGameMode()){
+				case OneNightJinro:
+					OneNightYakusyoku y = ComingOut.getOneComingOut(e.getPlayer());
+					if(y == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
+						Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
+						Bukkit.broadcastMessage(ChatColor.WHITE +"<"+e.getPlayer().getName()+"> " + e.getMessage());
+					} else {
+						String yaku = "";
+						if(y == OneNightYakusyoku.白){
+							yaku = "○";
+						} else if(y == OneNightYakusyoku.黒){
+							yaku = "●";
+						} else {
+							yaku = y.toString();
+						}
+						Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
+						Bukkit.broadcastMessage(OneNightYakusyoku.getYakuColor( y ) + "[" + OneNightYakusyoku.getYaku2moji(y) + "]" + ChatColor.WHITE +" <"+e.getPlayer().getName()+"> " + e.getMessage());
+					}
+					break;
+				case MinecraftJinro:
+					Yakusyoku ya = ComingOut.getComingOut(e.getPlayer());
+					if(ya == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
+						Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
+						Bukkit.broadcastMessage(ChatColor.WHITE +"<"+e.getPlayer().getName()+"> " + e.getMessage());
+					} else {
+						String yaku = "";
+						if(ya == Yakusyoku.白){
+							yaku = "○";
+						} else if(ya == Yakusyoku.黒){
+							yaku = "●";
+						} else {
+							yaku = ya.toString();
+						}
+						Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
+						Bukkit.broadcastMessage(Yakusyoku.getYakuColor( ya ) + "[" + getYaku2moji(ya) + "]" + ChatColor.WHITE +" <"+e.getPlayer().getName()+"> " + e.getMessage());
+					}
+					break;
 			}
+
 
 	    	// =====  Discussion =====
 	    }
 	    if(Cycle.getStatus() == Cycle.Execution){
 			// 処刑
-			y = ComingOut.getComingOut(e.getPlayer());
-			if(y == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
-				Bukkit.broadcastMessage(ChatColor.WHITE +"<"+e.getPlayer().getName()+"> " + e.getMessage());
-			} else {
-				yaku = "";
-				if(y == Yakusyoku.白){
-					yaku = "○";
-				} else if(y == Yakusyoku.黒){
-					yaku = "●";
-				} else {
-					yaku = y.toString();
-				}
-				Bukkit.broadcastMessage(Yakusyoku.getYakuColor( y ) + "[" + getYaku2moji(y) + "]" + ChatColor.WHITE +" <"+e.getPlayer().getName()+"> " + e.getMessage());
+			switch (GameMode.getGameMode()){
+				case OneNightJinro:
+					OneNightYakusyoku y = ComingOut.getOneComingOut(e.getPlayer());
+					if(y == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
+						Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
+						Bukkit.broadcastMessage(ChatColor.WHITE +"<"+e.getPlayer().getName()+"> " + e.getMessage());
+					} else {
+						String yaku = "";
+						if(y == OneNightYakusyoku.白){
+							yaku = "○";
+						} else if(y == OneNightYakusyoku.黒){
+							yaku = "●";
+						} else {
+							yaku = y.toString();
+						}
+						Bukkit.broadcastMessage(OneNightYakusyoku.getYakuColor( y ) + "[" + OneNightYakusyoku.getYaku2moji(y) + "]" + ChatColor.WHITE +" <"+e.getPlayer().getName()+"> " + e.getMessage());
+					}
+					break;
+				case MinecraftJinro:
+					Yakusyoku ya = ComingOut.getComingOut(e.getPlayer());
+					if(ya == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
+						Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
+						Bukkit.broadcastMessage(ChatColor.WHITE +"<"+e.getPlayer().getName()+"> " + e.getMessage());
+					} else {
+						String yaku = "";
+						if(ya == Yakusyoku.白){
+							yaku = "○";
+						} else if(ya == Yakusyoku.黒){
+							yaku = "●";
+						} else {
+							yaku = ya.toString();
+						}
+						Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
+						Bukkit.broadcastMessage(Yakusyoku.getYakuColor( ya ) + "[" + getYaku2moji(ya) + "]" + ChatColor.WHITE +" <"+e.getPlayer().getName()+"> " + e.getMessage());
+					}
+					break;
 			}
 		}
 		if(Cycle.getStatus() == Cycle.Night){
 			// ===== Night =====
 			// 人狼 アオォォォォォォォォォン
+			Yakusyoku y = null;
+			String yaku = "";
 			if( Yakusyoku.getYaku(e.getPlayer()) == Yakusyoku.人狼 ) {
 				for(Player p : Bukkit.getOnlinePlayers()) {
 					Yakusyoku py = Yakusyoku.getYaku( p );
@@ -205,11 +256,27 @@ public class Event implements Listener {
 		}
 
 		if(Cycle.getStatus() == Cycle.Vote || Cycle.getStatus() == Cycle.VoteAgain){
-			e.getPlayer().sendMessage(Yakusyoku.getYakuColor( y ) +"[" + yaku + "] <"+e.getPlayer().getName()+"> " + e.getMessage());
+			switch (GameMode.getGameMode()){
+				case MinecraftJinro:
+					e.getPlayer().sendMessage(Yakusyoku.getYakuColor( ComingOut.getComingOut(e.getPlayer()) ) +"[" + Yakusyoku.getYaku2moji( ComingOut.getComingOut(e.getPlayer()) ) + "] <"+e.getPlayer().getName()+"> " + e.getMessage());
+					break;
+				case OneNightJinro:
+					e.getPlayer().sendMessage(
+							OneNightYakusyoku.getYakuColor( ComingOut.getOneComingOut(e.getPlayer()) ) +"[" + OneNightYakusyoku.getYaku2moji( ComingOut.getOneComingOut(e.getPlayer()) ) + "] <"+e.getPlayer().getName()+"> " + e.getMessage());
+					break;
+			}
 		}
 
 		if(Cycle.getStatus() == Cycle.Vote || Cycle.getStatus() == Cycle.Night || Cycle.getStatus() == Cycle.VoteAgain){
-			Bukkit.broadcast(Yakusyoku.getYakuColor( y ) +"[" + yaku + "] <"+e.getPlayer().getName()+"> " + e.getMessage(),"axtuki1.Jinro.GameMaster");
+			switch (GameMode.getGameMode()){
+				case MinecraftJinro:
+					Bukkit.broadcast(Yakusyoku.getYakuColor( Yakusyoku.getYaku(e.getPlayer()) ) +"[" + Yakusyoku.getYaku2moji( Yakusyoku.getYaku(e.getPlayer()) ) + "] <"+e.getPlayer().getName()+"> " + e.getMessage(),"axtuki1.Jinro.GameMaster");
+					break;
+				case OneNightJinro:
+					Bukkit.broadcast(OneNightYakusyoku.getYakuColor( OneNightYakusyoku.getYaku(e.getPlayer()) ) +"[" + OneNightYakusyoku.getYaku2moji(OneNightYakusyoku.getYaku(e.getPlayer())) + "] <"+e.getPlayer().getName()+"> " + e.getMessage(),"axtuki1.Jinro.GameMaster");
+					break;
+			}
+
 		}
 
 		e.setCancelled(true);
@@ -260,7 +327,7 @@ public class Event implements Listener {
 		}
 		if(Status.getStatus() == Status.GamePlaying ) {
 			if ( Yakusyoku.getYaku(p) == null && Jinro.getMain().getConfig().getBoolean("LoginSpectatorMode") && !p.hasPermission("axtuki1.Jinro.GameMaster") ) {
-				p.setGameMode(GameMode.SPECTATOR);
+				p.setGameMode(org.bukkit.GameMode.SPECTATOR);
 				Data.set("Players." + p.getUniqueId() + ".Spectator", true);
 				p.sendMessage(ChatColor.GREEN + "==== 現在観戦モードです ====");
 				// p.sendTitle(ChatColor.GREEN + "現在観戦モードです", ChatColor.AQUA + "" + Timer.getDay() + "日目 " + Cycle.getStatusLocalize(), 20, 50, 10);
@@ -300,51 +367,77 @@ public class Event implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGHEST) 
 	public void onPlayerDeath(PlayerDeathEvent e) {
-		Player Ex = Yakusyoku.getExecution( Timer.getDay() );
-    	if(e.getEntity().equals(Ex) && Status.getStatus() == Status.GamePlaying){
-    		e.setDeathMessage(ChatColor.DARK_RED + e.getEntity().getName() + "は処刑されました。");
-    		e.getEntity().getPlayer().setGlowing(false);
-    		e.getEntity().getPlayer().setPlayerListName(ChatColor.BLACK + "[霊界] "+ e.getEntity().getName() + " ");
-    		Yakusyoku.setDeath(e.getEntity());
-    		Stats.setDeath(e.getEntity(), Stats.death.Execution, (Stats.getDeath(e.getEntity(), Stats.death.Execution) + 1));
-    		int Alive = Data.getInt("Status.Alive");
-			int Death = Data.getInt("Status.Death");
-			Data.set("Status.Alive", Alive - 1);
-			Data.set("Status.Death", Death + 1);
-			ScoreBoard.getScoreboard().resetScores(ChatColor.AQUA + "生存人数: 0人");
-			ScoreBoard.getScoreboard().resetScores(ChatColor.AQUA + "生存人数: "+ Alive +"人");
-			ScoreBoard.getScoreboard().resetScores(ChatColor.RED + "死亡人数: "+ Death +"人");
-			ScoreBoard.getInfoObj().getScore( ChatColor.AQUA + "生存人数: "+ (Alive - 1) +"人").setScore(2);
-			ScoreBoard.getInfoObj().getScore( ChatColor.RED + "死亡人数: "+ (Death + 1) +"人").setScore(1);
-			if( Yakusyoku.getYaku( e.getEntity().getPlayer() ) == Yakusyoku.爆弾魔 ){
-				int random = new Random().nextInt(Yakusyoku.getAlivePlayers().size());
-				Player miti = (Player) Yakusyoku.getAlivePlayers().toArray()[random];
-				Bukkit.broadcastMessage(ChatColor.DARK_RED + miti.getName() + "が爆発に巻き込まれて死亡しました。");
-				Yakusyoku.setDeath(miti);
-				Jinro.TeleportToReikai(miti);
-				Stats.setDeath(miti, Stats.death.Explosion, (Stats.getDeath(miti, Stats.death.Explosion) + 1));
-				Alive = Data.getInt("Status.Alive");
-				Death = Data.getInt("Status.Death");
-				Data.set("Status.Alive", Alive - 1);
-				Data.set("Status.Death", Death + 1);
-				ScoreBoard.getScoreboard().resetScores(ChatColor.AQUA + "生存人数: "+ Alive +"人");
-				ScoreBoard.getScoreboard().resetScores(ChatColor.RED + "死亡人数: "+ Death +"人");
-				ScoreBoard.getInfoObj().getScore( ChatColor.AQUA + "生存人数: "+ (Alive - 1) +"人").setScore(2);
-				ScoreBoard.getInfoObj().getScore( ChatColor.RED + "死亡人数: "+ (Death + 1) +"人").setScore(1);
-				e.setKeepInventory(false);
-			}
-			e.setKeepInventory(false);
-    	} else {
-    		if( e.getEntity().getKiller() != null ) {
-				if (e.getEntity().getKiller().hasPermission("axtuki1.Jinro.GameMaster")) {
-					Stats.setDeath(e.getEntity(), Stats.death.GM, (Stats.getDeath(e.getEntity(), Stats.death.GM) + 1));
-					if( !Status.getStatus().equals(Status.GamePlaying) ){
-						Challenge.CheckOpen(e.getEntity());
+
+		switch (GameMode.getGameMode()) {
+			case OneNightJinro:
+				Player Ex = OneNightYakusyoku.getExecution();
+				if (e.getEntity().equals(Ex) && Status.getStatus() == Status.GamePlaying) {
+					e.setDeathMessage(ChatColor.DARK_RED + e.getEntity().getName() + "は処刑されました。");
+					e.getEntity().getPlayer().setGlowing(false);
+					e.getEntity().getPlayer().setPlayerListName(ChatColor.BLACK + "[霊界] " + e.getEntity().getName() + " ");
+					OneNightYakusyoku.setDeath(e.getEntity());
+					e.setKeepInventory(false);
+				} else {
+					if (e.getEntity().getKiller() != null) {
+						if (e.getEntity().getKiller().hasPermission("axtuki1.Jinro.GameMaster")) {
+							Stats.setDeath(e.getEntity(), Stats.death.GM, (Stats.getDeath(e.getEntity(), Stats.death.GM) + 1));
+							if (!Status.getStatus().equals(Status.GamePlaying)) {
+								Challenge.CheckOpen(e.getEntity());
+							}
+						}
 					}
+					e.setDeathMessage(null);
+					e.setKeepInventory(true);
 				}
-			}
-			e.setDeathMessage(null);
-			e.setKeepInventory(true);
+				break;
+			case MinecraftJinro:
+				Ex = Yakusyoku.getExecution(Timer.getDay());
+				if (e.getEntity().equals(Ex) && Status.getStatus() == Status.GamePlaying) {
+					e.setDeathMessage(ChatColor.DARK_RED + e.getEntity().getName() + "は処刑されました。");
+					e.getEntity().getPlayer().setGlowing(false);
+					e.getEntity().getPlayer().setPlayerListName(ChatColor.BLACK + "[霊界] " + e.getEntity().getName() + " ");
+					Yakusyoku.setDeath(e.getEntity());
+					Stats.setDeath(e.getEntity(), Stats.death.Execution, (Stats.getDeath(e.getEntity(), Stats.death.Execution) + 1));
+					int Alive = Data.getInt("Status.Alive");
+					int Death = Data.getInt("Status.Death");
+					Data.set("Status.Alive", Alive - 1);
+					Data.set("Status.Death", Death + 1);
+					ScoreBoard.getScoreboard().resetScores(ChatColor.AQUA + "生存人数: 0人");
+					ScoreBoard.getScoreboard().resetScores(ChatColor.AQUA + "生存人数: " + Alive + "人");
+					ScoreBoard.getScoreboard().resetScores(ChatColor.RED + "死亡人数: " + Death + "人");
+					ScoreBoard.getInfoObj().getScore(ChatColor.AQUA + "生存人数: " + (Alive - 1) + "人").setScore(2);
+					ScoreBoard.getInfoObj().getScore(ChatColor.RED + "死亡人数: " + (Death + 1) + "人").setScore(1);
+					if (Yakusyoku.getYaku(e.getEntity().getPlayer()) == Yakusyoku.爆弾魔) {
+						int random = new Random().nextInt(Yakusyoku.getAlivePlayers().size());
+						Player miti = (Player) Yakusyoku.getAlivePlayers().toArray()[random];
+						Bukkit.broadcastMessage(ChatColor.DARK_RED + miti.getName() + "が爆発に巻き込まれて死亡しました。");
+						Yakusyoku.setDeath(miti);
+						Jinro.TeleportToReikai(miti);
+						Stats.setDeath(miti, Stats.death.Explosion, (Stats.getDeath(miti, Stats.death.Explosion) + 1));
+						Alive = Data.getInt("Status.Alive");
+						Death = Data.getInt("Status.Death");
+						Data.set("Status.Alive", Alive - 1);
+						Data.set("Status.Death", Death + 1);
+						ScoreBoard.getScoreboard().resetScores(ChatColor.AQUA + "生存人数: " + Alive + "人");
+						ScoreBoard.getScoreboard().resetScores(ChatColor.RED + "死亡人数: " + Death + "人");
+						ScoreBoard.getInfoObj().getScore(ChatColor.AQUA + "生存人数: " + (Alive - 1) + "人").setScore(2);
+						ScoreBoard.getInfoObj().getScore(ChatColor.RED + "死亡人数: " + (Death + 1) + "人").setScore(1);
+						e.setKeepInventory(false);
+					}
+					e.setKeepInventory(false);
+				} else {
+					if (e.getEntity().getKiller() != null) {
+						if (e.getEntity().getKiller().hasPermission("axtuki1.Jinro.GameMaster")) {
+							Stats.setDeath(e.getEntity(), Stats.death.GM, (Stats.getDeath(e.getEntity(), Stats.death.GM) + 1));
+							if (!Status.getStatus().equals(Status.GamePlaying)) {
+								Challenge.CheckOpen(e.getEntity());
+							}
+						}
+					}
+					e.setDeathMessage(null);
+					e.setKeepInventory(true);
+				}
+				break;
 		}
 		e.getEntity().setVelocity(new Vector());
 		e.getEntity().spigot().respawn();
@@ -390,8 +483,7 @@ public class Event implements Listener {
 			return;
 		}
 
-		Player Ex = Yakusyoku.getExecution( Timer.getDay() );
-		if( !e.getEntity().equals( Ex ) ){
+		if( !e.getEntity().equals( Yakusyoku.getExecution( Timer.getDay() ) ) && !e.getEntity().equals( OneNightYakusyoku.getExecution() ) ){
 			e.setCancelled(true);
 			return;
 		}

@@ -24,6 +24,14 @@ public class Timer extends BukkitRunnable {
 	private static World w = Jinro.getCurrentWorld();
     private static Config Data = Jinro.getData();
 
+    public static void init(){
+        setDay(1);
+        setGameStopFlag(false);
+        setGameEndFlag(false);
+        setTimerPauseFlag(false);
+        setCyclePauseFlag(false);
+    }
+
 	@Override
 	public void run() {
 
@@ -43,7 +51,6 @@ public class Timer extends BukkitRunnable {
 
         /*
         あくしょんばー
-        ぶっちゃけいらない
         */
         ActionBar bar = new ActionBar("");
         for(Player p : Bukkit.getOnlinePlayers()){

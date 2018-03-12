@@ -22,8 +22,7 @@ public class Jinro extends JavaPlugin {
 	private static Jinro main;
 	private static World world;
 	private static boolean DEBUGFLAG;
-	static Config Data, Pattern;
-	Config challenge;
+	static Config Data, challenge, map;
 	//Config Stats;
 	private String url, username, password;
 	private int port;
@@ -44,19 +43,19 @@ public class Jinro extends JavaPlugin {
 
 		Data = new Config("data.yml");
 		challenge = new Config("challenge.yml");
-		Pattern = new Config("ruleset.yml");
+		map = new Config("map.yml");
 
 		this.saveDefaultConfig();
 		Data.saveDefaultConfig();
 		Stats.saveDefaultConfig();
 		challenge.saveDefaultConfig();
-		//Pattern.saveDefaultConfig();
+		map.saveDefaultConfig();
 
 		this.reloadConfig();
 		Data.reloadConfig();
 		Stats.reloadConfig();
 		challenge.reloadConfig();
-		//Pattern.reloadConfig();
+		map.reloadConfig();
 
 		SQLEnable = this.getConfig().getBoolean("sql.enable");
 
@@ -148,6 +147,13 @@ public class Jinro extends JavaPlugin {
 			));
 		}
 
+		if( JinroMap.getMaps() == null ){
+			JinroMap default_Map = new JinroMap("Default");
+			default_Map.setDisplayName( "Default" );
+			default_Map.setSpawnPoint( world.getSpawnLocation() );
+			default_Map.setReikaiSpawnPoint( world.getSpawnLocation() );
+		}
+
 
 		Initialization.Admin();
 		//Bukkit.broadcastMessage(ChatColor.AQUA + "MinecraftJinro Initialization complete.");
@@ -210,7 +216,7 @@ public class Jinro extends JavaPlugin {
 
 	public static Config getData(){ return Data; }
 
-	public static Config getRandom(){ return Pattern; }
+	public static Config getMap(){ return map; }
 
     public static boolean getDebug(){
 		return DEBUGFLAG;
@@ -221,6 +227,10 @@ public class Jinro extends JavaPlugin {
     	String Prefix = config.getString("Prefix");
     	Prefix = Prefix+"§r ";
   	  	return Prefix;
+	}
+
+	public static String getHeader() {
+		return ChatColor.RED + "================ " + Jinro.getPrefix() + ChatColor.RED + "================";
 	}
 
 
@@ -364,8 +374,9 @@ public class Jinro extends JavaPlugin {
 			return true;
 		} else if(arg0.equalsIgnoreCase("pause")) {
             if(args.length == 1){
-                sender.sendMessage("/jinro_ad pause timer | タイマーの一時停止を切り替えます。");
-                sender.sendMessage("/jinro_ad pause cycle | 進行の一時停止を切り替えます。(タイマーは止まりません)");
+				Jinro.sendMessage(sender, Jinro.getHeader(), LogLevel.Notice, false);
+				Jinro.sendCmdHelp(sender, "/jinro_ad pause timer", "タイマーの一時停止を切り替えます。");
+				Jinro.sendCmdHelp(sender, "/jinro_ad pause cycle", "進行の一時停止を切り替えます。(タイマーは止まりません)");
             } else if(args.length == 2){
                 if(args[1].equalsIgnoreCase("timer")){
                     if( Timer.getTimerPauseFlag() ){
@@ -474,9 +485,10 @@ public class Jinro extends JavaPlugin {
 			return true;
 		} else if(arg0.equalsIgnoreCase("co")){
 			if(args.length == 1){
-				sender.sendMessage(ChatColor.AQUA + "/jinro_ad co <Player> "+ ChatColor.GREEN +"指定したプレイヤーの役職を確認します。");
-				sender.sendMessage(ChatColor.AQUA + "/jinro_ad co <Player> <Yakusyoku> "+ ChatColor.GREEN +"指定したプレイヤーを強制的にCOさせます。");
-				sender.sendMessage(ChatColor.AQUA + "/jinro_ad co <Player> del "+ ChatColor.GREEN +"指定したプレイヤーのCOを解除します。");
+				Jinro.sendMessage(sender, Jinro.getHeader(), LogLevel.Notice, false);
+				Jinro.sendCmdHelp(sender, "/jinro_ad co <Player>", "指定したプレイヤーの役職を確認します。");
+				Jinro.sendCmdHelp(sender, "/jinro_ad co <Player> <Yakusyoku>", "指定したプレイヤーを強制的にCOさせます。");
+				Jinro.sendCmdHelp(sender, "/jinro_ad co <Player> del", "指定したプレイヤーのCOを解除します。");
 			} else if(args.length == 2){
 				Player p = Utility.getPlayer(args[1]);
 				if(p == null){
@@ -540,6 +552,7 @@ public class Jinro extends JavaPlugin {
 		} else if(arg0.equalsIgnoreCase("reload")){
 			this.reloadConfig();
 			Data.reloadConfig();
+			map.reloadConfig();
 			DEBUGFLAG = this.getConfig().getBoolean("Debug");
 			SQLEnable = this.getConfig().getBoolean("sql.enable");
 			if(getDebug()){
@@ -649,6 +662,9 @@ public class Jinro extends JavaPlugin {
 				}
 				sendMessage(sender, "全員をあなたにテレポートしました。", LogLevel.INFO);
 			}
+			return true;
+		} else if(arg0.equalsIgnoreCase("map")){
+			JinroMap.Admin(sender, commandLabel, args);
 			return true;
 		} else if(arg0.equalsIgnoreCase("guide")){
 			Help.guideAdmin(sender, commandLabel, args);
@@ -1956,6 +1972,9 @@ public class Jinro extends JavaPlugin {
 	}
 
 	public static void sendMessage(Player p, String msg, LogLevel lv, boolean Prefix){
+		if( msg.equalsIgnoreCase("") ){
+			return;
+		}
 		String send = "";
 		if(Prefix){
 			send = Jinro.getPrefix();
@@ -1980,6 +1999,9 @@ public class Jinro extends JavaPlugin {
 	}
 
 	public static void sendMessage(CommandSender p, String msg, LogLevel lv, boolean Prefix){
+		if( msg.equalsIgnoreCase("") ){
+			return;
+		}
 		String send = "";
 		if(Prefix){
 			send = Jinro.getPrefix();
@@ -2005,11 +2027,12 @@ public class Jinro extends JavaPlugin {
 
 
 	public static void sendCmdHelp(Player p, String cmd, String help, boolean Prefix){
-		String send = "";
+		String send = " ";
 		if(Prefix){
 			send = Jinro.getPrefix();
 		}
-		p.sendMessage(send + CmdColor(cmd) + " " + ChatColor.GREEN + help);
+		p.sendMessage(send + CmdColor(cmd));
+		p.sendMessage(send + ChatColor.GREEN + "   " + help);
 	}
 
 	public static void sendCmdHelp(Player p, String cmd, String help){
@@ -2017,11 +2040,12 @@ public class Jinro extends JavaPlugin {
 	}
 
 	public static void sendCmdHelp(CommandSender p, String cmd, String help, boolean Prefix){
-		String send = "";
+		String send = " ";
 		if(Prefix){
 			send = Jinro.getPrefix();
 		}
-		p.sendMessage(send + CmdColor(cmd) + " " + ChatColor.GREEN + help);
+		p.sendMessage(send + CmdColor(cmd));
+		p.sendMessage(send + ChatColor.GREEN + "   " + help);
 	}
 
 	public static void sendCmdHelp(CommandSender p, String cmd, String help){

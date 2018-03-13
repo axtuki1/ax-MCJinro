@@ -174,6 +174,7 @@ public class Timer extends BukkitRunnable {
 	}
 
 	public static void NextCycle() {
+        w = Jinro.getCurrentWorld();
         resetGameElapsedTime();
 	    // 勝利判定
         if(Cycle.getStatus() == Cycle.Execution || Cycle.getStatus() == Cycle.Night) {

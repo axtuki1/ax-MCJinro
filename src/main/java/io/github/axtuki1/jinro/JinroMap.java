@@ -79,7 +79,11 @@ public class JinroMap {
                 }
                 Jinro.setReikaiLoc(map.getReikaiSpawnPoint());
                 Jinro.setRespawnLoc(map.getSpawnPoint());
-                Jinro.sendMessage(sender, "各スポーンポイントをマップ「" + args[2] + "」の値に変更しました。", LogLevel.SUCCESSFUL, true);
+//                Jinro.sendMessage(sender, "各スポーンポイントをマップ「" + args[2] + "」の値に変更しました。", LogLevel.SUCCESSFUL, true);
+                Bukkit.broadcastMessage( Jinro.getPrefix() + ChatColor.GREEN + "マップが「" + map.getDisplayName() + "」に変更されました。" );
+                for( Player p : Bukkit.getOnlinePlayers() ){
+                    Jinro.TeleportToRespawn(p);
+                }
             }
         } else if( args[1].equalsIgnoreCase("info") ){
             if( args.length == 2 ){
@@ -166,6 +170,10 @@ public class JinroMap {
                 Jinro.sendCmdHelp(sender, "/jinro_ad map setup add <Name> <DisplayName>", "マップ<Name>を表示名<DisplayName>で追加します。");
                 return;
             } else if (args.length == 4) {
+                if( args[3].equalsIgnoreCase("add") || args[3].equalsIgnoreCase("remove") ){
+                    Jinro.sendMessage(sender, "この名前はコマンドで使用するため利用できません。", LogLevel.ERROR, true);
+                    return;
+                }
                 JinroMap map = new JinroMap(args[3]);
                 if (map.getDisplayName() != null) {
                     Jinro.sendMessage(sender, "このマップは既に存在しています。", LogLevel.ERROR, true);
@@ -175,6 +183,10 @@ public class JinroMap {
                 Jinro.sendMessage(sender, "マップ「" + args[3] + "」を追加しました。", LogLevel.SUCCESSFUL, true);
                 return;
             } else if (args.length == 5) {
+                if( args[3].equalsIgnoreCase("add") || args[3].equalsIgnoreCase("remove") ){
+                    Jinro.sendMessage(sender, "この名前はコマンドで使用するため利用できません。", LogLevel.ERROR, true);
+                    return;
+                }
                 JinroMap map = new JinroMap(args[3]);
                 if (map.getDisplayName() != null) {
                     Jinro.sendMessage(sender, "このマップは既に存在しています。", LogLevel.ERROR, true);

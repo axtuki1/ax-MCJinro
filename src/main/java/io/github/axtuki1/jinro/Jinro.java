@@ -1820,7 +1820,7 @@ public class Jinro extends JavaPlugin {
 			} else if(args[0].equalsIgnoreCase("map")) {
 				if(args.length == 2){
 					String arg = args[1].toLowerCase();
-					for ( String name : new String[]{"list","set","tp", "setup"}  ) {
+					for ( String name : new String[]{"list","set","tp", "setup", "info"}  ) {
 						if ( name.toLowerCase().startsWith(arg) ) {
 							view.add(name);
 						}
@@ -1835,7 +1835,18 @@ public class Jinro extends JavaPlugin {
 						// do nothing.
 					}
 					return view;
-				} else if(args[1].equalsIgnoreCase("setup")){
+				} else if(args[1].equalsIgnoreCase("list")) {
+                    if(args.length == 3){
+                        String arg = args[2].toLowerCase();
+                        for ( String name : new String[]{"full","all"}  ) {
+                            if ( name.toLowerCase().startsWith(arg) ) {
+                                view.add(name);
+                            }
+                        }
+                        return view;
+                    }
+                    return view;
+                } else if(args[1].equalsIgnoreCase("setup")){
 					if( args.length == 3 ){
 						String arg = args[2].toLowerCase();
 						for ( String name : new String[]{"add","remove"}  ) {
@@ -1872,7 +1883,7 @@ public class Jinro extends JavaPlugin {
 						}
 					}
 					return view;
-				} else if(args[1].equalsIgnoreCase("set")){
+				} else if(args[1].equalsIgnoreCase("set") || args[1].equalsIgnoreCase("info")){
 					String arg = args[2].toLowerCase();
 					try {
 						for ( JinroMap m : JinroMap.getMaps() ) {

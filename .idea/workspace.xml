@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5af5beee-6096-447d-8a9b-fb381c74d809" name="Default" comment="update MapSelectの仕様を調整&#10;マップ切替時に全員をテレポートするよう変更。&#10;setupコマンドを削除。">
+    <list default="true" id="5af5beee-6096-447d-8a9b-fb381c74d809" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/JinroMap.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/JinroMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Timer.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Timer.java" />
     </list>
     <list id="9dbb00f8-89aa-43a0-a686-fc029d98ec97" name="README.md 追加 忘れてたんやで (cherry picked from commit 24d75aa)" comment="README.md 追加&#10;&#10;忘れてたんやで&#10;&#10;(cherry picked from commit 24d75aa)" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -26,17 +25,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Jinro.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Jinro.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="1855" column="56" lean-forward="true" selection-start-line="1855" selection-start-column="56" selection-end-line="1855" selection-end-column="56" />
+            <state relative-caret-position="560">
+              <caret line="1898" column="41" lean-forward="true" selection-start-line="1898" selection-start-column="41" selection-end-line="1898" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#79113#79114#0" expanded="true" />
-                <element signature="e#79136#79137#0" expanded="true" />
-                <element signature="e#79172#79173#0" expanded="true" />
-                <element signature="e#79196#79197#0" expanded="true" />
+                <element signature="e#79665#79666#0" expanded="true" />
+                <element signature="e#79688#79689#0" expanded="true" />
+                <element signature="e#79724#79725#0" expanded="true" />
+                <element signature="e#79748#79749#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -52,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JinroMap.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="JinroMap.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/JinroMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-509">
-              <caret line="192" column="27" lean-forward="true" selection-start-line="192" selection-start-column="27" selection-end-line="192" selection-end-column="27" />
+            <state relative-caret-position="227">
+              <caret line="18" column="79" lean-forward="false" selection-start-line="18" selection-start-column="79" selection-end-line="18" selection-end-column="79" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -279,8 +278,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1390" />
-    <option name="y" value="509" />
+    <option name="x" value="1150" />
+    <option name="y" value="534" />
     <option name="width" value="1535" />
     <option name="height" value="1033" />
   </component>
@@ -694,7 +693,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520871753920</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="update MapSelectの仕様を調整&#10;マップ切替時に全員をテレポートするよう変更。&#10;setupコマンドを削除。&#10;Tab補完追加。&#10;切替時にConfigに記録されていなかったのを修正。なにしとん">
+      <created>1520925417229</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1520925417229</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -707,8 +713,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1390" y="509" width="1535" height="1033" extended-state="0" />
-    <editor active="true" />
+    <frame x="1150" y="534" width="1535" height="1033" extended-state="0" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25851065" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -722,7 +727,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32734153" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16744809" sideWeight="0.5937888" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16744809" sideWeight="0.5937888" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16902515" sideWeight="0.54545456" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24903475" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -806,7 +811,8 @@
     <MESSAGE value="update Multi World Support&#10;スポーンポイントと霊界の座標にワールドを指定できるよう変更" />
     <MESSAGE value="update Multi World Support v1.4&#10;スポーンポイントと霊界の座標にワールドを指定できるよう変更" />
     <MESSAGE value="update MapSelect 実装" />
-    <option name="LAST_COMMIT_MESSAGE" value="update MapSelect 実装" />
+    <MESSAGE value="update MapSelectの仕様を調整&#10;マップ切替時に全員をテレポートするよう変更。&#10;setupコマンドを削除。&#10;Tab補完追加。&#10;切替時にConfigに記録されていなかったのを修正。なにしとん" />
+    <option name="LAST_COMMIT_MESSAGE" value="update MapSelectの仕様を調整&#10;マップ切替時に全員をテレポートするよう変更。&#10;setupコマンドを削除。&#10;Tab補完追加。&#10;切替時にConfigに記録されていなかったのを修正。なにしとん" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1128,26 +1134,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/JinroMap.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-509">
-          <caret line="192" column="27" lean-forward="true" selection-start-line="192" selection-start-column="27" selection-end-line="192" selection-end-column="27" />
+        <state relative-caret-position="560">
+          <caret line="1898" column="41" lean-forward="true" selection-start-line="1898" selection-start-column="41" selection-end-line="1898" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#79665#79666#0" expanded="true" />
+            <element signature="e#79688#79689#0" expanded="true" />
+            <element signature="e#79724#79725#0" expanded="true" />
+            <element signature="e#79748#79749#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/JinroMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="1855" column="56" lean-forward="true" selection-start-line="1855" selection-start-column="56" selection-end-line="1855" selection-end-column="56" />
+        <state relative-caret-position="227">
+          <caret line="18" column="79" lean-forward="false" selection-start-line="18" selection-start-column="79" selection-end-line="18" selection-end-column="79" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#79113#79114#0" expanded="true" />
-            <element signature="e#79136#79137#0" expanded="true" />
-            <element signature="e#79172#79173#0" expanded="true" />
-            <element signature="e#79196#79197#0" expanded="true" />
           </folding>
         </state>
       </provider>

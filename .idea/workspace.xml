@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5af5beee-6096-447d-8a9b-fb381c74d809" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/JinroMap.java" afterPath="$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/JinroMap.java" />
     </list>
     <list id="9dbb00f8-89aa-43a0-a686-fc029d98ec97" name="README.md 追加 忘れてたんやで (cherry picked from commit 24d75aa)" comment="README.md 追加&#10;&#10;忘れてたんやで&#10;&#10;(cherry picked from commit 24d75aa)" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -28,36 +27,52 @@
       <file leaf-file-name="Jinro.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="1898" column="41" lean-forward="true" selection-start-line="1898" selection-start-column="41" selection-end-line="1898" selection-end-column="41" />
+            <state relative-caret-position="0">
+              <caret line="2470" column="13" lean-forward="false" selection-start-line="2470" selection-start-column="13" selection-end-line="2470" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#79665#79666#0" expanded="true" />
-                <element signature="e#79688#79689#0" expanded="true" />
-                <element signature="e#79724#79725#0" expanded="true" />
-                <element signature="e#79748#79749#0" expanded="true" />
+                <marker date="1520945381000" expanded="true" signature="91353:91365" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Timer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Timer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Timer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="179" column="86" lean-forward="true" selection-start-line="179" selection-start-column="86" selection-end-line="179" selection-end-column="86" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JinroMap.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/JinroMap.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="18" column="79" lean-forward="false" selection-start-line="18" selection-start-column="79" selection-end-line="18" selection-end-column="79" />
+            <state relative-caret-position="453">
+              <caret line="200" column="46" lean-forward="false" selection-start-line="200" selection-start-column="46" selection-end-line="200" selection-end-column="46" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <marker date="1520945381000" expanded="false" signature="30999:31007" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="31023:31029" ph=" }" />
+                <marker date="1520945381000" expanded="false" signature="31073:31084" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="31103:31109" ph=" }" />
+                <marker date="1520945381000" expanded="false" signature="31163:31174" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="31194:31200" ph=" }" />
+                <marker date="1520945381000" expanded="false" signature="31245:31256" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="31276:31282" ph=" }" />
+                <marker date="1520945381000" expanded="false" signature="31338:31349" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="31371:31377" ph=" }" />
+                <marker date="1520945381000" expanded="false" signature="31424:31435" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="31457:31463" ph=" }" />
+                <marker date="1520945381000" expanded="false" signature="31520:31525" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="31547:31550" ph=" }" />
+                <marker date="1520945381000" expanded="false" signature="31597:31608" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="31630:31636" ph=" }" />
+                <marker date="1520945381000" expanded="false" signature="31691:31702" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="31723:31729" ph=" }" />
+                <marker date="1520945381000" expanded="false" signature="31775:31786" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="31807:31813" ph=" }" />
+                <marker date="1520945381000" expanded="false" signature="31857:31867" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="31882:31888" ph=" }" />
+                <marker date="1520945381000" expanded="false" signature="31922:31927" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="31936:31939" ph=" }" />
+                <marker date="1520945381000" expanded="false" signature="31982:31987" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="31996:31999" ph=" }" />
+                <marker date="1520945381000" expanded="false" signature="32040:32050" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="32064:32070" ph=" }" />
+                <marker date="1520945381000" expanded="false" signature="32195:32206" ph=" { " />
+                <marker date="1520945381000" expanded="false" signature="32214:32220" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -67,17 +82,7 @@
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="map.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/map.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -86,7 +91,7 @@
       <file leaf-file-name="UUIDFetcher.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/UUIDFetcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
+            <state relative-caret-position="240">
               <caret line="36" column="47" lean-forward="false" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -98,9 +103,11 @@
       <file leaf-file-name="Setup.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="21" column="12" lean-forward="false" selection-start-line="21" selection-start-column="12" selection-end-line="31" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="225">
+              <caret line="21" column="12" lean-forward="false" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+              <folding>
+                <marker date="1520945381000" expanded="true" signature="387:2049" ph="//..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -108,9 +115,11 @@
       <file leaf-file-name="ComingOut.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/ComingOut.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="52" column="17" lean-forward="false" selection-start-line="52" selection-start-column="17" selection-end-line="52" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="1170">
+              <caret line="82" column="17" lean-forward="false" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="17" />
+              <folding>
+                <marker date="1520945262000" expanded="true" signature="3855:3860" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,18 +131,11 @@
               <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Event.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Event.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="24" column="61" lean-forward="false" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
-              <folding>
-                <marker date="1520860116000" expanded="true" signature="15614:15663" ph="{...}" />
+                <marker date="1520945262000" expanded="true" signature="7503:7691" ph="{...}" />
+                <marker date="1520945262000" expanded="true" signature="7616:7685" ph="{...}" />
+                <marker date="1520945262000" expanded="true" signature="8200:8390" ph="{...}" />
+                <marker date="1520945262000" expanded="true" signature="8315:8384" ph="{...}" />
+                <marker date="1520945262000" expanded="true" signature="10649:10733" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -315,14 +317,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="MinecraftJinro" type="b2602c69:ProjectViewProjectNode" />
               <item name="MinecraftJinro" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MinecraftJinro" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MinecraftJinro" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MinecraftJinro" type="b2602c69:ProjectViewProjectNode" />
@@ -361,8 +366,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -713,21 +720,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1150" y="534" width="1535" height="1033" extended-state="0" />
+    <frame x="988" y="538" width="1535" height="1033" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25851065" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32923368" sideWeight="0.48713" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17270789" sideWeight="0.4822505" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21557271" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17270789" sideWeight="0.5295405" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23701298" sideWeight="0.51287" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17270789" sideWeight="0.5177495" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23667377" sideWeight="0.51287" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32734153" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16744809" sideWeight="0.5937888" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16744809" sideWeight="0.5937888" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16902515" sideWeight="0.54545456" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24903475" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -735,13 +743,32 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24945295" sideWeight="0.45454547" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32923368" sideWeight="0.48713" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21557271" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16902515" sideWeight="0.54545456" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24903475" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25851065" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17270789" sideWeight="0.5295405" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23701298" sideWeight="0.51287" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32734153" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16744809" sideWeight="0.5937888" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942432" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24945295" sideWeight="0.45454547" order="2" side_tool="true" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1019,9 +1046,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11460">
           <caret line="772" column="4" lean-forward="false" selection-start-line="782" selection-start-column="80" selection-end-line="783" selection-end-column="5" />
-          <folding>
-            <marker date="1520860116000" expanded="true" signature="22429:22432" ph=" }" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1053,9 +1078,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="24" column="61" lean-forward="false" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
-          <folding>
-            <marker date="1520860116000" expanded="true" signature="15614:15663" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1075,9 +1098,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/ComingOut.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="52" column="17" lean-forward="false" selection-start-line="52" selection-start-column="17" selection-end-line="52" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="1170">
+          <caret line="82" column="17" lean-forward="false" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="17" />
+          <folding>
+            <marker date="1520945262000" expanded="true" signature="3855:3860" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1087,13 +1112,18 @@
           <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1520945262000" expanded="true" signature="7503:7691" ph="{...}" />
+            <marker date="1520945262000" expanded="true" signature="7616:7685" ph="{...}" />
+            <marker date="1520945262000" expanded="true" signature="8200:8390" ph="{...}" />
+            <marker date="1520945262000" expanded="true" signature="8315:8384" ph="{...}" />
+            <marker date="1520945262000" expanded="true" signature="10649:10733" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/UUIDFetcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
+        <state relative-caret-position="240">
           <caret line="36" column="47" lean-forward="false" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1106,44 +1136,73 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Setup.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="21" column="12" lean-forward="false" selection-start-line="21" selection-start-column="12" selection-end-line="31" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="225">
+          <caret line="21" column="12" lean-forward="false" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+          <folding>
+            <marker date="1520945381000" expanded="true" signature="387:2049" ph="//..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Timer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="179" column="86" lean-forward="true" selection-start-line="179" selection-start-column="86" selection-end-line="179" selection-end-column="86" />
-          <folding />
+        <state relative-caret-position="453">
+          <caret line="200" column="46" lean-forward="false" selection-start-line="200" selection-start-column="46" selection-end-line="200" selection-end-column="46" />
+          <folding>
+            <marker date="1520945381000" expanded="false" signature="30999:31007" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="31023:31029" ph=" }" />
+            <marker date="1520945381000" expanded="false" signature="31073:31084" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="31103:31109" ph=" }" />
+            <marker date="1520945381000" expanded="false" signature="31163:31174" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="31194:31200" ph=" }" />
+            <marker date="1520945381000" expanded="false" signature="31245:31256" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="31276:31282" ph=" }" />
+            <marker date="1520945381000" expanded="false" signature="31338:31349" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="31371:31377" ph=" }" />
+            <marker date="1520945381000" expanded="false" signature="31424:31435" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="31457:31463" ph=" }" />
+            <marker date="1520945381000" expanded="false" signature="31520:31525" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="31547:31550" ph=" }" />
+            <marker date="1520945381000" expanded="false" signature="31597:31608" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="31630:31636" ph=" }" />
+            <marker date="1520945381000" expanded="false" signature="31691:31702" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="31723:31729" ph=" }" />
+            <marker date="1520945381000" expanded="false" signature="31775:31786" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="31807:31813" ph=" }" />
+            <marker date="1520945381000" expanded="false" signature="31857:31867" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="31882:31888" ph=" }" />
+            <marker date="1520945381000" expanded="false" signature="31922:31927" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="31936:31939" ph=" }" />
+            <marker date="1520945381000" expanded="false" signature="31982:31987" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="31996:31999" ph=" }" />
+            <marker date="1520945381000" expanded="false" signature="32040:32050" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="32064:32070" ph=" }" />
+            <marker date="1520945381000" expanded="false" signature="32195:32206" ph=" { " />
+            <marker date="1520945381000" expanded="false" signature="32214:32220" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/axtuki1/jinro/Jinro.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="1898" column="41" lean-forward="true" selection-start-line="1898" selection-start-column="41" selection-end-line="1898" selection-end-column="41" />
+        <state relative-caret-position="0">
+          <caret line="2470" column="13" lean-forward="false" selection-start-line="2470" selection-start-column="13" selection-end-line="2470" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#79665#79666#0" expanded="true" />
-            <element signature="e#79688#79689#0" expanded="true" />
-            <element signature="e#79724#79725#0" expanded="true" />
-            <element signature="e#79748#79749#0" expanded="true" />
+            <marker date="1520945381000" expanded="true" signature="91353:91365" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1152,9 +1211,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
           <caret line="18" column="79" lean-forward="false" selection-start-line="18" selection-start-column="79" selection-end-line="18" selection-end-column="79" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

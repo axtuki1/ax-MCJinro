@@ -252,7 +252,7 @@ public class Jinro extends JavaPlugin {
 	}
     
     private static String[] AdminCmdList = new String[]{
-    	"start" /* ,"stop" MEMO:誤爆防止 */,"pause","map","initialization","touhyou","yakusyoku","co","reload","debug","option","tp","next","open","list","spec","challenge"};
+    	"start" /* ,"stop" MEMO:誤爆防止 */,"pause","map","gamemode","initialization","touhyou","yakusyoku","co","reload","debug","option","tp","next","open","list","spec","challenge"};
 	
 	private static String[] getAdminCmdList(){
 		return AdminCmdList;
@@ -2090,6 +2090,17 @@ public class Jinro extends JavaPlugin {
 						}
 						return view;
 					}
+				}
+				return view;
+			} else if(args[0].equalsIgnoreCase("gamemode")) {
+				if(args.length == 2){
+					String arg = args[1].toLowerCase();
+					for ( GameMode name : GameMode.values()  ) {
+						if ( name.toString().toLowerCase().startsWith(arg) ) {
+							view.add(name.toString());
+						}
+					}
+					return view;
 				}
 				return view;
 			} else if(args[0].equalsIgnoreCase("tp")) {

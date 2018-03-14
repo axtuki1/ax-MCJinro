@@ -23,6 +23,10 @@ public class JinroMap {
     }
 
     public static void Admin(CommandSender sender, String commandLabel, String[] args) {
+        if (Status.getStatus().equals(Status.GamePlaying)) {
+            Jinro.sendMessage(sender, "ゲーム中はこの機能を使用できません。", LogLevel.ERROR, true);
+            return;
+        }
         if( args.length == 1 ){
             // jinro_ad map
             AdminCmdHelp(sender);

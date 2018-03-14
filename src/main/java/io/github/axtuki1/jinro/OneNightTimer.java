@@ -150,6 +150,7 @@ public class OneNightTimer extends BukkitRunnable {
 	}
 
 	public static void NextCycle() {
+        w = Jinro.getCurrentWorld();
         resetGameElapsedTime();
 	    // 勝利判定
         if(Cycle.getStatus() == Cycle.Execution ) {

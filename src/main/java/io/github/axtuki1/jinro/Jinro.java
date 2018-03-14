@@ -513,7 +513,8 @@ public class Jinro extends JavaPlugin {
 				GameMode.setGameMode(gm);
 				ScoreBoard.getInfoObj().getScore(ChatColor.WHITE + "GameMode:").setScore(5);
 				ScoreBoard.getInfoObj().getScore(ChatColor.GREEN + GameMode.getGameMode().toString()).setScore(4);
-				sendMessage(sender, "ゲームモードを\"" + GameMode.getGameMode().toString() + "\"に設定しました。", LogLevel.SUCCESSFUL, true);
+//				sendMessage(sender, "ゲームモードを\"" + GameMode.getGameMode().toString() + "\"に設定しました。", LogLevel.SUCCESSFUL, true);
+				Bukkit.broadcastMessage(getPrefix() + ChatColor.GREEN + "ゲームモードが\"" + GameMode.getGameMode().toString() + "\"に変更されました。");
 			}
 			return true;
 		} else if(arg0.equalsIgnoreCase("Spec")){

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 public enum OneNightYakusyoku {
-	村人, 人狼, 占い師, 狂人, 聴狂人, 狩人, 怪盗, 白, 黒;
+	村人, 人狼, 占い師, 狂人, 聴狂人, 怪盗, 白, 黒;
 	
 	// プレイヤーの役職等 内部処理担当	
 
@@ -50,10 +50,32 @@ public enum OneNightYakusyoku {
 		return Execution;
 	}
 
+	public static void setAmari(int i, OneNightYakusyoku y1) {
+		Data.set("NPCs.amari.No" + i, getYakuToName(y1).toString());
+		return;
+	}
+
+	public static void removeAmari(int i) {
+		if( i > 2 ){
+			throw new NullPointerException("は？3以上指定するとかなめてんの？");
+		}
+		Data.set("NPCs.amari.No" + i, null);
+		return;
+	}
+
+	public static OneNightYakusyoku getAmari(int i) {
+		if( i > 2 ){
+			throw new NullPointerException("は？3以上指定するとかなめてんの？");
+		}
+		String a = Data.getString("NPCs.amari.No" + i);
+		if(a == null){
+			return null;
+		}
+		return OneNightYakusyoku.getNameToYaku(a);
+	}
 
 	public static void addYaku(Player p, OneNightYakusyoku y){
 		Data.set("Players."+p.getUniqueId()+".yaku", getYakuToName(y).toString());
-		
 		return;
 	}
 	
@@ -209,9 +231,6 @@ public enum OneNightYakusyoku {
 			case 聴狂人:
 				out = ChatColor.BLUE;
 				break;
-			case 狩人:
-				out = ChatColor.GRAY;
-				break;
 			case 怪盗:
 				out = ChatColor.DARK_GREEN;
 				break;
@@ -234,8 +253,6 @@ public enum OneNightYakusyoku {
 			yaku = 狂人;
 		} else if(name.equalsIgnoreCase("tyoukyoujin")){
 			yaku = 聴狂人;
-		} else if(name.equalsIgnoreCase("kariudo")) {
-			yaku = 狩人;
 		} else if(name.equalsIgnoreCase("kaitou")){
 			yaku = 怪盗;
 		} else if(name.equalsIgnoreCase("siro")){
@@ -263,9 +280,6 @@ public enum OneNightYakusyoku {
 				break;
 			case 聴狂人:
 				out = "tyoukyoujin";
-				break;
-			case 狩人:
-				out = "kariudo";
 				break;
 			case 怪盗:
 				out = "kaitou";
@@ -298,9 +312,6 @@ public enum OneNightYakusyoku {
 			case 聴狂人:
 				out = "聴狂";
 				break;
-			case 狩人:
-				out = "狩人";
-				break;
 			case 怪盗:
 				out = "怪盗";
 				break;
@@ -325,12 +336,29 @@ public enum OneNightYakusyoku {
 		return pl;
 	}
 
+	public static void SwapYaku(Player p1, Player p2){
+		OneNightYakusyoku p1y = getYaku(p1);
+		OneNightYakusyoku p2y = getYaku(p2);
+		Data.set("Players."+p1.getUniqueId()+".yaku", getYakuToName(p2y));
+		Data.set("Players."+p1.getUniqueId()+".beforeyaku", getYakuToName(p1y));
+		Data.set("Players."+p2.getUniqueId()+".yaku", getYakuToName(p1y));
+		Data.set("Players."+p2.getUniqueId()+".beforeyaku", getYakuToName(p2y));
+	}
+
 
 	public static void setYakuFromTool(JSONArray players, OneNightYakusyoku y) {
 		Jinro.getMain().getLogger().info( "===================["+y.toString()+"]" );
 		for(Object a : players){
 			//System.out.print(p);
 			String p = a.toString();
+			if( p.equals("amari##") ){
+				if( getAmari(1) == null ){
+					setAmari(1, y);
+				} else if( getAmari(2) == null ){
+					setAmari(2, y);
+				}
+				continue;
+			}
 			Player pp = Bukkit.getPlayer(p);
 			if (pp != null) {
 				pp.sendMessage(ChatColor.RED + "=== " + ChatColor.WHITE + "あなたは " + OneNightYakusyoku.getYakuColor(y) + "[" + y.name() + "]" + ChatColor.WHITE + " です。" + ChatColor.RED + " ===");
@@ -371,6 +399,21 @@ public enum OneNightYakusyoku {
 					sender.sendMessage(ChatColor.RED + "===================================");
 					sender.sendMessage(ChatColor.GREEN + "役は以下のようにセットされました。");
 					String Death = "";
+					// ここはてぬき
+					StringBuilder amari = new StringBuilder();
+					yaku = OneNightYakusyoku.getAmari(1);
+					if(yaku != null){
+						amari.append(OneNightYakusyoku.getYakuColor(yaku)).append("[").append(yaku.toString()).append("]");
+					} else {
+						amari.append(ChatColor.GREEN + "[なし]");
+					}
+					yaku = OneNightYakusyoku.getAmari(2);
+					if(yaku != null){
+						amari.append(OneNightYakusyoku.getYakuColor(yaku)).append("[").append(yaku.toString()).append("]");
+					} else {
+						amari.append(ChatColor.GREEN + "[なし]");
+					}
+					sender.sendMessage(ChatColor.GREEN + "余り : " + amari);
 					for(Player pa : OneNightYakusyoku.getAllPlayers()){
 						yaku = OneNightYakusyoku.getYaku(pa);
 						Death = "";
@@ -389,7 +432,29 @@ public enum OneNightYakusyoku {
 				Jinro.sendMessage(sender, "フォーマットが不正です。", LogLevel.ERROR);
 				return true;
 			}
-
+			if(args[2].equalsIgnoreCase("余り") || args[2].equalsIgnoreCase("amari##") ){
+				if(args[1].equalsIgnoreCase("del") ){
+					Jinro.sendMessage(sender, "余りの役職を削除しました。", LogLevel.SUCCESSFUL);
+					removeAmari(1);
+					removeAmari(2);
+					return true;
+				}
+				yaku = getNameToYaku(args[1]);
+				if(yaku == null){
+					sendYakuHelp(sender);
+					return true;
+				}
+				if( getAmari(1) == null ){
+					setAmari(1, yaku);
+				} else if( getAmari(2) == null ){
+					setAmari(2, yaku);
+				} else {
+					Jinro.sendMessage(sender, "これ以上設定できません。", LogLevel.ERROR);
+					return true;
+				}
+				Jinro.sendMessage(sender, "役職[ " + yaku.name() + " ]を余りに設定しました。", LogLevel.SUCCESSFUL);
+				return true;
+			}
 			p = Utility.getPlayer(args[2]);
 			yaku = getNameToYaku(args[1]);
 		}
@@ -451,9 +516,7 @@ public enum OneNightYakusyoku {
 			// [DEBUG] sender.sendMessage(p.toString());
 			OneNightYakusyoku.addYaku(p, yaku);
 			Jinro.sendMessage(sender, p.getName() + " を役職[ " + yaku.name() + " ]に設定しました。", LogLevel.SUCCESSFUL);
-			if (p instanceof Player) {
-				p.sendMessage(ChatColor.RED + "=== " + ChatColor.WHITE + "あなたは " + OneNightYakusyoku.getYakuColor(yaku) + "[" + yaku.name() + "]" + ChatColor.WHITE + " です。" + ChatColor.RED + " ===");
-			}
+			p.sendMessage(ChatColor.RED + "=== " + ChatColor.WHITE + "あなたは " + OneNightYakusyoku.getYakuColor(yaku) + "[" + yaku.name() + "]" + ChatColor.WHITE + " です。" + ChatColor.RED + " ===");
 			return true;
 		}
 		return true;

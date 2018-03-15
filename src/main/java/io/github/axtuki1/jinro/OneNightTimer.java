@@ -82,17 +82,8 @@ public class OneNightTimer extends BukkitRunnable {
                 bar.send(p);
                 continue;
             } else if(Cycle.getStatus() == Cycle.Night){
-                if(OneNightYakusyoku.getYaku(p) == OneNightYakusyoku.占い師 ) {
-                    if(!Data.getBoolean("Status.uranai."+ p.getUniqueId() )) {
-                        bar.setText(ChatColor.GREEN + "能力を使用できます。");
-                        bar.send(p);
-                        continue;
-                    } else {
-                        bar.setText(ChatColor.GRAY + "能力は使用済みです。");
-                        bar.send(p);
-                        continue;
-                    }
-                }
+                // 夜のアクションバーややこし杉
+                // ほんとだるい
             } else {
                 bar.setText("");
                 bar.send(p);
@@ -250,13 +241,13 @@ public class OneNightTimer extends BukkitRunnable {
                                 p.sendMessage(ChatColor.RED + "[ " + a.getName() + " ]");
                             }
                             break;
-                        case 狩人:
-                            p.sendMessage(yc + "あなたは 狩人 です。");
-                            p.sendMessage(yc + "処刑される際に誰か一人を指名して道連れにすることができます。");
-                            //p.sendMessage(yc + "「/jinro assign <Player>」で指名できます");
-                            p.sendMessage(yc + "目標: 村人の勝利");
-                            Data.set("Players." + p.getUniqueId() + ".goei", null);
-                            break;
+//                        case 狩人:
+//                            p.sendMessage(yc + "あなたは 狩人 です。");
+//                            p.sendMessage(yc + "処刑される際に誰か一人を指名して道連れにすることができます。");
+//                            //p.sendMessage(yc + "「/jinro assign <Player>」で指名できます");
+//                            p.sendMessage(yc + "目標: 村人の勝利");
+//                            Data.set("Players." + p.getUniqueId() + ".goei", null);
+//                            break;
                         case 怪盗:
                             p.sendMessage(yc + "あなたは 怪盗 です。");
                             p.sendMessage(yc + "誰か一人と役を交換できます。");
@@ -295,7 +286,6 @@ public class OneNightTimer extends BukkitRunnable {
             case 怪盗:
             case 村人:
             case 狂人:
-            case 狩人:
             case 占い師:
             case 聴狂人:
                 if (Jinro.getMain().getConfig().getBoolean("WinnerMsgUseTitle")) {

@@ -288,11 +288,14 @@ public class Jinro extends JavaPlugin {
 
 	private static ArrayList<String> getCmdList(OneNightYakusyoku yaku) {
 		ArrayList<String> out = new ArrayList<String>();
-		if(yaku.equals(OneNightYakusyoku.狩人)){
-			out.add("assign");
-		}
+//		if(yaku.equals(OneNightYakusyoku.狩人)){
+//			out.add("assign");
+//		}
 		if(yaku.equals(OneNightYakusyoku.占い師)){
 			out.add("uranai");
+		}
+		if(yaku.equals(OneNightYakusyoku.怪盗)){
+			out.add("change");
 		}
 		out.add("chat");
 		out.add("co");
@@ -335,6 +338,17 @@ public class Jinro extends JavaPlugin {
 						}
 						break;
 					case OneNightJinro:
+						StringBuilder amari = new StringBuilder();
+						OneNightYakusyoku yaku = OneNightYakusyoku.getAmari(1);
+						if(yaku == null){
+							sender.sendMessage(Jinro.getPrefix() + ChatColor.RED + "まだ役を振っていない人がいます。");
+							return true;
+						}
+						yaku = OneNightYakusyoku.getAmari(2);
+						if(yaku == null){
+							sender.sendMessage(Jinro.getPrefix() + ChatColor.RED + "まだ役を振っていない人がいます。");
+							return true;
+						}
 						for(Player p : Bukkit.getOnlinePlayers()){
 							if( OneNightYakusyoku.getYaku( p ) == null && !p.hasPermission("axtuki1.Jinro.GameMaster") && !Data.getBoolean("Players." + p.getUniqueId() + ".Spectator")){
 								sender.sendMessage(Jinro.getPrefix() + ChatColor.RED + "まだ役を振っていない人がいます。");
@@ -876,6 +890,20 @@ public class Jinro extends JavaPlugin {
 				case OneNightJinro:
 					OneNightYakusyoku yak = null;
 					Death = "";
+					StringBuilder amari = new StringBuilder();
+					yak = OneNightYakusyoku.getAmari(1);
+					if(yak != null){
+						amari.append(OneNightYakusyoku.getYakuColor(yak)).append("[").append(yak.toString()).append("]");
+					} else {
+						amari.append("[なし]");
+					}
+					yak = OneNightYakusyoku.getAmari(2);
+					if(yak != null){
+						amari.append(OneNightYakusyoku.getYakuColor(yak)).append("[").append(yak.toString()).append("]");
+					} else {
+						amari.append("[なし]");
+					}
+					sender.sendMessage(ChatColor.GREEN + "余り : " + amari);
 					for(Player p : OneNightYakusyoku.getAllPlayers()){
 						yak = OneNightYakusyoku.getYaku(p);
 						Death = "";
@@ -1043,8 +1071,24 @@ public class Jinro extends JavaPlugin {
 					}
 					break;
 				case OneNightJinro:
+					StringBuilder amari = new StringBuilder();
+					OneNightYakusyoku oyaku = OneNightYakusyoku.getAmari(1);
+					if(oyaku != null){
+						amari.append(OneNightYakusyoku.getYakuColor(oyaku)).append("[").append(oyaku.toString()).append("]");
+					} else {
+						amari.append("[なし]");
+						ready = false;
+					}
+					oyaku = OneNightYakusyoku.getAmari(2);
+					if(oyaku != null){
+						amari.append(OneNightYakusyoku.getYakuColor(oyaku)).append("[").append(oyaku.toString()).append("]");
+					} else {
+						amari.append("[なし]");
+						ready = false;
+					}
+					sender.sendMessage(ChatColor.GREEN + "余り : " + amari);
 					for(Player p : OneNightYakusyoku.getAllPlayers()){
-						OneNightYakusyoku oyaku = OneNightYakusyoku.getYaku(p);
+						oyaku = OneNightYakusyoku.getYaku(p);
 						Death = "";
 						if(OneNightYakusyoku.getDeath(p)){
 							Death = ChatColor.GRAY + "(死亡)";
@@ -1055,6 +1099,11 @@ public class Jinro extends JavaPlugin {
 							sender.sendMessage(ChatColor.GREEN + p.getName() + " : [なし]"+Death);
 							ready = false;
 						}
+					}
+					if(ready){
+						sender.sendMessage(ChatColor.GOLD + "/jinro_ad start でゲームを開始できます。");
+					} else {
+						sender.sendMessage(ChatColor.RED + "役を振っていないプレイヤーがいます。");
 					}
 					break;
 			}
@@ -1192,13 +1241,32 @@ public class Jinro extends JavaPlugin {
 				sender.sendMessage(Jinro.getPrefix() + ChatColor.RED + "まだ使用できません。");
 				return true;
 			}
-			if(Yakusyoku.getYaku( Utility.getPlayer( sender.getName() ) ) != Yakusyoku.占い師){
-				sendMessage(sender, "あなたは占い師ではありません。", LogLevel.ERROR);
-				return true;
+			switch (GameMode.getGameMode()){
+				case OneNightJinro:
+					if(Data.get("Players."+((Player)sender).getUniqueId()+".beforeyaku") != null){
+						if(!Data.getString("Players."+((Player)sender).getUniqueId()+".beforeyaku").equalsIgnoreCase( OneNightYakusyoku.getYakuToName(OneNightYakusyoku.占い師))){
+							sendMessage(sender, "あなたは占いを行う事ができません。", LogLevel.ERROR);
+							return true;
+						}
+					} else if(OneNightYakusyoku.getYaku(Utility.getPlayer(sender.getName())) != OneNightYakusyoku.占い師){
+						sendMessage(sender, "あなたは占いを行う事ができません。", LogLevel.ERROR);
+						return true;
+					}
+					break;
+				case MinecraftJinro:
+					if(Yakusyoku.getYaku( Utility.getPlayer( sender.getName() ) ) != Yakusyoku.占い師){
+						sendMessage(sender, "あなたは占い師ではありません。", LogLevel.ERROR);
+						return true;
+					}
+					break;
 			}
 			if (args.length == 1) {
 				sendMessage(sender, "プレイヤーを指定してください。", LogLevel.ERROR);
 			} else if(args[1].equalsIgnoreCase("syoniti##")) {
+				if( !GameMode.getGameMode().equals(GameMode.MinecraftJinro) ){
+					sendMessage(sender, "このゲームモードでは初日犠牲者は存在しません。", LogLevel.ERROR);
+					return true;
+				}
 				if(Cycle.getStatus() != Cycle.Night){
 					sendMessage(sender, "夜ではありません。", LogLevel.ERROR);
 					return true;
@@ -1238,6 +1306,35 @@ public class Jinro extends JavaPlugin {
 					Data.set("Status.uranai."+ sender.getName() +"." + Timer.getDay(), true);
 					Bukkit.broadcast(getPrefix() + ChatColor.GREEN + "[占い]" + sender.getName() + " -> 初日犠牲者("+ Yakusyoku.getYakuColor( yaku ) + yaku.toString() + ChatColor.GREEN +")" , "axtuki1.Jinro.GameMaster");
 				}
+			} else if(args[1].equalsIgnoreCase("amari##")) {
+				if( !GameMode.getGameMode().equals(GameMode.OneNightJinro) ){
+					sendMessage(sender, "このゲームモードでは余りは存在しません。", LogLevel.ERROR);
+					return true;
+				}
+				if(Cycle.getStatus() != Cycle.Night){
+					sendMessage(sender, "夜ではありません。", LogLevel.ERROR);
+					return true;
+				}
+				if( Data.getConfig().getBoolean("Status.uranai."+ sender.getName() +"." + Timer.getDay()) ){
+					sendMessage(sender, "もう既に占っています。", LogLevel.ERROR);
+					return true;
+				}
+				StringBuilder amari = new StringBuilder();
+				OneNightYakusyoku oyaku = OneNightYakusyoku.getAmari(1);
+				if (oyaku != null) {
+					amari.append(OneNightYakusyoku.getYakuColor(oyaku)).append("[").append(oyaku.toString()).append("]");
+				} else {
+					amari.append("[なし]");
+				}
+				oyaku = OneNightYakusyoku.getAmari(2);
+				if (oyaku != null) {
+					amari.append(OneNightYakusyoku.getYakuColor(oyaku)).append("[").append(oyaku.toString()).append("]");
+				} else {
+					amari.append("[なし]");
+				}
+				sendMessage(sender, "占いの結果、余りの役は " + amari + ChatColor.GREEN + " でした。", LogLevel.SUCCESSFUL);
+				Data.set("Status.uranai." + sender.getName() +"." + Timer.getDay(), true);
+				Bukkit.broadcast(getPrefix() + ChatColor.GREEN + "[占い]" + sender.getName() + " -> 余り "+ amari, "axtuki1.Jinro.GameMaster");
 			} else {
 				Player p = Utility.getPlayer( args[1] );
 				if(sender.getName() == p.getName()){
@@ -1263,52 +1360,73 @@ public class Jinro extends JavaPlugin {
 					sendMessage(sender, "もう既に占っています。", LogLevel.ERROR);
 					return true;
 				}
-				Yakusyoku yaku = Yakusyoku.getYaku( p );
-				String y;
-				if(yaku == null){
-					sendMessage(sender, args[1] + "を占えませんでした....", LogLevel.ERROR);
-				} else {
-					if(yaku == Yakusyoku.妖狐 ){
-						if( Jinro.getMain().getConfig().getBoolean("ShowYakusyoku") ){
-							y = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
+				switch (GameMode.getGameMode()){
+					case MinecraftJinro:
+						Yakusyoku yaku = Yakusyoku.getYaku( p );
+						String y;
+						if(yaku == null){
+							sendMessage(sender, args[1] + "を占えませんでした....", LogLevel.ERROR);
 						} else {
-							y = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
+							if(yaku == Yakusyoku.妖狐 ){
+								if( Jinro.getMain().getConfig().getBoolean("ShowYakusyoku") ){
+									y = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
+								} else {
+									y = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
+								}
+								p.sendMessage(ChatColor.RED + "あなたは呪い殺されました....");
+								p.sendMessage(ChatColor.RED + "翌日霊界へご案内します。");
+								Stats.setDeath(p, Stats.death.Curse, (Stats.getDeath(p, Stats.death.Curse) + 1));
+								Yakusyoku.setMorningDeath(p);
+							} else if(yaku == Yakusyoku.狂人){
+								if( Jinro.getMain().getConfig().getBoolean("ShowYakusyoku") ){
+									y = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
+								} else {
+									y = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
+								}
+							} else if(yaku == Yakusyoku.コスプレイヤー){
+								if( Jinro.getMain().getConfig().getBoolean("ShowYakusyoku") ){
+									y = Yakusyoku.getYakuColor( Yakusyoku.人狼 ) + Yakusyoku.人狼.toString();
+								} else {
+									y = Yakusyoku.getYakuColor( Yakusyoku.人狼 ) + Yakusyoku.人狼.toString();
+								}
+							} else {
+								if( Jinro.getMain().getConfig().getBoolean("ShowYakusyoku") ){
+									y = Yakusyoku.getYakuColor( yaku ) + yaku.toString();
+								} else if( yaku == Yakusyoku.人狼 ){
+									y = Yakusyoku.getYakuColor( Yakusyoku.人狼 ) + Yakusyoku.人狼.toString();
+								} else {
+									y = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
+								}
+							}
+							sendMessage(sender, "占いの結果、" + p.getName() + " は " + y + ChatColor.GREEN + " でした。" , LogLevel.SUCCESSFUL);
+							int i = Stats.getAction((Player) sender, Stats.action.Uranai);
+							Stats.setAction((Player) sender, Stats.action.Uranai, (i + 1));
+							Data.set("Status.uranai."+ sender.getName() +"." + Timer.getDay(), true);
+							String co = "";
+							Yakusyoku coy = ComingOut.getComingOut(p);
+							if( coy != null ){
+								co = Yakusyoku.getYakuColor(coy) + "[" + Yakusyoku.getYaku2moji(coy) + "]" + ChatColor.GREEN;
+							}
+							Bukkit.broadcast(getPrefix() + ChatColor.GREEN + "[占い]" + sender.getName() + " -> " + co + p.getName() + "("+ Yakusyoku.getYakuColor( yaku ) + yaku.toString() + ChatColor.GREEN +")" , "axtuki1.Jinro.GameMaster");
 						}
-						p.sendMessage(ChatColor.RED + "あなたは呪い殺されました....");
-						p.sendMessage(ChatColor.RED + "翌日霊界へご案内します。");
-						Stats.setDeath(p, Stats.death.Curse, (Stats.getDeath(p, Stats.death.Curse) + 1));
-						Yakusyoku.setMorningDeath(p);
-					} else if(yaku == Yakusyoku.狂人){
-                        if( Jinro.getMain().getConfig().getBoolean("ShowYakusyoku") ){
-                            y = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
-                        } else {
-                            y = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
-                        }
-                    } else if(yaku == Yakusyoku.コスプレイヤー){
-                        if( Jinro.getMain().getConfig().getBoolean("ShowYakusyoku") ){
-                            y = Yakusyoku.getYakuColor( Yakusyoku.人狼 ) + Yakusyoku.人狼.toString();
-                        } else {
-                            y = Yakusyoku.getYakuColor( Yakusyoku.人狼 ) + Yakusyoku.人狼.toString();
-                        }
-                    } else {
-						if( Jinro.getMain().getConfig().getBoolean("ShowYakusyoku") ){
-							y = Yakusyoku.getYakuColor( yaku ) + yaku.toString();
-						} else if( yaku == Yakusyoku.人狼 ){
-							y = Yakusyoku.getYakuColor( Yakusyoku.人狼 ) + Yakusyoku.人狼.toString();
+						break;
+					case OneNightJinro:
+						OneNightYakusyoku yak;
+						if(Data.get("Players."+p.getUniqueId()+".beforeyaku") == null){
+							yak = OneNightYakusyoku.getYaku( p );
 						} else {
-							y = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
+							yak = OneNightYakusyoku.getNameToYaku(Data.getString("Players."+p.getUniqueId()+".beforeyaku"));
 						}
-					}
-					sendMessage(sender, "占いの結果、" + p.getName() + " は " + y + ChatColor.GREEN + " でした。" , LogLevel.SUCCESSFUL);
-					int i = Stats.getAction((Player) sender, Stats.action.Uranai);
-					Stats.setAction((Player) sender, Stats.action.Uranai, (i + 1));
-					Data.set("Status.uranai."+ sender.getName() +"." + Timer.getDay(), true);
-					String co = "";
-					Yakusyoku coy = ComingOut.getComingOut(p);
-					if( coy != null ){
-						co = Yakusyoku.getYakuColor(coy) + "[" + Yakusyoku.getYaku2moji(coy) + "]" + ChatColor.GREEN;
-					}
-					Bukkit.broadcast(getPrefix() + ChatColor.GREEN + "[占い]" + sender.getName() + " -> " + co + p.getName() + "("+ Yakusyoku.getYakuColor( yaku ) + yaku.toString() + ChatColor.GREEN +")" , "axtuki1.Jinro.GameMaster");
+						y = "";
+						if(yak == null){
+							sendMessage(sender, args[1] + "を占えませんでした....", LogLevel.ERROR);
+						} else {
+							y = OneNightYakusyoku.getYakuColor(yak) + "[" + yak.toString() + "]";
+							sendMessage(sender, "占いの結果、" + p.getName() + " は " + y + ChatColor.GREEN + " でした。" , LogLevel.SUCCESSFUL);
+							Data.set("Status.uranai."+ sender.getName() +"." + Timer.getDay(), true);
+							Bukkit.broadcast(getPrefix() + ChatColor.GREEN + "[占い]" + sender.getName() + " -> " + p.getName() + "("+ OneNightYakusyoku.getYakuColor( yak ) + yak.toString() + ChatColor.GREEN +")" , "axtuki1.Jinro.GameMaster");
+						}
+						break;
 				}
 			}
 			return true;
@@ -1371,6 +1489,53 @@ public class Jinro extends JavaPlugin {
 					Bukkit.broadcast(getPrefix() + ChatColor.GRAY + "[護衛]" + sender.getName() + " -> " + co + p.getName() + "("+Yakusyoku.getYakuColor( yaku ) + yaku.toString() + ChatColor.GRAY+")" , "axtuki1.Jinro.GameMaster");
 				}
 			}
+			return true;
+		} else if(arg0.equalsIgnoreCase("change")){
+			if(Status.getStatus() != Status.GamePlaying && Cycle.getStatus() != Cycle.Night && !Jinro.getDebug()){
+				sendMessage(sender, "まだ使用できません。", LogLevel.ERROR);
+				return true;
+			}
+			if( Data.getBoolean("Status.kaitou."+ sender.getName() +"." + Timer.getDay()) ){
+				sendMessage(sender, "既に能力を使用済みです。", LogLevel.ERROR);
+				return true;
+			}
+			if( !GameMode.getGameMode().equals(GameMode.OneNightJinro) ){
+				sendMessage(sender, "このゲームモードでは使用できません。", LogLevel.ERROR, true);
+				return true;
+			}
+			if (args.length == 1) {
+				sendMessage(sender, "プレイヤーを指定してください。", LogLevel.ERROR);
+				return true;
+			}
+
+			Player p = Utility.getPlayer( args[1] );
+
+			if(p == null){
+				sendMessage(sender, "プレイヤーが見つかりませんでした。", LogLevel.ERROR);
+				return true;
+			}
+
+			if(Cycle.getStatus() != Cycle.Night){
+				sendMessage(sender, "夜ではありません。", LogLevel.ERROR);
+				return true;
+			}
+			Player sp = (Player) sender;
+
+			OneNightYakusyoku spy = OneNightYakusyoku.getYaku(sp);
+			OneNightYakusyoku py = OneNightYakusyoku.getYaku(p);
+
+			String out = "";
+			if( py != null ){
+				out =  OneNightYakusyoku.getYakuColor(py) + "[" + py + "]";
+			} else {
+				sendMessage(sender, "役の交換に失敗しました。", LogLevel.Notice );
+				return true;
+			}
+			Data.set("Status.kaitou."+ sender.getName() +"." + Timer.getDay(), true);
+			sendMessage(sender, p.getName() + " と交換した結果、あなたは " + out + ChatColor.GREEN + " になりました。", LogLevel.SUCCESSFUL );
+
+			OneNightYakusyoku.SwapYaku(sp, p);
+
 			return true;
 		} else if(arg0.equalsIgnoreCase("guide")){
 			Help.guide(sender, commandLabel, args);
@@ -1555,6 +1720,15 @@ public class Jinro extends JavaPlugin {
 							continue;
 						}
 						out = setCount( yak, out );
+					}
+					StringBuilder amari = new StringBuilder();
+					yak = OneNightYakusyoku.getAmari(1);
+					if(yak != null){
+						out = setCount(yak, out);
+					}
+					yak = OneNightYakusyoku.getAmari(2);
+					if(yak != null){
+						out = setCount(yak, out);
 					}
 					sender.sendMessage(ChatColor.RED + "===================================");
 					if(out.size() == 1 && out.get("none") != null){
@@ -2050,8 +2224,17 @@ public class Jinro extends JavaPlugin {
 								view.add(player.getName());
 							}
 						}
-						if("syoniti##".toLowerCase().startsWith(arg)){
-							view.add("syoniti##");
+						switch (GameMode.getGameMode()){
+							case MinecraftJinro:
+								if("syoniti##".toLowerCase().startsWith(arg)){
+									view.add("syoniti##");
+								}
+								break;
+							case OneNightJinro:
+								if("amari##".toLowerCase().startsWith(arg)){
+									view.add("amari##");
+								}
+								break;
 						}
 						return view;
 					}

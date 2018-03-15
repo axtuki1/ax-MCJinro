@@ -65,7 +65,6 @@ public enum Yakusyoku {
 
 	public static void removeSyoniti() {
 		Data.set("NPCs.syoniti.yaku", null);
-		
 		return;
 	}
 

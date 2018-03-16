@@ -1170,6 +1170,10 @@ public class Jinro extends JavaPlugin {
 							sendMessage(sender, "死亡しています。", LogLevel.ERROR);
 							return true;
 						}
+						if( Yakusyoku.getDeath(p) ){
+							sendMessage(sender, "そのプレイヤーは死亡しています。", LogLevel.ERROR);
+							return true;
+						}
 						break;
 				}
 
@@ -1233,6 +1237,10 @@ public class Jinro extends JavaPlugin {
 				sendMessage(sender, "プレイヤーを指定してください。", LogLevel.ERROR);
 			} else {
 				Player p = Bukkit.getPlayer(args[1]);
+				if( Yakusyoku.getDeath(p) ){
+					sendMessage(sender, "そのプレイヤーは死亡しています。", LogLevel.ERROR);
+					return true;
+				}
 				Yakusyoku.Kami((Player) sender, p);
 			}
 			return true;
@@ -1337,12 +1345,12 @@ public class Jinro extends JavaPlugin {
 				Bukkit.broadcast(getPrefix() + ChatColor.GREEN + "[占い]" + sender.getName() + " -> 余り "+ amari, "axtuki1.Jinro.GameMaster");
 			} else {
 				Player p = Utility.getPlayer( args[1] );
-				if(sender.getName() == p.getName()){
-					sendMessage(sender, "プレイヤーを指定してください。", LogLevel.ERROR);
-				}
 				if(p == null){
 					sendMessage(sender, "プレイヤーが見つかりませんでした。", LogLevel.ERROR);
 					return true;
+				}
+				if(sender.getName() == p.getName()) {
+					sendMessage(sender, "プレイヤーを指定してください。", LogLevel.ERROR);
 				}
 				if(p.getName() == sender.getName()){
 					sendMessage(sender, "自分を占うことはできません。", LogLevel.ERROR);
@@ -1364,6 +1372,10 @@ public class Jinro extends JavaPlugin {
 					case MinecraftJinro:
 						Yakusyoku yaku = Yakusyoku.getYaku( p );
 						String y;
+						if( Yakusyoku.getDeath(p) ){
+							sendMessage(sender, "そのプレイヤーは死亡しています。", LogLevel.ERROR);
+							return true;
+						}
 						if(yaku == null){
 							sendMessage(sender, args[1] + "を占えませんでした....", LogLevel.ERROR);
 						} else {
@@ -1533,7 +1545,7 @@ public class Jinro extends JavaPlugin {
 			}
 			Data.set("Status.kaitou."+ sender.getName() +"." + Timer.getDay(), true);
 			sendMessage(sender, p.getName() + " と交換した結果、あなたは " + out + ChatColor.GREEN + " になりました。", LogLevel.SUCCESSFUL );
-
+			Bukkit.broadcast(getPrefix() + ChatColor.DARK_GREEN + "[交換]" + sender.getName() + " <--[Change]--> " + p.getName() + "("+OneNightYakusyoku.getYakuColor( py ) + py.toString() + ChatColor.DARK_GREEN+")" , "axtuki1.Jinro.GameMaster");
 			OneNightYakusyoku.SwapYaku(sp, p);
 
 			return true;

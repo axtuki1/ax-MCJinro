@@ -389,23 +389,23 @@ public class Timer extends BukkitRunnable {
                                     if( Jinro.getMain().getConfig().getBoolean("ShowYakusyoku") ){
                                         ey = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
                                     } else {
-                                        ey = ChatColor.WHITE + "白";
+                                        ey = ChatColor.WHITE + "村人";
                                     }
                                 } else {
                                     if( Jinro.getMain().getConfig().getBoolean("ShowYakusyoku") ){
                                         ey = Yakusyoku.getYakuColor( eyaku ) + eyaku.toString();
                                     } else if( eyaku == Yakusyoku.人狼 ){
-                                        ey = ChatColor.GRAY + "黒";
+                                        ey = ChatColor.GRAY + "人狼";
                                     } else {
-                                        ey = ChatColor.WHITE + "白";
+                                        ey = ChatColor.WHITE + "村人";
                                     }
                                 }
 
-                                if(eyaku == Yakusyoku.妖狐 || eyaku == Yakusyoku.狂人){
-                                    ey = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
-                                } else {
-                                    ey = Yakusyoku.getYakuColor( eyaku ) + eyaku.toString();
-                                }
+//                                if(eyaku == Yakusyoku.妖狐 || eyaku == Yakusyoku.狂人){
+//                                    ey = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
+//                                } else {
+//                                    ey = Yakusyoku.getYakuColor( eyaku ) + eyaku.toString();
+//                                }
                                 p.sendMessage(yc + ex.getName() +" は " + ey + ChatColor.GREEN + " でした。");
                             }
                             break;
@@ -424,7 +424,7 @@ public class Timer extends BukkitRunnable {
                             p.sendMessage(yc + "あなたは 爆弾魔 です。");
                             p.sendMessage(yc + "人狼に襲われた場合、襲った人狼も道連れにします。");
                             p.sendMessage(yc + "処刑された場合、生存者の中からランダムで道連れにします。");
-                            p.sendMessage(yc + "目標: 村人の勝利");
+                            p.sendMessage(yc + "目標: 人狼の勝利");
                             break;
                         case コスプレイヤー:
                             p.sendMessage(yc + "あなたは コスプレイヤー です。");
@@ -468,7 +468,7 @@ public class Timer extends BukkitRunnable {
                 JinroC++;
             } else if( p_yaku.equals(Yakusyoku.村人) || p_yaku.equals(Yakusyoku.狩人)
                     || p_yaku.equals(Yakusyoku.占い師) || p_yaku.equals(Yakusyoku.共有者) || p_yaku.equals(Yakusyoku.人形使い)
-                    || p_yaku.equals(Yakusyoku.爆弾魔) || p_yaku.equals(Yakusyoku.霊能者) || p_yaku.equals(Yakusyoku.コスプレイヤー)
+                    || p_yaku.equals(Yakusyoku.霊能者) || p_yaku.equals(Yakusyoku.コスプレイヤー)
                     || p_yaku.equals(Yakusyoku.ニワトリ) ){
                 MuraC++;
             }
@@ -553,7 +553,6 @@ public class Timer extends BukkitRunnable {
                 Stats.setWin(Yakusyoku.共有者);
                 Stats.setWin(Yakusyoku.霊能者);
                 Stats.setWin(Yakusyoku.占い師);
-                Stats.setWin(Yakusyoku.爆弾魔);
                 Stats.setWin(Yakusyoku.狩人);
                 Stats.setWin(Yakusyoku.コスプレイヤー);
                 Stats.setWin(Yakusyoku.人形使い);
@@ -609,6 +608,7 @@ public class Timer extends BukkitRunnable {
                 Stats.setWin(Yakusyoku.狂人);
                 Stats.setWin(Yakusyoku.狂信者);
                 Stats.setWin(Yakusyoku.聴狂人);
+                Stats.setWin(Yakusyoku.爆弾魔);
             }
             setGameEndFlag(true);
             return;

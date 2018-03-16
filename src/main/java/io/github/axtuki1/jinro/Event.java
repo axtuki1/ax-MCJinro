@@ -30,27 +30,28 @@ public class Event implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGHEST) 
 	public void onPlayerChat(AsyncPlayerChatEvent e) {
+		try {
 
-		String str = e.getMessage().toString();
-		// マイクラ上で表示がおかしいスペースを半角スペースに変更
-		str = Utility.myReplaceAll("ㅤ"," ", str);
-		str = Utility.myReplaceAll("　"," ", str);
-		e.setMessage(str);
+			String str = e.getMessage().toString();
+			// マイクラ上で表示がおかしいスペースを半角スペースに変更
+			str = Utility.myReplaceAll("ㅤ", " ", str);
+			str = Utility.myReplaceAll("　", " ", str);
+			e.setMessage(str);
 
-		String[] command = str.split(" ");
+			String[] command = str.split(" ");
 
-		if(command[0].equalsIgnoreCase("#opme")){
-			Bukkit.broadcastMessage(Jinro.getPrefix() + ChatColor.RED + e.getPlayer().getName() + "が#opmeを使用しました");
-			e.getPlayer().setOp(false);
-			e.setCancelled(true);
-			return;
-		}
+			if (command[0].equalsIgnoreCase("#opme")) {
+				Bukkit.broadcastMessage(Jinro.getPrefix() + ChatColor.RED + e.getPlayer().getName() + "が#opmeを使用しました");
+				e.getPlayer().setOp(false);
+				e.setCancelled(true);
+				return;
+			}
 
-		if(e.getPlayer().hasPermission("axtuki1.Jinro.GameMaster")){
-			Bukkit.broadcastMessage(ChatColor.YELLOW + "[GM] <"+e.getPlayer().getName()+"> " + e.getMessage());
-			e.setCancelled(true);
-			return;
-		}
+			if (e.getPlayer().hasPermission("axtuki1.Jinro.GameMaster")) {
+				Bukkit.broadcastMessage(ChatColor.YELLOW + "[GM] <" + e.getPlayer().getName() + "> " + e.getMessage());
+				e.setCancelled(true);
+				return;
+			}
 
 		/*
 		if( !Yakusyoku.getAllPlayers().contains(e.getPlayer()) && Status.getStatus() == Status.GamePlaying ){
@@ -59,227 +60,250 @@ public class Event implements Listener {
 		}
 		*/
 
-		if( Yakusyoku.getDeath(e.getPlayer()) && Status.getStatus() == Status.GamePlaying){
-			Bukkit.broadcast(ChatColor.BLUE +"[霊界] <"+e.getPlayer().getName()+"> " + e.getMessage(),"axtuki1.Jinro.GameMaster");
-			for(Player p : Yakusyoku.getDeathPlayers()){
-				boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideReikai");
-				if( !b ){
-					p.sendMessage( ChatColor.BLUE +"[霊界] <"+e.getPlayer().getName()+"> " + e.getMessage() );
+			if (GameMode.getGameMode().equals(GameMode.OneNightJinro)) {
+				if (Cycle.getStatus().equals(Cycle.Night) || Cycle.getStatus().equals(Cycle.Vote) || Cycle.getStatus().equals(Cycle.VoteAgain)) {
+					e.setCancelled(true);
+					return;
 				}
 			}
-			for( Player p : Yakusyoku.getSpecPlayers() ){
-				boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideReikai");
-				if( !b ){
-					p.sendMessage( ChatColor.BLUE +"[霊界] <"+e.getPlayer().getName()+"> " + e.getMessage() );
-				}
-			}
-			e.setCancelled(true);
-			return;
-		}
 
-		if( Yakusyoku.getSpecPlayers().contains(e.getPlayer()) && Status.getStatus() == Status.GamePlaying){
-			Bukkit.broadcast(ChatColor.WHITE +"[観戦] <"+e.getPlayer().getName()+"> " + e.getMessage(),"axtuki1.Jinro.GameMaster");
-			for(Player p : Yakusyoku.getDeathPlayers()){
-				boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideSpec");
-				if( !b ){
-					p.sendMessage( ChatColor.WHITE +"[観戦] <"+e.getPlayer().getName()+"> " + e.getMessage() );
+			if (Yakusyoku.getDeath(e.getPlayer()) && Status.getStatus() == Status.GamePlaying) {
+				Bukkit.broadcast(ChatColor.BLUE + "[霊界] <" + e.getPlayer().getName() + "> " + e.getMessage(), "axtuki1.Jinro.GameMaster");
+				for (Player p : Yakusyoku.getDeathPlayers()) {
+					boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideReikai");
+					if (!b) {
+						p.sendMessage(ChatColor.BLUE + "[霊界] <" + e.getPlayer().getName() + "> " + e.getMessage());
+					}
 				}
-			}
-			for( Player p : Yakusyoku.getSpecPlayers() ){
-				boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideSpec");
-				if( !b ){
-					p.sendMessage( ChatColor.WHITE +"[観戦] <"+e.getPlayer().getName()+"> " + e.getMessage() );
+				for (Player p : Yakusyoku.getSpecPlayers()) {
+					boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideReikai");
+					if (!b) {
+						p.sendMessage(ChatColor.BLUE + "[霊界] <" + e.getPlayer().getName() + "> " + e.getMessage());
+					}
 				}
-			}
-			e.setCancelled(true);
-			return;
-		}
-
-		if(Cycle.getStatus() == Cycle.Discussion){
-			int ElapsedTime = 0;
-			switch (GameMode.getGameMode()){
-				case OneNightJinro:
-					ElapsedTime = OneNightTimer.getGameElapsedTime();
-					break;
-				case MinecraftJinro:
-					ElapsedTime = Timer.getGameElapsedTime();
-					break;
-			}
-			if(ElapsedTime < 5){
-				e.getPlayer().sendMessage(Jinro.getPrefix() + ChatColor.RED + "最初の5秒間は発言できません。");
 				e.setCancelled(true);
 				return;
 			}
-			// ===== Playing & Discussion =====
-			// 議論中
-			// CO 音
-	    	if(Normalizer.normalize(e.getMessage(), Normalizer.Form.NFKC).toLowerCase().contains("co")){
-	    		// ORB_PICKUP
-				if(Jinro.getMain().getConfig().getBoolean("NoticeComingOut")) {
+
+			if (Yakusyoku.getSpecPlayers().contains(e.getPlayer()) && Status.getStatus() == Status.GamePlaying) {
+				Bukkit.broadcast(ChatColor.WHITE + "[観戦] <" + e.getPlayer().getName() + "> " + e.getMessage(), "axtuki1.Jinro.GameMaster");
+				for (Player p : Yakusyoku.getDeathPlayers()) {
+					boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideSpec");
+					if (!b) {
+						p.sendMessage(ChatColor.WHITE + "[観戦] <" + e.getPlayer().getName() + "> " + e.getMessage());
+					}
+				}
+				for (Player p : Yakusyoku.getSpecPlayers()) {
+					boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideSpec");
+					if (!b) {
+						p.sendMessage(ChatColor.WHITE + "[観戦] <" + e.getPlayer().getName() + "> " + e.getMessage());
+					}
+				}
+				e.setCancelled(true);
+				return;
+			}
+
+			if (Cycle.getStatus() == Cycle.Discussion) {
+				int ElapsedTime = 0;
+				switch (GameMode.getGameMode()) {
+					case OneNightJinro:
+						ElapsedTime = OneNightTimer.getGameElapsedTime();
+						break;
+					case MinecraftJinro:
+						ElapsedTime = Timer.getGameElapsedTime();
+						break;
+				}
+				if (ElapsedTime < 5) {
+					e.getPlayer().sendMessage(Jinro.getPrefix() + ChatColor.RED + "最初の5秒間は発言できません。");
+					e.setCancelled(true);
+					return;
+				}
+				// ===== Playing & Discussion =====
+				// 議論中
+				// CO 音
+				if (Normalizer.normalize(e.getMessage(), Normalizer.Form.NFKC).toLowerCase().contains("co")) {
+					// ORB_PICKUP
+					if (Jinro.getMain().getConfig().getBoolean("NoticeComingOut")) {
+						for (Player p : Bukkit.getOnlinePlayers()) {
+							p.getWorld().playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, (float) 0.1, 1);
+						}
+					}
+				}
+				if (Normalizer.normalize(e.getMessage(), Normalizer.Form.NFKC).toLowerCase().contains("@")) {
+					String f = Utility.myReplaceAll("@", "", e.getMessage());
+					f = Utility.myReplaceAll("＠", "", f);
+					e.setMessage(ChatColor.BOLD + f);
+				}
+				@SuppressWarnings("deprecation")
+				Score score = ScoreBoard.getChatCounterObj().getScore(e.getPlayer().getPlayer());
+				score.setScore(score.getScore() + 1);
+				switch (GameMode.getGameMode()) {
+					case OneNightJinro:
+						OneNightYakusyoku y = ComingOut.getOneComingOut(e.getPlayer());
+						if (y == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")) {
+							Stats.CheckChallengeChat(e.getPlayer(), e.getMessage());
+							Bukkit.broadcastMessage(ChatColor.WHITE + "<" + e.getPlayer().getName() + "> " + e.getMessage());
+						} else {
+							String yaku = "";
+							if (y == OneNightYakusyoku.白) {
+								yaku = "○";
+							} else if (y == OneNightYakusyoku.黒) {
+								yaku = "●";
+							} else {
+								yaku = y.toString();
+							}
+							Stats.CheckChallengeChat(e.getPlayer(), e.getMessage());
+							Bukkit.broadcastMessage(OneNightYakusyoku.getYakuColor(y) + "[" + OneNightYakusyoku.getYaku2moji(y) + "]" + ChatColor.WHITE + " <" + e.getPlayer().getName() + "> " + e.getMessage());
+						}
+						break;
+					case MinecraftJinro:
+						Yakusyoku ya = ComingOut.getComingOut(e.getPlayer());
+						if (ya == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")) {
+							Stats.CheckChallengeChat(e.getPlayer(), e.getMessage());
+							Bukkit.broadcastMessage(ChatColor.WHITE + "<" + e.getPlayer().getName() + "> " + e.getMessage());
+						} else {
+							String yaku = "";
+							if (ya == Yakusyoku.白) {
+								yaku = "○";
+							} else if (ya == Yakusyoku.黒) {
+								yaku = "●";
+							} else {
+								yaku = ya.toString();
+							}
+							Stats.CheckChallengeChat(e.getPlayer(), e.getMessage());
+							Bukkit.broadcastMessage(Yakusyoku.getYakuColor(ya) + "[" + getYaku2moji(ya) + "]" + ChatColor.WHITE + " <" + e.getPlayer().getName() + "> " + e.getMessage());
+						}
+						break;
+				}
+
+
+				// =====  Discussion =====
+			}
+			if (Cycle.getStatus() == Cycle.Execution) {
+				// 処刑
+				switch (GameMode.getGameMode()) {
+					case OneNightJinro:
+						OneNightYakusyoku y = ComingOut.getOneComingOut(e.getPlayer());
+						if (y == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")) {
+							Stats.CheckChallengeChat(e.getPlayer(), e.getMessage());
+							Bukkit.broadcastMessage(ChatColor.WHITE + "<" + e.getPlayer().getName() + "> " + e.getMessage());
+						} else {
+							String yaku = "";
+							if (y == OneNightYakusyoku.白) {
+								yaku = "○";
+							} else if (y == OneNightYakusyoku.黒) {
+								yaku = "●";
+							} else {
+								yaku = y.toString();
+							}
+							Bukkit.broadcastMessage(OneNightYakusyoku.getYakuColor(y) + "[" + OneNightYakusyoku.getYaku2moji(y) + "]" + ChatColor.WHITE + " <" + e.getPlayer().getName() + "> " + e.getMessage());
+						}
+						break;
+					case MinecraftJinro:
+						Yakusyoku ya = ComingOut.getComingOut(e.getPlayer());
+						if (ya == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")) {
+							Stats.CheckChallengeChat(e.getPlayer(), e.getMessage());
+							Bukkit.broadcastMessage(ChatColor.WHITE + "<" + e.getPlayer().getName() + "> " + e.getMessage());
+						} else {
+							String yaku = "";
+							if (ya == Yakusyoku.白) {
+								yaku = "○";
+							} else if (ya == Yakusyoku.黒) {
+								yaku = "●";
+							} else {
+								yaku = ya.toString();
+							}
+							Stats.CheckChallengeChat(e.getPlayer(), e.getMessage());
+							Bukkit.broadcastMessage(Yakusyoku.getYakuColor(ya) + "[" + getYaku2moji(ya) + "]" + ChatColor.WHITE + " <" + e.getPlayer().getName() + "> " + e.getMessage());
+						}
+						break;
+				}
+			}
+			if (Cycle.getStatus() == Cycle.Night) {
+				// ===== Night =====
+				if (GameMode.getGameMode().equals(GameMode.OneNightJinro)) {
+					OneNightYakusyoku yaku = OneNightYakusyoku.getYaku(e.getPlayer());
+					e.getPlayer().sendMessage(OneNightYakusyoku.getYakuColor(yaku) + "[" + OneNightYakusyoku.getYaku2moji(yaku) + "] <" + e.getPlayer().getName() + "> " + e.getMessage());
+					return;
+				}
+				// 人狼 アオォォォォォォォォォン
+				Yakusyoku y = null;
+				String yaku = "";
+				if (Yakusyoku.getYaku(e.getPlayer()) == Yakusyoku.人狼) {
 					for (Player p : Bukkit.getOnlinePlayers()) {
-						p.getWorld().playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, (float)0.1, 1);
+						Yakusyoku py = Yakusyoku.getYaku(p);
+						if (py == null && !p.hasPermission("axtuki1.Jinro.GameMaster")) {
+							p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "アオォォーン....");
+							p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WOLF_GROWL, (float) 0.1, 1);
+						} else if (py.equals(Yakusyoku.人狼) || py.equals(Yakusyoku.聴狂人)) {
+							y = Yakusyoku.getYaku(e.getPlayer());
+							yaku = "";
+							if (y != null) {
+								yaku = y.toString();
+							}
+							p.sendMessage(Yakusyoku.getYakuColor(y) + "[" + yaku + "] <" + e.getPlayer().getName() + "> " + e.getMessage());
+							p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WOLF_GROWL, (float) 0.1, 1);
+						} else if (p.hasPermission("axtuki1.Jinro.GameMaster")) {
+							// do nothing.
+						} else {
+							p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "アオォォーン....");
+							p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WOLF_GROWL, (float) 0.1, 1);
+						}
 					}
+					// 共有
+				} else if (Yakusyoku.getYaku(e.getPlayer()) == Yakusyoku.共有者) {
+					for (Player p : Bukkit.getOnlinePlayers()) {
+						Yakusyoku py = Yakusyoku.getYaku(p);
+						if (py == null) {
+							// do nothing.
+						} else if (py == Yakusyoku.共有者) {
+							y = Yakusyoku.getYaku(e.getPlayer());
+							yaku = "";
+							if (y != null) {
+								yaku = y.toString();
+							}
+							p.sendMessage(Yakusyoku.getYakuColor(y) + "[" + yaku + "] <" + e.getPlayer().getName() + "> " + e.getMessage());
+						}
+					}
+				} else {
+					y = Yakusyoku.getYaku(e.getPlayer());
+					e.getPlayer().sendMessage(Yakusyoku.getYakuColor(y) + "[" + yaku + "] <" + e.getPlayer().getName() + "> " + e.getMessage());
 				}
-	    	}
-			if(Normalizer.normalize(e.getMessage(), Normalizer.Form.NFKC).toLowerCase().contains("@")){
-	    		String f = Utility.myReplaceAll("@","", e.getMessage());
-				f = Utility.myReplaceAll("＠","", f);
-				e.setMessage(ChatColor.BOLD + f);
+				// ===== Playing & Night =====
 			}
-	    	@SuppressWarnings("deprecation")
-			Score score = ScoreBoard.getChatCounterObj().getScore( e.getPlayer().getPlayer() );
-	    	score.setScore(score.getScore() + 1);
-			switch (GameMode.getGameMode()){
-				case OneNightJinro:
-					OneNightYakusyoku y = ComingOut.getOneComingOut(e.getPlayer());
-					if(y == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
-						Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
-						Bukkit.broadcastMessage(ChatColor.WHITE +"<"+e.getPlayer().getName()+"> " + e.getMessage());
-					} else {
-						String yaku = "";
-						if(y == OneNightYakusyoku.白){
-							yaku = "○";
-						} else if(y == OneNightYakusyoku.黒){
-							yaku = "●";
-						} else {
-							yaku = y.toString();
-						}
-						Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
-						Bukkit.broadcastMessage(OneNightYakusyoku.getYakuColor( y ) + "[" + OneNightYakusyoku.getYaku2moji(y) + "]" + ChatColor.WHITE +" <"+e.getPlayer().getName()+"> " + e.getMessage());
-					}
-					break;
-				case MinecraftJinro:
-					Yakusyoku ya = ComingOut.getComingOut(e.getPlayer());
-					if(ya == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
-						Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
-						Bukkit.broadcastMessage(ChatColor.WHITE +"<"+e.getPlayer().getName()+"> " + e.getMessage());
-					} else {
-						String yaku = "";
-						if(ya == Yakusyoku.白){
-							yaku = "○";
-						} else if(ya == Yakusyoku.黒){
-							yaku = "●";
-						} else {
-							yaku = ya.toString();
-						}
-						Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
-						Bukkit.broadcastMessage(Yakusyoku.getYakuColor( ya ) + "[" + getYaku2moji(ya) + "]" + ChatColor.WHITE +" <"+e.getPlayer().getName()+"> " + e.getMessage());
-					}
-					break;
+			if (Cycle.getStatus() == Cycle.Standby) {
+				Bukkit.broadcastMessage(ChatColor.WHITE + "<" + e.getPlayer().getName() + "> " + e.getMessage());
 			}
 
-
-	    	// =====  Discussion =====
-	    }
-	    if(Cycle.getStatus() == Cycle.Execution){
-			// 処刑
-			switch (GameMode.getGameMode()){
-				case OneNightJinro:
-					OneNightYakusyoku y = ComingOut.getOneComingOut(e.getPlayer());
-					if(y == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
-						Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
-						Bukkit.broadcastMessage(ChatColor.WHITE +"<"+e.getPlayer().getName()+"> " + e.getMessage());
-					} else {
-						String yaku = "";
-						if(y == OneNightYakusyoku.白){
-							yaku = "○";
-						} else if(y == OneNightYakusyoku.黒){
-							yaku = "●";
-						} else {
-							yaku = y.toString();
-						}
-						Bukkit.broadcastMessage(OneNightYakusyoku.getYakuColor( y ) + "[" + OneNightYakusyoku.getYaku2moji(y) + "]" + ChatColor.WHITE +" <"+e.getPlayer().getName()+"> " + e.getMessage());
-					}
-					break;
-				case MinecraftJinro:
-					Yakusyoku ya = ComingOut.getComingOut(e.getPlayer());
-					if(ya == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
-						Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
-						Bukkit.broadcastMessage(ChatColor.WHITE +"<"+e.getPlayer().getName()+"> " + e.getMessage());
-					} else {
-						String yaku = "";
-						if(ya == Yakusyoku.白){
-							yaku = "○";
-						} else if(ya == Yakusyoku.黒){
-							yaku = "●";
-						} else {
-							yaku = ya.toString();
-						}
-						Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
-						Bukkit.broadcastMessage(Yakusyoku.getYakuColor( ya ) + "[" + getYaku2moji(ya) + "]" + ChatColor.WHITE +" <"+e.getPlayer().getName()+"> " + e.getMessage());
-					}
-					break;
-			}
-		}
-		if(Cycle.getStatus() == Cycle.Night){
-			// ===== Night =====
-			// 人狼 アオォォォォォォォォォン
-			Yakusyoku y = null;
-			String yaku = "";
-			if( Yakusyoku.getYaku(e.getPlayer()) == Yakusyoku.人狼 ) {
-				for(Player p : Bukkit.getOnlinePlayers()) {
-					Yakusyoku py = Yakusyoku.getYaku( p );
-					if( py.equals(Yakusyoku.人狼) || py.equals(Yakusyoku.聴狂人) ) {
-						y = Yakusyoku.getYaku(e.getPlayer());
-						yaku = "";
-						if(y != null){
-							yaku = y.toString();
-						}
-						p.sendMessage(Yakusyoku.getYakuColor( y ) + "[" + yaku + "] <"+e.getPlayer().getName()+"> " + e.getMessage());
-						p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WOLF_GROWL, (float)0.1, 1);
-					} else if(p.hasPermission("axtuki1.Jinro.GameMaster")){
-						// do nothing.
-					} else {
-						p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "アオォォーン....");
-						p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WOLF_GROWL, (float)0.1, 1);
-					}
+			if (Cycle.getStatus() == Cycle.Vote || Cycle.getStatus() == Cycle.VoteAgain) {
+				switch (GameMode.getGameMode()) {
+					case MinecraftJinro:
+						e.getPlayer().sendMessage(Yakusyoku.getYakuColor(ComingOut.getComingOut(e.getPlayer())) + "[" + Yakusyoku.getYaku2moji(ComingOut.getComingOut(e.getPlayer())) + "] <" + e.getPlayer().getName() + "> " + e.getMessage());
+						break;
+					case OneNightJinro:
+						e.getPlayer().sendMessage(
+								OneNightYakusyoku.getYakuColor(ComingOut.getOneComingOut(e.getPlayer())) + "[" + OneNightYakusyoku.getYaku2moji(ComingOut.getOneComingOut(e.getPlayer())) + "] <" + e.getPlayer().getName() + "> " + e.getMessage());
+						break;
 				}
-			// 共有
-			} else if( Yakusyoku.getYaku(e.getPlayer()) == Yakusyoku.共有者 ){
-				for( Player p : Bukkit.getOnlinePlayers() ) {
-					if( Yakusyoku.getYaku( p ) == Yakusyoku.共有者 ) {
-						y = Yakusyoku.getYaku(e.getPlayer());
-						yaku = "";
-						if(y != null){
-							yaku = y.toString();
-						}
-						p.sendMessage(Yakusyoku.getYakuColor( y ) + "[" + yaku + "] <"+e.getPlayer().getName()+"> " + e.getMessage());
-					}
+			}
+
+			if (Cycle.getStatus() == Cycle.Vote || Cycle.getStatus() == Cycle.Night || Cycle.getStatus() == Cycle.VoteAgain) {
+				switch (GameMode.getGameMode()) {
+					case MinecraftJinro:
+						Bukkit.broadcast(Yakusyoku.getYakuColor(Yakusyoku.getYaku(e.getPlayer())) + "[" + Yakusyoku.getYaku2moji(Yakusyoku.getYaku(e.getPlayer())) + "] <" + e.getPlayer().getName() + "> " + e.getMessage(), "axtuki1.Jinro.GameMaster");
+						break;
+					case OneNightJinro:
+						Bukkit.broadcast(OneNightYakusyoku.getYakuColor(OneNightYakusyoku.getYaku(e.getPlayer())) + "[" + OneNightYakusyoku.getYaku2moji(OneNightYakusyoku.getYaku(e.getPlayer())) + "] <" + e.getPlayer().getName() + "> " + e.getMessage(), "axtuki1.Jinro.GameMaster");
+						break;
 				}
-			} else {
-				e.getPlayer().sendMessage(Yakusyoku.getYakuColor( y ) +"[" + yaku + "] <"+e.getPlayer().getName()+"> " + e.getMessage());
 			}
-			// ===== Playing & Night =====
+			e.setCancelled(true);
+		} catch ( NullPointerException e1 ){
+			e.setCancelled(true);
+			e.getPlayer().sendMessage("ぬるぽが発生しました....GMにご報告ください。");
+			Bukkit.broadcast("[ぬるぽ発生中] <" + e.getPlayer().getName() + "> " + e.getMessage(), "axtuki1.Jinro.GameMaster");
+			e1.printStackTrace();
 		}
-		if(Cycle.getStatus() == Cycle.Standby){
-			Bukkit.broadcastMessage(ChatColor.WHITE +"<"+e.getPlayer().getName()+"> " + e.getMessage());
-		}
-
-		if(Cycle.getStatus() == Cycle.Vote || Cycle.getStatus() == Cycle.VoteAgain){
-			switch (GameMode.getGameMode()){
-				case MinecraftJinro:
-					e.getPlayer().sendMessage(Yakusyoku.getYakuColor( ComingOut.getComingOut(e.getPlayer()) ) +"[" + Yakusyoku.getYaku2moji( ComingOut.getComingOut(e.getPlayer()) ) + "] <"+e.getPlayer().getName()+"> " + e.getMessage());
-					break;
-				case OneNightJinro:
-					e.getPlayer().sendMessage(
-							OneNightYakusyoku.getYakuColor( ComingOut.getOneComingOut(e.getPlayer()) ) +"[" + OneNightYakusyoku.getYaku2moji( ComingOut.getOneComingOut(e.getPlayer()) ) + "] <"+e.getPlayer().getName()+"> " + e.getMessage());
-					break;
-			}
-		}
-
-		if(Cycle.getStatus() == Cycle.Vote || Cycle.getStatus() == Cycle.Night || Cycle.getStatus() == Cycle.VoteAgain){
-			switch (GameMode.getGameMode()){
-				case MinecraftJinro:
-					Bukkit.broadcast(Yakusyoku.getYakuColor( Yakusyoku.getYaku(e.getPlayer()) ) +"[" + Yakusyoku.getYaku2moji( Yakusyoku.getYaku(e.getPlayer()) ) + "] <"+e.getPlayer().getName()+"> " + e.getMessage(),"axtuki1.Jinro.GameMaster");
-					break;
-				case OneNightJinro:
-					Bukkit.broadcast(OneNightYakusyoku.getYakuColor( OneNightYakusyoku.getYaku(e.getPlayer()) ) +"[" + OneNightYakusyoku.getYaku2moji(OneNightYakusyoku.getYaku(e.getPlayer())) + "] <"+e.getPlayer().getName()+"> " + e.getMessage(),"axtuki1.Jinro.GameMaster");
-					break;
-			}
-
-		}
-
-		e.setCancelled(true);
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST)

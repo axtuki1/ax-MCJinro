@@ -489,8 +489,10 @@ public enum Yakusyoku {
 		ArrayList<Player> pl = new ArrayList<Player>();
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			Yakusyoku ya = getYaku(p);
-			if(y == ya){
-				pl.add(p);
+			if( ya != null ){
+				if(y == ya){
+					pl.add(p);
+				}
 			}
 		}
 		return pl;

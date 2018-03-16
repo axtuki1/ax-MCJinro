@@ -2306,15 +2306,6 @@ public class Jinro extends JavaPlugin {
 							view.add(name);
 						}
 					}
-					try {
-						for ( JinroMap m : JinroMap.getMaps() ) {
-							if ( m.getName().toLowerCase().startsWith(arg) ) {
-								view.add(m.getName());
-							}
-						}
-					} catch ( Exception e ) {
-						// do nothing.
-					}
 					return view;
 				} else if(args[1].equalsIgnoreCase("list")) {
                     if(args.length == 3){

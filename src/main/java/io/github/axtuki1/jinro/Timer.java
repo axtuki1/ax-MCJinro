@@ -324,6 +324,10 @@ public class Timer extends BukkitRunnable {
                             p.sendMessage(yc + "あなたは 占い師 です。");
                             p.sendMessage(yc + "毎晩一人を占うことができます。");
                             p.sendMessage(yc + "「/jinro uranai <Player>」で占えます。");
+                            if( Timer.getDay() == 1 ){
+                                p.sendMessage(yc + "この日(1日目)のみ初日犠牲者を占うことができます。");
+                                p.sendMessage(yc + "「/jinro uranai syoniti##」で占えます。");
+                            }
                             p.sendMessage(yc + "目標: 村人の勝利");
                             break;
                         case 村人:

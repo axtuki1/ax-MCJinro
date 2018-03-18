@@ -1287,6 +1287,10 @@ public class Jinro extends JavaPlugin {
 					sendMessage(sender, "もう既に占っています。", LogLevel.ERROR);
 					return true;
 				}
+				if(Timer.getDay() != 1){
+					sendMessage(sender, "初日犠牲者を占えるのは初日のみです。", LogLevel.ERROR);
+					return true;
+				}
 				Yakusyoku yaku = Yakusyoku.getSyoniti();
 				String y;
 				if(yaku == null){
@@ -1953,15 +1957,31 @@ public class Jinro extends JavaPlugin {
 			if(args.length == 1){
 				// jinro
 				Player p = Utility.getPlayer(sender.getName());
-				Yakusyoku yaku = null;
-				if(p != null){
-					yaku = Yakusyoku.getYaku( p );
-				}
-				String arg = args[0].toLowerCase();
-				for ( String name : Jinro.getCmdList( yaku ) ) {
-					if ( name.toLowerCase().startsWith(arg) ) {
-						view.add(name);
-					}
+				switch (GameMode.getGameMode()) {
+					case MinecraftJinro:
+						Yakusyoku yaku = null;
+						if(p != null){
+							yaku = Yakusyoku.getYaku( p );
+						}
+						String arg = args[0].toLowerCase();
+						for ( String name : Jinro.getCmdList( yaku ) ) {
+							if ( name.toLowerCase().startsWith(arg) ) {
+								view.add(name);
+							}
+						}
+						break;
+					case OneNightJinro:
+						OneNightYakusyoku yak = null;
+						if(p != null){
+							yak = OneNightYakusyoku.getNightYaku( p );
+						}
+						arg = args[0].toLowerCase();
+						for ( String name : Jinro.getCmdList( yak ) ) {
+							if ( name.toLowerCase().startsWith(arg) ) {
+								view.add(name);
+							}
+						}
+						break;
 				}
 				return view;
 			} else if(args[0].equalsIgnoreCase("co")) {
@@ -1984,8 +2004,17 @@ public class Jinro extends JavaPlugin {
 							}
 						}
 					}
-					if("syoniti##".toLowerCase().startsWith(arg)){
-						view.add("syoniti##");
+					switch (GameMode.getGameMode()) {
+						case MinecraftJinro:
+							if("syoniti##".toLowerCase().startsWith(arg)){
+								view.add("syoniti##");
+							}
+							break;
+						case OneNightJinro:
+							if("amari##".toLowerCase().startsWith(arg)){
+								view.add("amari##");
+							}
+							break;
 					}
 					return view;
 				}

@@ -135,9 +135,7 @@ public class OneNightTimer extends BukkitRunnable {
             a = 0;
         }
         a++;
-        if( Cycle.getStatus().equals(Cycle.Discussion) ){
-            ScoreBoard.getInfoObj().getScore(getTimeColor(t)  + "残り時間: "+ t +"秒").setScore(3);
-        }
+        ScoreBoard.getInfoObj().getScore(getTimeColor(t)  + "残り時間: "+ t +"秒").setScore(3);
 	}
 
 	public static void NextCycle() {
@@ -189,7 +187,7 @@ public class OneNightTimer extends BukkitRunnable {
             setGameTime(Jinro.getMain().getConfig().getInt("NightTime"));
             w.setTime(15000);
             Bukkit.broadcastMessage(ChatColor.RED + "===============[夜になりました]===============");
-            Bukkit.broadcastMessage(ChatColor.AQUA + "夜に出歩くと狼に襲われる可能性があります！");
+//            Bukkit.broadcastMessage(ChatColor.AQUA + "");
             List<Player> pl = OneNightYakusyoku.getAlivePlayers();
             if(pl.size() != 0) {
                 for (Player p : pl) {
@@ -233,7 +231,7 @@ public class OneNightTimer extends BukkitRunnable {
                             break;
                         case 聴狂人:
                             p.sendMessage(yc + "あなたは 聴狂人 です。");
-                            p.sendMessage(yc + "人狼の会話を聴くことができます。");
+                            p.sendMessage(yc + "人狼のプレイヤーを確認できます。");
                             p.sendMessage(yc + "空気を読む力とトークスキルで人狼を勝利へ導いてください。");
                             p.sendMessage(yc + "目標: 人狼の勝利");
                             p.sendMessage(ChatColor.RED + "====[今回の人狼は]====");

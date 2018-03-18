@@ -170,6 +170,8 @@ public enum OneNightYakusyoku {
 		return;
 	}
 
+	// 現在設定されている役職を取得する。
+	// 怪盗に交換されたら即座に反映されるので注意。
 	public static OneNightYakusyoku getYaku(Player p){
 		if(p == null){
 			throw new NullPointerException("'getYaku'関数にnullを渡すことは許されません。(半ギレ)");
@@ -181,7 +183,23 @@ public enum OneNightYakusyoku {
 		}
 		return y;
 	}
-	
+
+	// 交換される前の役職を取得する。
+	public static OneNightYakusyoku getNightYaku(Player p) {
+		if(p == null){
+			throw new NullPointerException("'getNightYaku'関数にnullを渡すことは許されません。(半ギレ)");
+		}
+		String yaku = Data.getString("Players."+p.getUniqueId()+".beforeyaku");
+		if(yaku != null){
+			return getNameToYaku( yaku );
+		}
+		yaku = Data.getString("Players."+p.getUniqueId()+".yaku");
+		if(yaku != null){
+			return getNameToYaku( yaku );
+		}
+		return null;
+	}
+
 	public static String getYakuName(Player p){
 		String yaku = Data.getString("Players."+p.getUniqueId()+".yaku");
 		if(yaku != null){
@@ -532,4 +550,5 @@ public enum OneNightYakusyoku {
 	public static void sendYakuHelp( Player sender ){
 		sendYakuHelp( ((CommandSender) sender) );
 	}
+
 }

@@ -266,6 +266,17 @@ public class Jinro extends JavaPlugin {
 
 	private static ArrayList<String> getCmdList(Yakusyoku yaku) {
 		ArrayList<String> out = new ArrayList<String>();
+		if( yaku != null ){
+			if(yaku.equals(Yakusyoku.人狼)){
+				out.add("kami");
+			}
+			if(yaku.equals(Yakusyoku.占い師)){
+				out.add("uranai");
+			}
+			if(yaku.equals(Yakusyoku.狩人) || yaku.equals(Yakusyoku.コスプレイヤー)){
+				out.add("goei");
+			}
+		}
 		if(yaku == Yakusyoku.人狼){
 			out.add("kami");
 		}
@@ -291,11 +302,13 @@ public class Jinro extends JavaPlugin {
 //		if(yaku.equals(OneNightYakusyoku.狩人)){
 //			out.add("assign");
 //		}
-		if(yaku.equals(OneNightYakusyoku.占い師)){
-			out.add("uranai");
-		}
-		if(yaku.equals(OneNightYakusyoku.怪盗)){
-			out.add("change");
+		if( yaku != null ){
+			if(yaku.equals(OneNightYakusyoku.占い師)){
+				out.add("uranai");
+			}
+			if(yaku.equals(OneNightYakusyoku.怪盗)){
+				out.add("change");
+			}
 		}
 		out.add("chat");
 		out.add("co");

@@ -428,7 +428,7 @@ public class Timer extends BukkitRunnable {
                             p.sendMessage(yc + "あなたは 爆弾魔 です。");
                             p.sendMessage(yc + "人狼に襲われた場合、襲った人狼も道連れにします。");
                             p.sendMessage(yc + "処刑された場合、生存者の中からランダムで道連れにします。");
-                            p.sendMessage(yc + "目標: 人狼の勝利");
+                            p.sendMessage(yc + "目標: 村人の勝利");
                             break;
                         case コスプレイヤー:
                             p.sendMessage(yc + "あなたは コスプレイヤー です。");
@@ -472,7 +472,7 @@ public class Timer extends BukkitRunnable {
                 JinroC++;
             } else if( p_yaku.equals(Yakusyoku.村人) || p_yaku.equals(Yakusyoku.狩人)
                     || p_yaku.equals(Yakusyoku.占い師) || p_yaku.equals(Yakusyoku.共有者) || p_yaku.equals(Yakusyoku.人形使い)
-                    || p_yaku.equals(Yakusyoku.霊能者) || p_yaku.equals(Yakusyoku.コスプレイヤー)
+                    || p_yaku.equals(Yakusyoku.爆弾魔) || p_yaku.equals(Yakusyoku.霊能者) || p_yaku.equals(Yakusyoku.コスプレイヤー)
                     || p_yaku.equals(Yakusyoku.ニワトリ) ){
                 MuraC++;
             }
@@ -561,6 +561,7 @@ public class Timer extends BukkitRunnable {
                 Stats.setWin(Yakusyoku.コスプレイヤー);
                 Stats.setWin(Yakusyoku.人形使い);
                 Stats.setWin(Yakusyoku.ニワトリ);
+                Stats.setWin(Yakusyoku.爆弾魔);
             }
             setGameEndFlag(true);
             return;
@@ -612,7 +613,6 @@ public class Timer extends BukkitRunnable {
                 Stats.setWin(Yakusyoku.狂人);
                 Stats.setWin(Yakusyoku.狂信者);
                 Stats.setWin(Yakusyoku.聴狂人);
-                Stats.setWin(Yakusyoku.爆弾魔);
             }
             setGameEndFlag(true);
             return;

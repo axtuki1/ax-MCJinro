@@ -48,10 +48,6 @@
       <id>sonatype</id>
       <url>https://oss.sonatype.org/content/groups/public/</url>
     </repository>
-    <repository>
-      <id>textapi-repo</id>
-      <url>https://dl.bintray.com/luca98/plugins/</url>
-    </repository>
   </repositories>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

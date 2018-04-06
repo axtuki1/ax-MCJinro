@@ -1,6 +1,5 @@
 package io.github.axtuki1.jinro;
 
-import io.github.theluca98.textapi.ActionBar;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -52,31 +51,25 @@ public class Timer extends BukkitRunnable {
         /*
         あくしょんばー
         */
-        ActionBar bar = new ActionBar("");
         for(Player p : Bukkit.getOnlinePlayers()){
             if(Cycle.getStatus() == Cycle.Vote){
                 Player b = Touhyou.getTouhyou(p);
-                if(p.hasPermission("axtuki1.Jinro.GameMaster")){
-                    bar.setText("");
-                    bar.send(p);
+                if(p.hasPermission("axtuki1.Jinro.GameMaster") || Yakusyoku.getSpecPlayers().contains(p)){
+//                    ActionBar.sendActionbar(p, "");
                     continue;
                 } else if(b == null){
-                    bar.setText(ChatColor.GREEN + "紙を手に持って投票してください。");
-                    bar.send(p);
+                    ActionBar.sendActionbar(p, ChatColor.GREEN + "紙を手に持って投票してください。");
                     continue;
                 } else {
-                    bar.setText(ChatColor.GRAY + "GMの開票を待っています...");
-                    bar.send(p);
+                    ActionBar.sendActionbar(p, ChatColor.GRAY + "GMの開票を待っています...");
                     continue;
                 }
             } else if(Cycle.getStatus() == Cycle.VoteAgain){
-                bar.setText(ChatColor.GREEN + "投票の結果: " + ChatColor.AQUA + "再投票");
-                bar.send(p);
+                ActionBar.sendActionbar(p, ChatColor.GREEN + "投票の結果: " + ChatColor.AQUA + "再投票");
                 continue;
             } else if(Cycle.getStatus() == Cycle.Discussion){
                 if(getGameElapsedTime() < 5){
-                    bar.setText(ChatColor.RED + "まだ発言できません。");
-                    bar.send(p);
+                    ActionBar.sendActionbar(p, ChatColor.RED + "まだ発言できません。");
                     continue;
                 }
             } else if(Cycle.getStatus() == Cycle.Execution){
@@ -87,53 +80,43 @@ public class Timer extends BukkitRunnable {
                 } else {
                     s = pe.getName();
                 }
-                bar.setText(ChatColor.GREEN + "投票の結果: " + ChatColor.RED + s );
-                bar.send(p);
+                ActionBar.sendActionbar(p, ChatColor.GREEN + "投票の結果: " + ChatColor.RED + s);
                 continue;
             } else if(Cycle.getStatus() == Cycle.Night){
                 if( Yakusyoku.getYaku(p) == Yakusyoku.人狼){
                     if(getDay() != 1) {
                         if (!Data.getBoolean("Status.kami." + getDay())) {
-                            bar.setText(ChatColor.GREEN + "能力を使用できます。");
-                            bar.send(p);
+                            ActionBar.sendActionbar(p, ChatColor.GREEN + "能力を使用できます。");
                             continue;
                         } else {
-                            bar.setText(ChatColor.GRAY + "能力は使用済みです。");
-                            bar.send(p);
+                            ActionBar.sendActionbar(p, ChatColor.GRAY + "能力は使用済みです。");
                             continue;
                         }
                     } else {
-                        bar.setText(ChatColor.GRAY + "初日は能力を使用できません。");
-                        bar.send(p);
+                        ActionBar.sendActionbar(p, ChatColor.GRAY + "初日は能力を使用できません。");
                         continue;
                     }
                 } else if(Yakusyoku.getYaku(p) == Yakusyoku.占い師 ) {
                     if(!Data.getBoolean("Status.uranai."+ p.getUniqueId() +"." + getDay())) {
-                        bar.setText(ChatColor.GREEN + "能力を使用できます。");
-                        bar.send(p);
+                        ActionBar.sendActionbar(p, ChatColor.GREEN + "能力を使用できます。");
                         continue;
                     } else {
-                        bar.setText(ChatColor.GRAY + "能力は使用済みです。");
-                        bar.send(p);
+                        ActionBar.sendActionbar(p, ChatColor.GRAY + "能力は使用済みです。");
                         continue;
                     }
                 } else if(Yakusyoku.getYaku(p) == Yakusyoku.狩人) {
                     if(Data.getString("Players." + p.getUniqueId() + ".goei") == null) {
-                        bar.setText(ChatColor.GREEN + "能力を使用できます。");
-                        bar.send(p);
+                        ActionBar.sendActionbar(p, ChatColor.GREEN + "能力を使用できます。");
                         continue;
                     } else {
-                        bar.setText(ChatColor.GRAY + "能力は使用済みです。");
-                        bar.send(p);
+                        ActionBar.sendActionbar(p, ChatColor.GRAY + "能力は使用済みです。");
                         continue;
                     }
                 }
             } else {
-                bar.setText("");
-                bar.send(p);
+//                ActionBar.sendActionbar(p, "");
             }
-            bar.setText("");
-            bar.send(p);
+//            ActionBar.sendActionbar(p, "");
         }
 
         /*

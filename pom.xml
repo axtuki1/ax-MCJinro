@@ -61,10 +61,6 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
-        <repository>
-            <id>textapi-repo</id>
-            <url>https://dl.bintray.com/luca98/plugins/</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -88,11 +84,6 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.11.2-R0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.theluca98</groupId>
-            <artifactId>TextAPI</artifactId>
-            <version>1.12-R2.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>

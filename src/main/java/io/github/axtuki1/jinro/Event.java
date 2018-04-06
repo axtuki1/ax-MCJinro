@@ -264,11 +264,6 @@ public class Event implements Listener {
 		}
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onCommandexec( PlayerCommandPreprocessEvent e ){
-		Bukkit.broadcast(ChatColor.GRAY + "[CMD] " + e.getPlayer().getName() + ": " + e.getMessage(), "axtuki1.Jinro.GameMaster");
-	}
-
 	@EventHandler(priority = EventPriority.HIGHEST) 
 	public void onPlayerMove(PlayerMoveEvent e) {
     	if(e.getTo().getBlockY() < -5){

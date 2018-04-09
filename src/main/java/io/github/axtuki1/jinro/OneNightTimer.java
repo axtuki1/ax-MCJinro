@@ -236,6 +236,11 @@ public class OneNightTimer extends BukkitRunnable {
 //                            p.sendMessage(yc + "目標: 村人の勝利");
 //                            Data.set("Players." + p.getUniqueId() + ".goei", null);
 //                            break;
+                        case てるてる:
+                            p.sendMessage(yc + "あなたは てるてる です。");
+                            p.sendMessage(yc + "自らが処刑されることで勝利となります。");
+                            p.sendMessage(yc + "目標: 自分の処刑");
+                            break;
                         case 怪盗:
                             p.sendMessage(yc + "あなたは 怪盗 です。");
                             p.sendMessage(yc + "誰か一人と役を交換できます。");
@@ -285,6 +290,15 @@ public class OneNightTimer extends BukkitRunnable {
 //                Stats.setWin(OneNightYakusyoku.人狼);
 //                Stats.setWin(OneNightYakusyoku.狂人);
 //                Stats.setWin(OneNightYakusyoku.聴狂人);
+                setGameEndFlag(true);
+                break;
+            case てるてる:
+                if (Jinro.getMain().getConfig().getBoolean("WinnerMsgUseTitle")) {
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        p.sendTitle(ChatColor.LIGHT_PURPLE + "==== てるてるが勝利しました ====", null);
+                    }
+                }
+                Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "====[てるてるが勝利しました]====");
                 setGameEndFlag(true);
                 break;
         }

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 public enum OneNightYakusyoku {
-	村人, 人狼, 占い師, 狂人, 聴狂人, 怪盗, 白, 黒;
+	村人, 人狼, 占い師, 狂人, 聴狂人, 怪盗, てるてる, 白, 黒;
 	
 	// プレイヤーの役職等 内部処理担当	
 
@@ -252,6 +252,9 @@ public enum OneNightYakusyoku {
 			case 怪盗:
 				out = ChatColor.DARK_GREEN;
 				break;
+			case てるてる:
+				out = ChatColor.LIGHT_PURPLE;
+				break;
 		}
 		return out;
 	}
@@ -273,6 +276,8 @@ public enum OneNightYakusyoku {
 			yaku = 聴狂人;
 		} else if(name.equalsIgnoreCase("kaitou")){
 			yaku = 怪盗;
+		} else if(name.equalsIgnoreCase("teruteru")){
+			yaku = てるてる;
 		} else if(name.equalsIgnoreCase("siro")){
 			yaku = 白;
 		} else if(name.equalsIgnoreCase("kuro")){
@@ -302,6 +307,8 @@ public enum OneNightYakusyoku {
 			case 怪盗:
 				out = "kaitou";
 				break;
+			case てるてる:
+				out = "teruteru";
 			case 白:
 				out = "siro";
 				break;
@@ -332,6 +339,9 @@ public enum OneNightYakusyoku {
 				break;
 			case 怪盗:
 				out = "怪盗";
+				break;
+			case てるてる:
+				out = "てる";
 				break;
 			case 白:
 				out = "○";
@@ -545,6 +555,7 @@ public enum OneNightYakusyoku {
 		Jinro.sendMessage(sender, "村人:murabito 占い師:uranai 怪盗:kaitou", LogLevel.INFO);
 		Jinro.sendMessage(sender, "狩人:kariudo 共有者:kyouyu 爆弾魔:bakudan", LogLevel.INFO);
 		Jinro.sendMessage(sender, "人狼:jinro 狂人:kyoujin 聴狂人:tyoukyoujin", LogLevel.INFO);
+		Jinro.sendMessage(sender, "てるてる:teruteru", LogLevel.INFO);
 	}
 
 	public static void sendYakuHelp( Player sender ){

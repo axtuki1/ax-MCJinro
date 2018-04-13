@@ -59,26 +59,6 @@ public class Jinro extends JavaPlugin {
 		challenge.saveDefaultConfig();
 		map.saveDefaultConfig();
 
-		// 入れてみたくなったハッシュ値取得してConfigに書き込むアレ
-		try {
-			HashMap<String, String> Hash = new HashMap<String, String>();
-			InputStream input = getClass().getClassLoader().getResourceAsStream("io/github/axtuki1/jinro/");
-			if( input == null ){
-				getLogger().log(Level.WARNING, "ファイルが見つかりませんでした。");
-			} else {
-				Hash.put("MD5", DigestUtils.md5Hex( input ));
-				Hash.put("SHA1", DigestUtils.sha1Hex( input ));
-				Hash.put("SHA256", DigestUtils.sha256Hex( input ));
-				this.getConfig().set("Hash", Hash);
-				this.saveConfig();
-				getLogger().info("ClassHash Saved.");
-				getLogger().info("MD5Hash: " + Hash.get("MD5"));
-				getLogger().info("SHA1Hash: " + Hash.get("SHA1"));
-			}
-		} catch (Exception e) {
-			getLogger().log(Level.WARNING, "["+ e.toString() +"] ファイルが読み込めませんでした。");
-		}
-
 		this.reloadConfig();
 		Data.reloadConfig();
 		Stats.reloadConfig();
@@ -320,7 +300,7 @@ public class Jinro extends JavaPlugin {
 		out.add("list");
 		out.add("stats");
 		out.add("option");
-		out.add("about");
+		out.add("ver");
 		return out;
 	}
 
@@ -344,7 +324,7 @@ public class Jinro extends JavaPlugin {
 		out.add("list");
 		out.add("stats");
 		out.add("option");
-		out.add("about");
+		out.add("ver");
 		return out;
 	}
 
@@ -943,7 +923,7 @@ public class Jinro extends JavaPlugin {
 					} else {
 						amari.append("[なし]");
 					}
-					sender.sendMessage(ChatColor.GREEN + "余り : " + amari);
+					Bukkit.broadcastMessage(ChatColor.GREEN + "余り : " + amari);
 					for(Player p : OneNightYakusyoku.getAllPlayers()){
 						yak = OneNightYakusyoku.getYaku(p);
 						Death = "";
@@ -1800,7 +1780,7 @@ public class Jinro extends JavaPlugin {
 						}
 						sender.sendMessage( OneNightYakusyoku.getYakuNameC( OneNightYakusyoku.getNameToYaku(key) ) + ChatColor.GREEN + ": " + ChatColor.YELLOW + out.get(key) + "人");
 					}
-					OneNightYakusyoku pya = OneNightYakusyoku.getYaku(((Player)sender));
+					OneNightYakusyoku pya = OneNightYakusyoku.getNightYaku(((Player)sender));
 					if( pya != null){
 						sender.sendMessage(ChatColor.YELLOW + "あなたの役職: " + OneNightYakusyoku.getYakuColor(pya) + "[" + OneNightYakusyoku.getYaku2moji(pya) + "]");
 					} else {
@@ -1888,9 +1868,9 @@ public class Jinro extends JavaPlugin {
 			}
 			sender.sendMessage(ChatColor.RED + "===================================");
 			return true;
-		} else if(arg0.equalsIgnoreCase("about")){
+		} else if(arg0.equalsIgnoreCase("ver")){
 			sender.sendMessage(ChatColor.RED     + "===================================");
-			sender.sendMessage(ChatColor.GOLD    + "MinecraftJinro " + getDescription().getVersion());
+			sender.sendMessage(ChatColor.GOLD    + "MinecraftJinro " + ChatColor.AQUA + "v" + getDescription().getVersion());sender.sendMessage(ChatColor.GOLD    + "");
 			sender.sendMessage(ChatColor.AQUA    + "Original Game: Mafia");
 			sender.sendMessage(ChatColor.AQUA    + "Base Game: Are You a Werewolf?");
 			sender.sendMessage(ChatColor.AQUA    + "Respected by MinecraftJinro (by Midorikun)");

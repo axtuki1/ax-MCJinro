@@ -1,6 +1,7 @@
 name: MinecraftJinro
 version: ${project.version}
 main: io.github.axtuki1.jinro.Jinro
+softdepend: [Multiverse-Core]
 permissions:
     axtuki1.Jinro.GameMaster:
         description: GameMaster

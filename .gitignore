@@ -1,4 +1,8 @@
 /target/
 /.idea/
 
+<<<<<<< HEAD
+=======
+.idea/workspace.xml
+>>>>>>> feature/v1.5/OneNightJinro
 .idea/workspace.xml

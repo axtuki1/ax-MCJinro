@@ -40,30 +40,15 @@ public class ComingOut extends JavaPlugin {
 					p.sendMessage(Jinro.getPrefix() + "黒をつけました。");
 					setComingOut(p,Yakusyoku.黒);
 				} else {
-					switch (GameMode.getGameMode()) {
-						case MinecraftJinro:
-							Yakusyoku yaku = Yakusyoku.getNameToYaku(args[1]);
-							if(yaku == null){
-								sendCOHelp(sender);
-								return true;
-							}
-							setComingOut(p, yaku);
-							Bukkit.broadcastMessage(Yakusyoku.getYakuColor(yaku) + p.getName() + "が" + yaku.toString() + "COしました。");
-							if(Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
-								p.setPlayerListName(Yakusyoku.getYakuColor(yaku) + "[" + Yakusyoku.getYaku2moji(yaku) + "] " + ChatColor.WHITE + p.getName() + " ");
-							}
-							break;
-						case OneNightJinro:
-							OneNightYakusyoku yak = OneNightYakusyoku.getNameToYaku(args[1]);
-							if(yak == null){
-								sendCOHelp(sender);
-								return true;
-							}
-							setComingOut(p, yak);
-							Bukkit.broadcastMessage(OneNightYakusyoku.getYakuColor(yak) + p.getName() + "が" + yak.toString() + "COしました。");
-							if(Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
-								p.setPlayerListName(OneNightYakusyoku.getYakuColor(yak) + "[" + OneNightYakusyoku.getYaku2moji(yak) + "] " + ChatColor.WHITE + p.getName() + " ");
-							}
+					Yakusyoku yaku = Yakusyoku.getNameToYaku(args[1]);
+					if (yaku == null) {
+						sendCOHelp(sender);
+						return true;
+					}
+					setComingOut(p, yaku);
+					Bukkit.broadcastMessage(Yakusyoku.getYakuColor(yaku) + p.getName() + "が" + yaku.toString() + "COしました。");
+					if (Jinro.getMain().getConfig().getBoolean("ShowComingOut")) {
+						p.setPlayerListName(Yakusyoku.getYakuColor(yaku) + "[" + Yakusyoku.getYaku2moji(yaku) + "] " + ChatColor.WHITE + p.getName() + " ");
 					}
 				}
 			} else {
@@ -85,23 +70,8 @@ public class ComingOut extends JavaPlugin {
 		return yaku;
 	}
 
-	public static OneNightYakusyoku getOneComingOut(Player p) {
-		String y = Data.getString("Players." + p.getUniqueId() + ".co");
-		OneNightYakusyoku yaku = null;
-		if(y != null){
-			yaku = OneNightYakusyoku.getNameToYaku( y );
-		}
-		return yaku;
-	}
-
 	public static void setComingOut(Player p, Yakusyoku y) {
 		Data.set("Players." + p.getUniqueId() + ".co", Yakusyoku.getYakuToName(y));
-		Data.saveConfig();
-		return;
-	}
-
-	public static void setComingOut(Player p, OneNightYakusyoku y) {
-		Data.set("Players." + p.getUniqueId() + ".co", OneNightYakusyoku.getYakuToName(y));
 		Data.saveConfig();
 		return;
 	}

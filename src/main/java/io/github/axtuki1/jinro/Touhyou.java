@@ -34,14 +34,7 @@ public class Touhyou extends JavaPlugin {
 			return true;
 		}
 		ArrayList<Player> alive = Yakusyoku.getAlivePlayers();
-		switch (GameMode.getGameMode()){
-			case MinecraftJinro:
-				alive = Yakusyoku.getAlivePlayers();
-				break;
-			case OneNightJinro:
-				alive = OneNightYakusyoku.getAlivePlayers();
-				break;
-		}
+		alive = Yakusyoku.getAlivePlayers();
 		ArrayList<Player> pl = new ArrayList<Player>();
 		switch(args[1].toLowerCase()){
 			case "kill":
@@ -178,21 +171,13 @@ public class Touhyou extends JavaPlugin {
 						}
 					}
 				}
-				if(max_found && !touhyou_again){
+				if(max_found && !touhyou_again) {
 					Bukkit.broadcastMessage(ChatColor.YELLOW + "投票の結果、" + syokei.getName() + " が処刑されます。");
 					Bukkit.broadcastMessage(ChatColor.AQUA + "チャットが全体に聞こえるようになりました。");
 					syokei.setGlowing(true);
 					Cycle.setStatus(Cycle.Vote);
-					switch (GameMode.getGameMode()){
-						case OneNightJinro:
-							OneNightYakusyoku.setExecution(syokei);
-							OneNightTimer.NextCycle();
-							break;
-						case MinecraftJinro:
-							Yakusyoku.setExecution(syokei);
-							Timer.NextCycle();
-							break;
-					}
+					Yakusyoku.setExecution(syokei);
+					Timer.NextCycle();
 				}
 				Bukkit.broadcastMessage(ChatColor.RED + "==================================");
 				if(touhyou_again){

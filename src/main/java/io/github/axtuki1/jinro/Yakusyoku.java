@@ -34,22 +34,10 @@ public enum Yakusyoku {
 	}
 
 	public static String[] getYakuList(){
-		switch(GameMode.getGameMode()){
-			case OneNightJinro:
-				return OneNightYakusyoku.getYakuList();
-			case MinecraftJinro:
-				return YakuList;
-		}
 		return YakuList;
 	}
 
 	public static String[] getCOList(){
-		switch(GameMode.getGameMode()){
-			case OneNightJinro:
-				return OneNightYakusyoku.getCOList();
-			case MinecraftJinro:
-				return COList;
-		}
 		return COList;
 	}
 

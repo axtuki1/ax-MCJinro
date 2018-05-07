@@ -1,6 +1,5 @@
 package io.github.axtuki1.jinro;
 
-import io.github.theluca98.textapi.ActionBar;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -24,6 +23,14 @@ public class Timer extends BukkitRunnable {
 	private static World w = Jinro.getCurrentWorld();
     private static Config Data = Jinro.getData();
 
+    public static void init(){
+        setDay(1);
+        setGameStopFlag(false);
+        setGameEndFlag(false);
+        setTimerPauseFlag(false);
+        setCyclePauseFlag(false);
+    }
+
 	@Override
 	public void run() {
 
@@ -43,34 +50,22 @@ public class Timer extends BukkitRunnable {
 
         /*
         あくしょんばー
-        ぶっちゃけいらない
         */
-        ActionBar bar = new ActionBar("");
         for(Player p : Bukkit.getOnlinePlayers()){
             if(Cycle.getStatus() == Cycle.Vote){
                 Player b = Touhyou.getTouhyou(p);
-                if(p.hasPermission("axtuki1.Jinro.GameMaster")){
-                    bar.setText("");
-                    bar.send(p);
-                    continue;
+                if(p.hasPermission("axtuki1.Jinro.GameMaster") || Yakusyoku.getSpecPlayers().contains(p)){
+//                    ActionBar.sendActionbar(p, "");
                 } else if(b == null){
-                    bar.setText(ChatColor.GREEN + "紙を手に持って投票してください。");
-                    bar.send(p);
-                    continue;
+                    ActionBar.sendActionbar(p, ChatColor.GREEN + "紙を手に持って投票してください。");
                 } else {
-                    bar.setText(ChatColor.GRAY + "GMの開票を待っています...");
-                    bar.send(p);
-                    continue;
+                    ActionBar.sendActionbar(p, ChatColor.GRAY + "GMの開票を待っています...");
                 }
             } else if(Cycle.getStatus() == Cycle.VoteAgain){
-                bar.setText(ChatColor.GREEN + "投票の結果: " + ChatColor.AQUA + "再投票");
-                bar.send(p);
-                continue;
+                ActionBar.sendActionbar(p, ChatColor.GREEN + "投票の結果: " + ChatColor.AQUA + "再投票");
             } else if(Cycle.getStatus() == Cycle.Discussion){
                 if(getGameElapsedTime() < 5){
-                    bar.setText(ChatColor.RED + "まだ発言できません。");
-                    bar.send(p);
-                    continue;
+                    ActionBar.sendActionbar(p, ChatColor.RED + "まだ発言できません。");
                 }
             } else if(Cycle.getStatus() == Cycle.Execution){
                 Player pe = Yakusyoku.getExecution( day );
@@ -80,53 +75,32 @@ public class Timer extends BukkitRunnable {
                 } else {
                     s = pe.getName();
                 }
-                bar.setText(ChatColor.GREEN + "投票の結果: " + ChatColor.RED + s );
-                bar.send(p);
-                continue;
+                ActionBar.sendActionbar(p, ChatColor.GREEN + "投票の結果: " + ChatColor.RED + s);
             } else if(Cycle.getStatus() == Cycle.Night){
                 if( Yakusyoku.getYaku(p) == Yakusyoku.人狼){
                     if(getDay() != 1) {
                         if (!Data.getBoolean("Status.kami." + getDay())) {
-                            bar.setText(ChatColor.GREEN + "能力を使用できます。");
-                            bar.send(p);
-                            continue;
+                            ActionBar.sendActionbar(p, ChatColor.GREEN + "能力を使用できます。");
                         } else {
-                            bar.setText(ChatColor.GRAY + "能力は使用済みです。");
-                            bar.send(p);
-                            continue;
+                            ActionBar.sendActionbar(p, ChatColor.GRAY + "能力は使用済みです。");
                         }
                     } else {
-                        bar.setText(ChatColor.GRAY + "初日は能力を使用できません。");
-                        bar.send(p);
-                        continue;
+                        ActionBar.sendActionbar(p, ChatColor.GRAY + "初日は能力を使用できません。");
                     }
                 } else if(Yakusyoku.getYaku(p) == Yakusyoku.占い師 ) {
                     if(!Data.getBoolean("Status.uranai."+ p.getUniqueId() +"." + getDay())) {
-                        bar.setText(ChatColor.GREEN + "能力を使用できます。");
-                        bar.send(p);
-                        continue;
+                        ActionBar.sendActionbar(p, ChatColor.GREEN + "能力を使用できます。");
                     } else {
-                        bar.setText(ChatColor.GRAY + "能力は使用済みです。");
-                        bar.send(p);
-                        continue;
+                        ActionBar.sendActionbar(p, ChatColor.GRAY + "能力は使用済みです。");
                     }
                 } else if(Yakusyoku.getYaku(p) == Yakusyoku.狩人) {
                     if(Data.getString("Players." + p.getUniqueId() + ".goei") == null) {
-                        bar.setText(ChatColor.GREEN + "能力を使用できます。");
-                        bar.send(p);
-                        continue;
+                        ActionBar.sendActionbar(p, ChatColor.GREEN + "能力を使用できます。");
                     } else {
-                        bar.setText(ChatColor.GRAY + "能力は使用済みです。");
-                        bar.send(p);
-                        continue;
+                        ActionBar.sendActionbar(p, ChatColor.GRAY + "能力は使用済みです。");
                     }
                 }
-            } else {
-                bar.setText("");
-                bar.send(p);
             }
-            bar.setText("");
-            bar.send(p);
         }
 
         /*
@@ -174,6 +148,7 @@ public class Timer extends BukkitRunnable {
 	}
 
 	public static void NextCycle() {
+        w = Jinro.getCurrentWorld();
         resetGameElapsedTime();
 	    // 勝利判定
         if(Cycle.getStatus() == Cycle.Execution || Cycle.getStatus() == Cycle.Night) {
@@ -316,6 +291,10 @@ public class Timer extends BukkitRunnable {
                             p.sendMessage(yc + "あなたは 占い師 です。");
                             p.sendMessage(yc + "毎晩一人を占うことができます。");
                             p.sendMessage(yc + "「/jinro uranai <Player>」で占えます。");
+                            if( Timer.getDay() == 1 ){
+                                p.sendMessage(yc + "この日(1日目)のみ初日犠牲者を占うことができます。");
+                                p.sendMessage(yc + "「/jinro uranai syoniti##」で占えます。");
+                            }
                             p.sendMessage(yc + "目標: 村人の勝利");
                             break;
                         case 村人:
@@ -381,23 +360,23 @@ public class Timer extends BukkitRunnable {
                                     if( Jinro.getMain().getConfig().getBoolean("ShowYakusyoku") ){
                                         ey = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
                                     } else {
-                                        ey = ChatColor.WHITE + "白";
+                                        ey = ChatColor.WHITE + "村人";
                                     }
                                 } else {
                                     if( Jinro.getMain().getConfig().getBoolean("ShowYakusyoku") ){
                                         ey = Yakusyoku.getYakuColor( eyaku ) + eyaku.toString();
                                     } else if( eyaku == Yakusyoku.人狼 ){
-                                        ey = ChatColor.GRAY + "黒";
+                                        ey = ChatColor.GRAY + "人狼";
                                     } else {
-                                        ey = ChatColor.WHITE + "白";
+                                        ey = ChatColor.WHITE + "村人";
                                     }
                                 }
 
-                                if(eyaku == Yakusyoku.妖狐 || eyaku == Yakusyoku.狂人){
-                                    ey = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
-                                } else {
-                                    ey = Yakusyoku.getYakuColor( eyaku ) + eyaku.toString();
-                                }
+//                                if(eyaku == Yakusyoku.妖狐 || eyaku == Yakusyoku.狂人){
+//                                    ey = Yakusyoku.getYakuColor( Yakusyoku.村人 ) + Yakusyoku.村人.toString();
+//                                } else {
+//                                    ey = Yakusyoku.getYakuColor( eyaku ) + eyaku.toString();
+//                                }
                                 p.sendMessage(yc + ex.getName() +" は " + ey + ChatColor.GREEN + " でした。");
                             }
                             break;
@@ -545,11 +524,11 @@ public class Timer extends BukkitRunnable {
                 Stats.setWin(Yakusyoku.共有者);
                 Stats.setWin(Yakusyoku.霊能者);
                 Stats.setWin(Yakusyoku.占い師);
-                Stats.setWin(Yakusyoku.爆弾魔);
                 Stats.setWin(Yakusyoku.狩人);
                 Stats.setWin(Yakusyoku.コスプレイヤー);
                 Stats.setWin(Yakusyoku.人形使い);
                 Stats.setWin(Yakusyoku.ニワトリ);
+                Stats.setWin(Yakusyoku.爆弾魔);
             }
             setGameEndFlag(true);
             return;

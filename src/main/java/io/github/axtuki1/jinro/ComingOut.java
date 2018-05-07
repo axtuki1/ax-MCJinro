@@ -41,13 +41,13 @@ public class ComingOut extends JavaPlugin {
 					setComingOut(p,Yakusyoku.黒);
 				} else {
 					Yakusyoku yaku = Yakusyoku.getNameToYaku(args[1]);
-					if(yaku == null){
+					if (yaku == null) {
 						sendCOHelp(sender);
 						return true;
 					}
 					setComingOut(p, yaku);
 					Bukkit.broadcastMessage(Yakusyoku.getYakuColor(yaku) + p.getName() + "が" + yaku.toString() + "COしました。");
-					if(Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
+					if (Jinro.getMain().getConfig().getBoolean("ShowComingOut")) {
 						p.setPlayerListName(Yakusyoku.getYakuColor(yaku) + "[" + Yakusyoku.getYaku2moji(yaku) + "] " + ChatColor.WHITE + p.getName() + " ");
 					}
 				}
@@ -62,12 +62,11 @@ public class ComingOut extends JavaPlugin {
 	}
 
 	public static Yakusyoku getComingOut(Player p) {
-		String y = Data.getString("Players." + p.getName() + ".co");
+		String y = Data.getString("Players." + p.getUniqueId() + ".co");
 		Yakusyoku yaku = null;
 		if(y != null){
 			yaku = Yakusyoku.getNameToYaku( y );
 		}
-
 		return yaku;
 	}
 
@@ -84,12 +83,12 @@ public class ComingOut extends JavaPlugin {
 	}
 
 	public static void sendCOHelp(CommandSender sender) {
-		sendCOHelp( ((Player) sender) );
+		Yakusyoku.sendYakuHelp(sender);
+		Jinro.sendMessage(sender, "白[○]:siro 黒[●]:kuro", LogLevel.INFO);
 	}
 
 	public static void sendCOHelp( Player sender ){
-		Yakusyoku.sendYakuHelp(sender);
-		Jinro.sendMessage(sender, "白[○]:siro 黒[●]:kuro", LogLevel.INFO);
+		sendCOHelp( ((CommandSender) sender) );
 	}
 
 }

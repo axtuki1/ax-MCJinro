@@ -66,11 +66,7 @@ public class Initialization extends JavaPlugin {
 		Data.set("Server_is_Alive", true);
 		//Jinro.getMain().getLogger().info("ゲームデータ - 初期化完了");
 		Jinro.getCurrentWorld().setTime(6000);
-		Timer.setDay(1);
-		Timer.setGameStopFlag(false);
-		Timer.setGameEndFlag(false);
-		Timer.setTimerPauseFlag(false);
-		Timer.setCyclePauseFlag(false);
+		Timer.init();
 		Status.setStatus(Status.GameStandby);
 		Cycle.setStatus(Cycle.Standby);
 		//Jinro.getMain().getLogger().info("各種フラグ - 初期化完了");
@@ -80,6 +76,21 @@ public class Initialization extends JavaPlugin {
 			ScoreBoard.getScoreboard().resetScores(ChatColor.RED + "===[DEBUG MODE]===§c");
 			ScoreBoard.getScoreboard().resetScores(ChatColor.RED + "===[DEBUG MODE]===");
 		}
+
+//		ScoreBoard.getScoreboard().resetScores(ChatColor.WHITE + "GameMode:");
+//		for( io.github.axtuki1.jinro.GameMode gm : io.github.axtuki1.jinro.GameMode.values() ) {
+//			ScoreBoard.getScoreboard().resetScores(ChatColor.GREEN + gm.toString());
+//		}
+//		ScoreBoard.getInfoObj().getScore( ChatColor.WHITE + "GameMode:").setScore(5);
+//		io.github.axtuki1.jinro.GameMode gm;
+//		try {
+//			gm = io.github.axtuki1.jinro.GameMode.valueOf(Jinro.getMain().getConfig().getString("GameMode"));
+//		} catch (Exception e) {
+//			gm = io.github.axtuki1.jinro.GameMode.MinecraftJinro;
+//			Jinro.getMain().getConfig().set("GameMode", gm.toString());
+//		}
+//		io.github.axtuki1.jinro.GameMode.setGameMode(gm);
+//		ScoreBoard.getInfoObj().getScore( ChatColor.GREEN + io.github.axtuki1.jinro.GameMode.getGameMode().toString()).setScore(4);
 		return true;
 	}
 	

@@ -34,6 +34,7 @@ public class Touhyou extends JavaPlugin {
 			return true;
 		}
 		ArrayList<Player> alive = Yakusyoku.getAlivePlayers();
+		alive = Yakusyoku.getAlivePlayers();
 		ArrayList<Player> pl = new ArrayList<Player>();
 		switch(args[1].toLowerCase()){
 			case "kill":
@@ -66,10 +67,21 @@ public class Touhyou extends JavaPlugin {
 				if(args.length == 3){
 					if(!args[2].equalsIgnoreCase("force")){
 						// 投票check
-						for(Player p : alive){
-							if( !Yakusyoku.getDeath(p) && getTouhyou( p ) == null && !p.hasPermission("axtuki1.Jinro.GameMaster")){
-								pl.add(p);
-							}
+						switch (GameMode.getGameMode()){
+							case OneNightJinro:
+								for(Player p : alive){
+									if( getTouhyou( p ) == null && !p.hasPermission("axtuki1.Jinro.GameMaster")){
+										pl.add(p);
+									}
+								}
+								break;
+							case MinecraftJinro:
+								for(Player p : alive){
+									if( !Yakusyoku.getDeath(p) && getTouhyou( p ) == null && !p.hasPermission("axtuki1.Jinro.GameMaster")){
+										pl.add(p);
+									}
+								}
+								break;
 						}
 						if(pl.size() != 0){
 							for(Player p : pl){
@@ -159,12 +171,12 @@ public class Touhyou extends JavaPlugin {
 						}
 					}
 				}
-				if(max_found && !touhyou_again){
+				if(max_found && !touhyou_again) {
 					Bukkit.broadcastMessage(ChatColor.YELLOW + "投票の結果、" + syokei.getName() + " が処刑されます。");
 					Bukkit.broadcastMessage(ChatColor.AQUA + "チャットが全体に聞こえるようになりました。");
-					Yakusyoku.setExecution(syokei);
 					syokei.setGlowing(true);
 					Cycle.setStatus(Cycle.Vote);
+					Yakusyoku.setExecution(syokei);
 					Timer.NextCycle();
 				}
 				Bukkit.broadcastMessage(ChatColor.RED + "==================================");

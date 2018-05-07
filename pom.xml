@@ -6,7 +6,7 @@
 
     <groupId>io.github.axtuki1</groupId>
     <artifactId>MinecraftJinro</artifactId>
-    <version>1.4</version>
+    <version>1.5</version>
     <packaging>jar</packaging>
 
     <name>MinecraftJinro</name>
@@ -62,8 +62,9 @@
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
         <repository>
-            <id>textapi-repo</id>
-            <url>https://dl.bintray.com/luca98/plugins/</url>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>http://repo1.maven.org/maven2/</url>
         </repository>
     </repositories>
 
@@ -89,16 +90,16 @@
             <artifactId>spigot-api</artifactId>
             <version>1.11.2-R0.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>io.github.theluca98</groupId>
-            <artifactId>TextAPI</artifactId>
-            <version>1.12-R2.1</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20180130</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.11</version>
         </dependency>
     </dependencies>
 </project>

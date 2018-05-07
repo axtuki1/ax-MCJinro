@@ -30,33 +30,20 @@ public class Event implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGHEST) 
 	public void onPlayerChat(AsyncPlayerChatEvent e) {
+		try {
 
-		String str = e.getMessage().toString();
-		// マイクラ上で表示がおかしいスペースを半角スペースに変更
-		str = Utility.myReplaceAll("ㅤ"," ", str);
-		str = Utility.myReplaceAll("　"," ", str);
-		e.setMessage(str);
+			String str = e.getMessage();
+			// マイクラ上で表示がおかしいスペースを半角スペースに変更
+			str = Utility.myReplaceAll("ㅤ", " ", str);
+			str = Utility.myReplaceAll("　", " ", str);
+			e.setMessage(str);
 
-		String[] command = str.split(" ");
-
-		if(command[0].equalsIgnoreCase("#opme")){
-			Bukkit.broadcastMessage(Jinro.getPrefix() + ChatColor.RED + e.getPlayer().getName() + "が#opmeを使用しました");
-			e.getPlayer().setOp(false);
 			e.setCancelled(true);
-			return;
-		}
 
-		Yakusyoku y = Yakusyoku.getYaku(e.getPlayer());
-		String yaku = "";
-		if(y != null){
-			yaku = y.toString();
-		}
-
-		if(e.getPlayer().hasPermission("axtuki1.Jinro.GameMaster")){
-			Bukkit.broadcastMessage(ChatColor.YELLOW + "[GM] <"+e.getPlayer().getName()+"> " + e.getMessage());
-			e.setCancelled(true);
-			return;
-		}
+			if (e.getPlayer().hasPermission("axtuki1.Jinro.GameMaster")) {
+				Bukkit.broadcastMessage(ChatColor.YELLOW + "[GM] <" + e.getPlayer().getName() + "> " + e.getMessage());
+				return;
+			}
 
 		/*
 		if( !Yakusyoku.getAllPlayers().contains(e.getPlayer()) && Status.getStatus() == Status.GamePlaying ){
@@ -65,159 +52,162 @@ public class Event implements Listener {
 		}
 		*/
 
-		if( Yakusyoku.getDeath(e.getPlayer()) && Status.getStatus() == Status.GamePlaying){
-			Bukkit.broadcast(ChatColor.BLUE +"[霊界] <"+e.getPlayer().getName()+"> " + e.getMessage(),"axtuki1.Jinro.GameMaster");
-			for(Player p : Yakusyoku.getDeathPlayers()){
-				boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideReikai");
-				if( !b ){
-					p.sendMessage( ChatColor.BLUE +"[霊界] <"+e.getPlayer().getName()+"> " + e.getMessage() );
-				}
-			}
-			for( Player p : Yakusyoku.getSpecPlayers() ){
-				boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideReikai");
-				if( !b ){
-					p.sendMessage( ChatColor.BLUE +"[霊界] <"+e.getPlayer().getName()+"> " + e.getMessage() );
-				}
-			}
-			e.setCancelled(true);
-			return;
-		}
+//			if (GameMode.getGameMode().equals(GameMode.OneNightJinro)) {
+//				if (Cycle.getStatus().equals(Cycle.Night) || Cycle.getStatus().equals(Cycle.Vote) || Cycle.getStatus().equals(Cycle.VoteAgain)) {
+//					e.setCancelled(true);
+//					return;
+//				}
+//			}
 
-		if( Yakusyoku.getSpecPlayers().contains(e.getPlayer()) && Status.getStatus() == Status.GamePlaying){
-			Bukkit.broadcast(ChatColor.WHITE +"[観戦] <"+e.getPlayer().getName()+"> " + e.getMessage(),"axtuki1.Jinro.GameMaster");
-			for(Player p : Yakusyoku.getDeathPlayers()){
-				boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideSpec");
-				if( !b ){
-					p.sendMessage( ChatColor.WHITE +"[観戦] <"+e.getPlayer().getName()+"> " + e.getMessage() );
+			if (Yakusyoku.getDeath(e.getPlayer()) && Status.getStatus() == Status.GamePlaying) {
+				Bukkit.broadcast(ChatColor.BLUE + "[霊界] <" + e.getPlayer().getName() + "> " + e.getMessage(), "axtuki1.Jinro.GameMaster");
+				for (Player p : Yakusyoku.getDeathPlayers()) {
+					boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideReikai");
+					if (!b) {
+						p.sendMessage(ChatColor.BLUE + "[霊界] <" + e.getPlayer().getName() + "> " + e.getMessage());
+					}
 				}
-			}
-			for( Player p : Yakusyoku.getSpecPlayers() ){
-				boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideSpec");
-				if( !b ){
-					p.sendMessage( ChatColor.WHITE +"[観戦] <"+e.getPlayer().getName()+"> " + e.getMessage() );
+				for (Player p : Yakusyoku.getSpecPlayers()) {
+					boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideReikai");
+					if (!b) {
+						p.sendMessage(ChatColor.BLUE + "[霊界] <" + e.getPlayer().getName() + "> " + e.getMessage());
+					}
 				}
-			}
-			e.setCancelled(true);
-			return;
-		}
-
-		if(Cycle.getStatus() == Cycle.Discussion){
-			if(Timer.getGameElapsedTime() < 5){
-				e.getPlayer().sendMessage(Jinro.getPrefix() + ChatColor.RED + "最初の5秒間は発言できません。");
 				e.setCancelled(true);
 				return;
 			}
-			// ===== Playing & Discussion =====
-			// 議論中
-			// CO 音
-	    	if(Normalizer.normalize(e.getMessage(), Normalizer.Form.NFKC).toLowerCase().contains("co")){
-	    		// ORB_PICKUP
-				if(Jinro.getMain().getConfig().getBoolean("NoticeComingOut")) {
+
+			if (Yakusyoku.getSpecPlayers().contains(e.getPlayer()) && Status.getStatus() == Status.GamePlaying) {
+				Bukkit.broadcast(ChatColor.WHITE + "[観戦] <" + e.getPlayer().getName() + "> " + e.getMessage(), "axtuki1.Jinro.GameMaster");
+				for (Player p : Yakusyoku.getDeathPlayers()) {
+					boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideSpec");
+					if (!b) {
+						p.sendMessage(ChatColor.WHITE + "[観戦] <" + e.getPlayer().getName() + "> " + e.getMessage());
+					}
+				}
+				for (Player p : Yakusyoku.getSpecPlayers()) {
+					boolean b = Data.getBoolean("Players." + p.getUniqueId() + ".HideSpec");
+					if (!b) {
+						p.sendMessage(ChatColor.WHITE + "[観戦] <" + e.getPlayer().getName() + "> " + e.getMessage());
+					}
+				}
+				e.setCancelled(true);
+				return;
+			}
+
+			if (Cycle.getStatus() == Cycle.Discussion) {
+				int ElapsedTime = 0;
+				ElapsedTime = Timer.getGameElapsedTime();
+				if (ElapsedTime < 5) {
+					e.getPlayer().sendMessage(Jinro.getPrefix() + ChatColor.RED + "最初の5秒間は発言できません。");
+					e.setCancelled(true);
+					return;
+				}
+				// ===== Playing & Discussion =====
+				// 議論中
+				// CO 音
+				if (Normalizer.normalize(e.getMessage(), Normalizer.Form.NFKC).toLowerCase().contains("co")) {
+					// ORB_PICKUP
+					if (Jinro.getMain().getConfig().getBoolean("NoticeComingOut")) {
+						for (Player p : Bukkit.getOnlinePlayers()) {
+							p.getWorld().playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, (float) 0.1, 1);
+						}
+					}
+				}
+				if (Normalizer.normalize(e.getMessage(), Normalizer.Form.NFKC).toLowerCase().contains("@")) {
+					String f = Utility.myReplaceAll("@", "", e.getMessage());
+					f = Utility.myReplaceAll("＠", "", f);
+					e.setMessage(ChatColor.BOLD + f);
+				}
+				@SuppressWarnings("deprecation")
+				Score score = ScoreBoard.getChatCounterObj().getScore(e.getPlayer().getPlayer());
+				score.setScore(score.getScore() + 1);
+				Yakusyoku ya = ComingOut.getComingOut(e.getPlayer());
+				if (ya == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")) {
+//							Stats.CheckChallengeChat(e.getPlayer(), e.getMessage());
+					Bukkit.broadcastMessage(ChatColor.WHITE + "<" + e.getPlayer().getName() + "> " + e.getMessage());
+				} else {
+					Stats.CheckChallengeChat(e.getPlayer(), e.getMessage());
+					Bukkit.broadcastMessage(Yakusyoku.getYakuColor(ya) + "[" + getYaku2moji(ya) + "]" + ChatColor.WHITE + " <" + e.getPlayer().getName() + "> " + e.getMessage());
+				}
+				// =====  Discussion =====
+			}
+			if (Cycle.getStatus() == Cycle.Execution) {
+				// 処刑
+				Yakusyoku ya = ComingOut.getComingOut(e.getPlayer());
+				if (ya == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")) {
+//							Stats.CheckChallengeChat(e.getPlayer(), e.getMessage());
+					Bukkit.broadcastMessage(ChatColor.WHITE + "<" + e.getPlayer().getName() + "> " + e.getMessage());
+				} else {
+					Stats.CheckChallengeChat(e.getPlayer(), e.getMessage());
+					Bukkit.broadcastMessage(Yakusyoku.getYakuColor(ya) + "[" + getYaku2moji(ya) + "]" + ChatColor.WHITE + " <" + e.getPlayer().getName() + "> " + e.getMessage());
+				}
+			}
+			if (Cycle.getStatus() == Cycle.Night) {
+				// ===== Night =====
+				Yakusyoku y = null;
+				if (Yakusyoku.getYaku(e.getPlayer()) == Yakusyoku.人狼) {
 					for (Player p : Bukkit.getOnlinePlayers()) {
-						p.getWorld().playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, (float)0.1, 1);
-					}
-				}
-	    	}
-			if(Normalizer.normalize(e.getMessage(), Normalizer.Form.NFKC).toLowerCase().contains("@")){
-	    		String f = Utility.myReplaceAll("@","", e.getMessage());
-				f = Utility.myReplaceAll("＠","", f);
-				e.setMessage(ChatColor.BOLD + f);
-			}
-	    	@SuppressWarnings("deprecation")
-			Score score = ScoreBoard.getChatCounterObj().getScore( e.getPlayer().getPlayer() );
-	    	score.setScore(score.getScore() + 1);
-	    	y = ComingOut.getComingOut(e.getPlayer());
-	    	if(y == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
-				Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
-				Bukkit.broadcastMessage(ChatColor.WHITE +"<"+e.getPlayer().getName()+"> " + e.getMessage());
-			} else {
-	    		yaku = "";
-	    		if(y == Yakusyoku.白){
-	    			yaku = "○";
-				} else if(y == Yakusyoku.黒){
-	    			yaku = "●";
-				} else {
-					yaku = y.toString();
-				}
-				Stats.CheckChallengeChat(e.getPlayer(),e.getMessage());
-				Bukkit.broadcastMessage(Yakusyoku.getYakuColor( y ) + "[" + getYaku2moji(y) + "]" + ChatColor.WHITE +" <"+e.getPlayer().getName()+"> " + e.getMessage());
-			}
-
-	    	// =====  Discussion =====
-	    }
-	    if(Cycle.getStatus() == Cycle.Execution){
-			// 処刑
-			y = ComingOut.getComingOut(e.getPlayer());
-			if(y == null || !Jinro.getMain().getConfig().getBoolean("ShowComingOut")){
-				Bukkit.broadcastMessage(ChatColor.WHITE +"<"+e.getPlayer().getName()+"> " + e.getMessage());
-			} else {
-				yaku = "";
-				if(y == Yakusyoku.白){
-					yaku = "○";
-				} else if(y == Yakusyoku.黒){
-					yaku = "●";
-				} else {
-					yaku = y.toString();
-				}
-				Bukkit.broadcastMessage(Yakusyoku.getYakuColor( y ) + "[" + getYaku2moji(y) + "]" + ChatColor.WHITE +" <"+e.getPlayer().getName()+"> " + e.getMessage());
-			}
-		}
-		if(Cycle.getStatus() == Cycle.Night){
-			// ===== Night =====
-			// 人狼 アオォォォォォォォォォン
-			if( Yakusyoku.getYaku(e.getPlayer()) == Yakusyoku.人狼 ) {
-				for(Player p : Bukkit.getOnlinePlayers()) {
-					Yakusyoku py = Yakusyoku.getYaku( p );
-					if( py.equals(Yakusyoku.人狼) || py.equals(Yakusyoku.聴狂人) ) {
-						y = Yakusyoku.getYaku(e.getPlayer());
-						yaku = "";
-						if(y != null){
-							yaku = y.toString();
+						Yakusyoku py = Yakusyoku.getYaku(p);
+						if (py == null) {
+							if (!p.hasPermission("axtuki1.Jinro.GameMaster")) {
+								p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "アオォォーン....");
+								p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WOLF_GROWL, (float) 0.1, 1);
+							}
+						} else if (py.equals(Yakusyoku.人狼) || py.equals(Yakusyoku.聴狂人)) {
+							y = Yakusyoku.getYaku(e.getPlayer());
+							if (y == null) {
+								continue;
+							}
+							p.sendMessage(Yakusyoku.getYakuColor(y) + "[" + y + "] <" + e.getPlayer().getName() + "> " + e.getMessage());
+							p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WOLF_GROWL, (float) 0.1, 1);
+						} else if (p.hasPermission("axtuki1.Jinro.GameMaster")) {
+							// do nothing.
+						} else {
+							p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "アオォォーン....");
+							p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WOLF_GROWL, (float) 0.1, 1);
 						}
-						p.sendMessage(Yakusyoku.getYakuColor( y ) + "[" + yaku + "] <"+e.getPlayer().getName()+"> " + e.getMessage());
-						p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WOLF_GROWL, (float)0.1, 1);
-					} else if(p.hasPermission("axtuki1.Jinro.GameMaster")){
-						// do nothing.
-					} else {
-						p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "アオォォーン....");
-						p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WOLF_GROWL, (float)0.1, 1);
 					}
-				}
-			// 共有
-			} else if( Yakusyoku.getYaku(e.getPlayer()) == Yakusyoku.共有者 ){
-				for( Player p : Bukkit.getOnlinePlayers() ) {
-					if( Yakusyoku.getYaku( p ) == Yakusyoku.共有者 ) {
-						y = Yakusyoku.getYaku(e.getPlayer());
-						yaku = "";
-						if(y != null){
-							yaku = y.toString();
+					// 共有
+				} else if (Yakusyoku.getYaku(e.getPlayer()) == Yakusyoku.共有者) {
+					for (Player p : Bukkit.getOnlinePlayers()) {
+						Yakusyoku py = Yakusyoku.getYaku(p);
+						if (py == null) {
+							// do nothing.
+						} else if (py == Yakusyoku.共有者) {
+							y = Yakusyoku.getYaku(e.getPlayer());
+							if (y == null) {
+								continue;
+							}
+							p.sendMessage(Yakusyoku.getYakuColor(y) + "[" + y + "] <" + e.getPlayer().getName() + "> " + e.getMessage());
 						}
-						p.sendMessage(Yakusyoku.getYakuColor( y ) + "[" + yaku + "] <"+e.getPlayer().getName()+"> " + e.getMessage());
 					}
+				} else {
+					y = Yakusyoku.getYaku(e.getPlayer());
+					e.getPlayer().sendMessage(Yakusyoku.getYakuColor(y) + "[" + y + "] <" + e.getPlayer().getName() + "> " + e.getMessage());
 				}
-			} else {
-				e.getPlayer().sendMessage(Yakusyoku.getYakuColor( y ) +"[" + yaku + "] <"+e.getPlayer().getName()+"> " + e.getMessage());
+				// ===== Playing & Night =====
 			}
-			// ===== Playing & Night =====
-		}
-		if(Cycle.getStatus() == Cycle.Standby){
-			Bukkit.broadcastMessage(ChatColor.WHITE +"<"+e.getPlayer().getName()+"> " + e.getMessage());
-		}
+			if (Cycle.getStatus() == Cycle.Standby) {
+				Bukkit.broadcastMessage(ChatColor.WHITE + "<" + e.getPlayer().getName() + "> " + e.getMessage());
+			}
 
-		if(Cycle.getStatus() == Cycle.Vote || Cycle.getStatus() == Cycle.VoteAgain){
-			e.getPlayer().sendMessage(Yakusyoku.getYakuColor( y ) +"[" + yaku + "] <"+e.getPlayer().getName()+"> " + e.getMessage());
+			if (Cycle.getStatus() == Cycle.Vote || Cycle.getStatus() == Cycle.VoteAgain) {
+				e.getPlayer().sendMessage(
+						Yakusyoku.getYakuColor(Yakusyoku.getYaku(e.getPlayer())) + "[" + Yakusyoku.getYaku2moji(Yakusyoku.getYaku(e.getPlayer())) + "] <" + e.getPlayer().getName() + "> " + e.getMessage()
+				);
+			}
+
+			if (Cycle.getStatus() == Cycle.Vote || Cycle.getStatus() == Cycle.Night || Cycle.getStatus() == Cycle.VoteAgain) {
+				Bukkit.broadcast(Yakusyoku.getYakuColor(Yakusyoku.getYaku(e.getPlayer())) + "[" + Yakusyoku.getYaku2moji(Yakusyoku.getYaku(e.getPlayer())) + "] <" + e.getPlayer().getName() + "> " + e.getMessage(), "axtuki1.Jinro.GameMaster");
+			}
+		} catch ( Exception e1 ){
+			e.setCancelled(true);
+			e.getPlayer().sendMessage(Jinro.getPrefix() + ChatColor.RED + "チャット処理時に例外が発生しました....");
+			Bukkit.broadcast("[例外:" + e1 + "] <" + e.getPlayer().getName() + "> " + e.getMessage(), "axtuki1.Jinro.GameMaster");
+			Bukkit.broadcast("[例外:" + e1 + "] " + e1.getLocalizedMessage(), "axtuki1.Jinro.GameMaster");
+			e1.printStackTrace();
 		}
-
-		if(Cycle.getStatus() == Cycle.Vote || Cycle.getStatus() == Cycle.Night || Cycle.getStatus() == Cycle.VoteAgain){
-			Bukkit.broadcast(Yakusyoku.getYakuColor( y ) +"[" + yaku + "] <"+e.getPlayer().getName()+"> " + e.getMessage(),"axtuki1.Jinro.GameMaster");
-		}
-
-		e.setCancelled(true);
-	}
-
-	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onCommandexec( PlayerCommandPreprocessEvent e ){
-		Bukkit.broadcast(ChatColor.GRAY + "[CMD] " + e.getPlayer().getName() + ": " + e.getMessage(), "axtuki1.Jinro.GameMaster");
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST) 
@@ -260,7 +250,7 @@ public class Event implements Listener {
 		}
 		if(Status.getStatus() == Status.GamePlaying ) {
 			if ( Yakusyoku.getYaku(p) == null && Jinro.getMain().getConfig().getBoolean("LoginSpectatorMode") && !p.hasPermission("axtuki1.Jinro.GameMaster") ) {
-				p.setGameMode(GameMode.SPECTATOR);
+				p.setGameMode(org.bukkit.GameMode.SPECTATOR);
 				Data.set("Players." + p.getUniqueId() + ".Spectator", true);
 				p.sendMessage(ChatColor.GREEN + "==== 現在観戦モードです ====");
 				// p.sendTitle(ChatColor.GREEN + "現在観戦モードです", ChatColor.AQUA + "" + Timer.getDay() + "日目 " + Cycle.getStatusLocalize(), 20, 50, 10);
@@ -300,23 +290,23 @@ public class Event implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGHEST) 
 	public void onPlayerDeath(PlayerDeathEvent e) {
-		Player Ex = Yakusyoku.getExecution( Timer.getDay() );
-    	if(e.getEntity().equals(Ex) && Status.getStatus() == Status.GamePlaying){
-    		e.setDeathMessage(ChatColor.DARK_RED + e.getEntity().getName() + "は処刑されました。");
-    		e.getEntity().getPlayer().setGlowing(false);
-    		e.getEntity().getPlayer().setPlayerListName(ChatColor.BLACK + "[霊界] "+ e.getEntity().getName() + " ");
-    		Yakusyoku.setDeath(e.getEntity());
-    		Stats.setDeath(e.getEntity(), Stats.death.Execution, (Stats.getDeath(e.getEntity(), Stats.death.Execution) + 1));
-    		int Alive = Data.getInt("Status.Alive");
+		Player Ex = Yakusyoku.getExecution(Timer.getDay());
+		if (e.getEntity().equals(Ex) && Status.getStatus() == Status.GamePlaying) {
+			e.setDeathMessage(ChatColor.DARK_RED + e.getEntity().getName() + "は処刑されました。");
+			e.getEntity().getPlayer().setGlowing(false);
+			e.getEntity().getPlayer().setPlayerListName(ChatColor.BLACK + "[霊界] " + e.getEntity().getName() + " ");
+			Yakusyoku.setDeath(e.getEntity());
+			Stats.setDeath(e.getEntity(), Stats.death.Execution, (Stats.getDeath(e.getEntity(), Stats.death.Execution) + 1));
+			int Alive = Data.getInt("Status.Alive");
 			int Death = Data.getInt("Status.Death");
 			Data.set("Status.Alive", Alive - 1);
 			Data.set("Status.Death", Death + 1);
 			ScoreBoard.getScoreboard().resetScores(ChatColor.AQUA + "生存人数: 0人");
-			ScoreBoard.getScoreboard().resetScores(ChatColor.AQUA + "生存人数: "+ Alive +"人");
-			ScoreBoard.getScoreboard().resetScores(ChatColor.RED + "死亡人数: "+ Death +"人");
-			ScoreBoard.getInfoObj().getScore( ChatColor.AQUA + "生存人数: "+ (Alive - 1) +"人").setScore(2);
-			ScoreBoard.getInfoObj().getScore( ChatColor.RED + "死亡人数: "+ (Death + 1) +"人").setScore(1);
-			if( Yakusyoku.getYaku( e.getEntity().getPlayer() ) == Yakusyoku.爆弾魔 ){
+			ScoreBoard.getScoreboard().resetScores(ChatColor.AQUA + "生存人数: " + Alive + "人");
+			ScoreBoard.getScoreboard().resetScores(ChatColor.RED + "死亡人数: " + Death + "人");
+			ScoreBoard.getInfoObj().getScore(ChatColor.AQUA + "生存人数: " + (Alive - 1) + "人").setScore(2);
+			ScoreBoard.getInfoObj().getScore(ChatColor.RED + "死亡人数: " + (Death + 1) + "人").setScore(1);
+			if (Yakusyoku.getYaku(e.getEntity().getPlayer()) == Yakusyoku.爆弾魔) {
 				int random = new Random().nextInt(Yakusyoku.getAlivePlayers().size());
 				Player miti = (Player) Yakusyoku.getAlivePlayers().toArray()[random];
 				Bukkit.broadcastMessage(ChatColor.DARK_RED + miti.getName() + "が爆発に巻き込まれて死亡しました。");
@@ -327,18 +317,18 @@ public class Event implements Listener {
 				Death = Data.getInt("Status.Death");
 				Data.set("Status.Alive", Alive - 1);
 				Data.set("Status.Death", Death + 1);
-				ScoreBoard.getScoreboard().resetScores(ChatColor.AQUA + "生存人数: "+ Alive +"人");
-				ScoreBoard.getScoreboard().resetScores(ChatColor.RED + "死亡人数: "+ Death +"人");
-				ScoreBoard.getInfoObj().getScore( ChatColor.AQUA + "生存人数: "+ (Alive - 1) +"人").setScore(2);
-				ScoreBoard.getInfoObj().getScore( ChatColor.RED + "死亡人数: "+ (Death + 1) +"人").setScore(1);
+				ScoreBoard.getScoreboard().resetScores(ChatColor.AQUA + "生存人数: " + Alive + "人");
+				ScoreBoard.getScoreboard().resetScores(ChatColor.RED + "死亡人数: " + Death + "人");
+				ScoreBoard.getInfoObj().getScore(ChatColor.AQUA + "生存人数: " + (Alive - 1) + "人").setScore(2);
+				ScoreBoard.getInfoObj().getScore(ChatColor.RED + "死亡人数: " + (Death + 1) + "人").setScore(1);
 				e.setKeepInventory(false);
 			}
 			e.setKeepInventory(false);
-    	} else {
-    		if( e.getEntity().getKiller() != null ) {
+		} else {
+			if (e.getEntity().getKiller() != null) {
 				if (e.getEntity().getKiller().hasPermission("axtuki1.Jinro.GameMaster")) {
 					Stats.setDeath(e.getEntity(), Stats.death.GM, (Stats.getDeath(e.getEntity(), Stats.death.GM) + 1));
-					if( !Status.getStatus().equals(Status.GamePlaying) ){
+					if (!Status.getStatus().equals(Status.GamePlaying)) {
 						Challenge.CheckOpen(e.getEntity());
 					}
 				}
@@ -390,8 +380,7 @@ public class Event implements Listener {
 			return;
 		}
 
-		Player Ex = Yakusyoku.getExecution( Timer.getDay() );
-		if( !e.getEntity().equals( Ex ) ){
+		if( !e.getEntity().equals( Yakusyoku.getExecution( Timer.getDay() ) ) ){
 			e.setCancelled(true);
 			return;
 		}

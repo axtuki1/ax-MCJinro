@@ -4,7 +4,7 @@
   <groupId>io.github.axtuki1</groupId>
   <artifactId>MinecraftJinro</artifactId>
   <name>MinecraftJinro</name>
-  <version>1.4</version>
+  <version>1.5</version>
   <build>
     <defaultGoal>clean package</defaultGoal>
     <resources>
@@ -49,8 +49,9 @@
       <url>https://oss.sonatype.org/content/groups/public/</url>
     </repository>
     <repository>
-      <id>textapi-repo</id>
-      <url>https://dl.bintray.com/luca98/plugins/</url>
+      <id>central</id>
+      <name>Maven Central</name>
+      <url>http://repo1.maven.org/maven2/</url>
     </repository>
   </repositories>
   <properties>

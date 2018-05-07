@@ -859,61 +859,59 @@ public class Jinro extends JavaPlugin {
 			int MuraC = 0;
 			int otherC = 0;
 			int AllC = 0;
-			if (GameMode.getGameMode().equals(GameMode.MinecraftJinro)) {
-				sender.sendMessage(ChatColor.GOLD + "[Status]");
-				Data.reloadConfig();
-				int Alivec = Data.getInt("Status.Alive");
-				int Deathc = Data.getInt("Status.Death");
-				if (Status.getStatus().equals(Status.GameStandby)) {
-					// do nothing.
-				} else if (Timer.getDay() == 1) {
-					Alivec--;
-				} else {
-					Deathc--;
-				}
-
-				Yakusyoku yaku = Yakusyoku.getSyoniti();
-				for (Player p : Yakusyoku.getAlivePlayers()) {
-					Yakusyoku p_yaku = Yakusyoku.getYaku(p);
-					if (p_yaku == null) {
-					} else if (p_yaku.equals(Yakusyoku.人狼)) {
-						JinroC++;
-						JinroKyoC++;
-						AllC++;
-					} else if (p_yaku.equals(Yakusyoku.村人) || p_yaku.equals(Yakusyoku.狩人)
-							|| p_yaku.equals(Yakusyoku.占い師) || p_yaku.equals(Yakusyoku.共有者) || p_yaku.equals(Yakusyoku.人形使い)
-							|| p_yaku.equals(Yakusyoku.爆弾魔) || p_yaku.equals(Yakusyoku.霊能者) || p_yaku.equals(Yakusyoku.コスプレイヤー)
-							|| p_yaku.equals(Yakusyoku.ニワトリ)) {
-						MuraC++;
-						AllC++;
-					} else if (p_yaku.equals(Yakusyoku.狂人)) {
-						JinroKyoC++;
-						AllC++;
-					} else if (p_yaku.equals(Yakusyoku.妖狐)) {
-						otherC++;
-						AllC++;
-					}
-				}
-				sender.sendMessage(ChatColor.GOLD + "総参加人数: " + ChatColor.YELLOW + AllC + "人 " + ChatColor.AQUA + "生存人数: " + ChatColor.YELLOW + Alivec + "人 " +
-						ChatColor.RED + "死亡人数: " + ChatColor.YELLOW + Deathc + "人 ");
-				sender.sendMessage(ChatColor.GREEN + "生存村人陣営: " + ChatColor.YELLOW + MuraC + "人 " +
-						ChatColor.RED + "生存人狼陣営: " + ChatColor.YELLOW + JinroKyoC + "人 " +
-						ChatColor.LIGHT_PURPLE + "生存第三陣営: " + ChatColor.YELLOW + otherC + "人 ");
-				int nawa = 0;
-				nawa = (Alivec - 1) / 2;
-				String nawa_s = "";
-				if (nawa == 0) {
-					nawa_s = "N/A";
-				} else {
-					nawa_s = nawa + "";
-				}
-				sender.sendMessage(ChatColor.GOLD + "推定縄数: " + ChatColor.YELLOW + nawa_s + "");
+			sender.sendMessage(ChatColor.GOLD + "[Status]");
+			Data.reloadConfig();
+			int Alivec = Data.getInt("Status.Alive");
+			int Deathc = Data.getInt("Status.Death");
+			if (Status.getStatus().equals(Status.GameStandby)) {
+				// do nothing.
+			} else if (Timer.getDay() == 1) {
+				Alivec--;
+			} else {
+				Deathc--;
 			}
+
+			Yakusyoku yaku = Yakusyoku.getSyoniti();
+			for (Player p : Yakusyoku.getAlivePlayers()) {
+				Yakusyoku p_yaku = Yakusyoku.getYaku(p);
+				if (p_yaku == null) {
+				} else if (p_yaku.equals(Yakusyoku.人狼)) {
+					JinroC++;
+					JinroKyoC++;
+					AllC++;
+				} else if (p_yaku.equals(Yakusyoku.村人) || p_yaku.equals(Yakusyoku.狩人)
+						|| p_yaku.equals(Yakusyoku.占い師) || p_yaku.equals(Yakusyoku.共有者) || p_yaku.equals(Yakusyoku.人形使い)
+						|| p_yaku.equals(Yakusyoku.爆弾魔) || p_yaku.equals(Yakusyoku.霊能者) || p_yaku.equals(Yakusyoku.コスプレイヤー)
+						|| p_yaku.equals(Yakusyoku.ニワトリ)) {
+					MuraC++;
+					AllC++;
+				} else if (p_yaku.equals(Yakusyoku.狂人)) {
+					JinroKyoC++;
+					AllC++;
+				} else if (p_yaku.equals(Yakusyoku.妖狐)) {
+					otherC++;
+					AllC++;
+				}
+			}
+			sender.sendMessage(ChatColor.GOLD + "総参加人数: " + ChatColor.YELLOW + AllC + "人 " + ChatColor.AQUA + "生存人数: " + ChatColor.YELLOW + Alivec + "人 " +
+					ChatColor.RED + "死亡人数: " + ChatColor.YELLOW + Deathc + "人 ");
+			sender.sendMessage(ChatColor.GREEN + "生存村人陣営: " + ChatColor.YELLOW + MuraC + "人 " +
+					ChatColor.RED + "生存人狼陣営: " + ChatColor.YELLOW + JinroKyoC + "人 " +
+					ChatColor.LIGHT_PURPLE + "生存第三陣営: " + ChatColor.YELLOW + otherC + "人 ");
+			int nawa = 0;
+			nawa = (Alivec - 1) / 2;
+			String nawa_s = "";
+			if (nawa == 0) {
+				nawa_s = "N/A";
+			} else {
+				nawa_s = nawa + "";
+			}
+			sender.sendMessage(ChatColor.GOLD + "推定縄数: " + ChatColor.YELLOW + nawa_s + "");
 
 			sender.sendMessage(ChatColor.GOLD + "[Players]");
 			boolean ready = true;
 			String Death = "";
-			Yakusyoku yaku = Yakusyoku.getSyoniti();
+			yaku = Yakusyoku.getSyoniti();
 			if (yaku != null) {
 				sender.sendMessage(ChatColor.GREEN + "初日犠牲者 : " + Yakusyoku.getYakuColor(yaku) + "[" + yaku.toString() + "]" + ChatColor.GRAY + "(死亡)");
 			} else {

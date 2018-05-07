@@ -3,7 +3,7 @@ package io.github.axtuki1.jinro;
 public enum GameMode {
     MinecraftJinro, OneNightJinro;
 
-    private static GameMode CurrentGameMode;
+    private static GameMode CurrentGameMode = MinecraftJinro;
 
     public static void setGameMode(GameMode gm){
         CurrentGameMode = gm;

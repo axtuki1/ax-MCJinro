@@ -182,9 +182,11 @@ public class Challenge implements Listener {
             if( after[0] != before && after[0]){
                 Jinro.sendMessage(p,ChatColor.WHITE +"実績 "+ ChatColor.GREEN + "[" + data.get("Title") + ChatColor.GREEN +"] " + ChatColor.WHITE +"を達成しました！", LogLevel.SUCCESSFUL);
                 Stats.setChallenge(p, key,true);
-                for(Player pall : Bukkit.getOnlinePlayers()){
-                    if(pall != p){
-                        Jinro.sendMessage(pall,ChatColor.WHITE + p.getName() +" が実績 "+ ChatColor.GREEN + "[" + data.get("Title") + ChatColor.GREEN +"] " + ChatColor.WHITE +"を達成しました！", LogLevel.SUCCESSFUL);
+                if( !Challenge.getConfig().getBoolean("Challenges."+key+".DisableBroadcast") ){
+                    for(Player pall : Bukkit.getOnlinePlayers()){
+                        if(pall != p){
+                            Jinro.sendMessage(pall,ChatColor.WHITE + p.getName() +" が実績 "+ ChatColor.GREEN + "[" + data.get("Title") + ChatColor.GREEN +"] " + ChatColor.WHITE +"を達成しました！", LogLevel.SUCCESSFUL);
+                        }
                     }
                 }
             }

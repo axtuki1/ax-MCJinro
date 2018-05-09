@@ -1617,11 +1617,11 @@ public class Jinro extends JavaPlugin {
 								view.add("syoniti##");
 							}
 							break;
-						case OneNightJinro:
-							if("amari##".toLowerCase().startsWith(arg)){
-								view.add("amari##");
-							}
-							break;
+//						case OneNightJinro:
+//							if("amari##".toLowerCase().startsWith(arg)){
+//								view.add("amari##");
+//							}
+//							break;
 					}
 					return view;
 				}
@@ -1878,11 +1878,11 @@ public class Jinro extends JavaPlugin {
 									view.add("syoniti##");
 								}
 								break;
-							case OneNightJinro:
-								if("amari##".toLowerCase().startsWith(arg)){
-									view.add("amari##");
-								}
-								break;
+//							case OneNightJinro:
+//								if("amari##".toLowerCase().startsWith(arg)){
+//									view.add("amari##");
+//								}
+//								break;
 						}
 						return view;
 					}

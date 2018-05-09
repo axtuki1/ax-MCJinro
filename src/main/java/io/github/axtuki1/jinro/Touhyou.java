@@ -68,13 +68,13 @@ public class Touhyou extends JavaPlugin {
 					if(!args[2].equalsIgnoreCase("force")){
 						// 投票check
 						switch (GameMode.getGameMode()){
-							case OneNightJinro:
-								for(Player p : alive){
-									if( getTouhyou( p ) == null && !p.hasPermission("axtuki1.Jinro.GameMaster")){
-										pl.add(p);
-									}
-								}
-								break;
+//							case OneNightJinro:
+//								for(Player p : alive){
+//									if( getTouhyou( p ) == null && !p.hasPermission("axtuki1.Jinro.GameMaster")){
+//										pl.add(p);
+//									}
+//								}
+//								break;
 							case MinecraftJinro:
 								for(Player p : alive){
 									if( !Yakusyoku.getDeath(p) && getTouhyou( p ) == null && !p.hasPermission("axtuki1.Jinro.GameMaster")){

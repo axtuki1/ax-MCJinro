@@ -1,7 +1,9 @@
 package io.github.axtuki1.jinro;
 
 public enum GameMode {
-    MinecraftJinro, OneNightJinro;
+    MinecraftJinro
+    //, OneNightJinro
+    ;
 
     private static GameMode CurrentGameMode = MinecraftJinro;
 

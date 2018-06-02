@@ -885,7 +885,7 @@ public class Jinro extends JavaPlugin {
 						|| p_yaku.equals(Yakusyoku.ニワトリ)) {
 					MuraC++;
 					AllC++;
-				} else if (p_yaku.equals(Yakusyoku.狂人)) {
+				} else if (p_yaku.equals(Yakusyoku.狂人) || p_yaku.equals(Yakusyoku.聴狂人) || p_yaku.equals(Yakusyoku.狂信者)) {
 					JinroKyoC++;
 					AllC++;
 				} else if (p_yaku.equals(Yakusyoku.妖狐)) {

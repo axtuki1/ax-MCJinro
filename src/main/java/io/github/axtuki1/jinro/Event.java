@@ -237,9 +237,7 @@ public class Event implements Listener {
 
 		if(Yakusyoku.getDeath(e.getPlayer())){
     		Jinro.TeleportToReikai(e.getPlayer());
-    	} else if( Yakusyoku.getAlivePlayers().contains(e.getPlayer()) ){
-			// do nothing.
-		} else {
+    	} else {
 			Jinro.TeleportToRespawn(e.getPlayer());
 		}
     	if(Jinro.getMain().getConfig().getBoolean("LoginAttention.enable")){

@@ -437,7 +437,7 @@ public class Timer extends BukkitRunnable {
             Yakusyoku p_yaku = Yakusyoku.getYaku(p);
             if( p_yaku.equals(Yakusyoku.人狼) ){
                 JinroC++;
-            } else if( p_yaku.equals(Yakusyoku.村人) || p_yaku.equals(Yakusyoku.狩人)
+            } else if( p_yaku.equals(Yakusyoku.村人) || p_yaku.equals(Yakusyoku.狩人) || p_yaku.equals(Yakusyoku.聴狂人) || p_yaku.equals(Yakusyoku.狂信者)  || p_yaku.equals(Yakusyoku.狂人)
                     || p_yaku.equals(Yakusyoku.占い師) || p_yaku.equals(Yakusyoku.共有者) || p_yaku.equals(Yakusyoku.人形使い)
                     || p_yaku.equals(Yakusyoku.爆弾魔) || p_yaku.equals(Yakusyoku.霊能者) || p_yaku.equals(Yakusyoku.コスプレイヤー)
                     || p_yaku.equals(Yakusyoku.ニワトリ) ){

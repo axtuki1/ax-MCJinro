@@ -14,6 +14,7 @@ import java.util.zip.ZipEntry;
 
 import org.bukkit.*;
 import org.bukkit.command.*;
+import org.bukkit.configuration.MemorySection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
@@ -852,6 +853,70 @@ public class Jinro extends JavaPlugin {
 				return true;
 			}
 			return true;
+		} else if(arg0.equalsIgnoreCase("data-edit")) {
+			if( args.length == 1 ){
+				sender.sendMessage(ChatColor.RED + "========== " + ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "]" + ChatColor.RED + "==========");
+				sendCmdHelp(sender, "/jinro_ad data-edit get <Path>", "data.ymlの<Path>を参照します。");
+				sendCmdHelp(sender, "/jinro_ad data-edit set <Path> <data ...>", "data.ymlの<Path>を<data>に変更します。");
+				return true;
+			} else {
+				if(args[1].equalsIgnoreCase("get")){
+					if( args.length <= 2 ){
+						sender.sendMessage( ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.GREEN + "(root):");
+						Data.getConfig().getKeys(false).forEach((String key) -> {
+							Object c = Data.get(key);
+							sender.sendMessage( ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.WHITE + " - " + ChatColor.YELLOW + key + ": " + ChatColor.WHITE + (c != null ? (c instanceof MemorySection ? ChatColor.LIGHT_PURPLE + "Array" : c.toString()) : "null"));
+						});
+						return true;
+					}
+					Object out = Data.get(args[2]);
+					if( out instanceof MemorySection ){
+						sender.sendMessage( ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.GREEN + args[2] + ":");
+						MemorySection memse = (MemorySection) out;
+						memse.getKeys(false).forEach((String key) -> {
+							Object c = Data.get(args[2] + "." + key);
+							sender.sendMessage( ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.WHITE + " - " + ChatColor.YELLOW + key + ": " + ChatColor.WHITE + (c != null ? (c instanceof MemorySection ? ChatColor.LIGHT_PURPLE + "Array" : c.toString()) : "null"));
+						});
+					} else {
+						sender.sendMessage( ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.GREEN + args[2] + ":");
+						sender.sendMessage(ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.WHITE + (out != null ? out.toString() : "null"));
+					}
+
+					return true;
+				} else if(args[1].equalsIgnoreCase("set")){
+					if( args.length <= 3 ){
+						sendCmdHelp(sender, "/jinro_ad data-edit set <Path> <data ...>", "data.ymlの<Path>を<data>に変更します。");
+						return true;
+					}
+					Object be = Data.get(args[2]);
+					String ar = Utility.CommandText(args,3);
+					Object af = null;
+					if( ar.equalsIgnoreCase("true") ){
+						af = Boolean.TRUE;
+					} else if( ar.equalsIgnoreCase("false") ){
+						af = Boolean.FALSE;
+					} else {
+						try {
+							af = Integer.parseInt(ar);
+						} catch ( NumberFormatException e ) {
+							try {
+								af = Double.parseDouble(ar);
+							} catch (NumberFormatException e1) {
+								af = ar;
+							}
+						}
+					}
+					Data.set(args[2],af);
+					sender.sendMessage( ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.GREEN + args[2] + ":");
+					sender.sendMessage( ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.WHITE + (be != null ? be.toString() : "null") + " -> " + af );
+					return true;
+				} else {
+					sender.sendMessage(ChatColor.RED + "========== " + ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "]" + ChatColor.RED + "==========");
+					sendCmdHelp(sender, "/jinro_ad data-edit get <Path>", "data.ymlの<Path>を参照します。");
+					sendCmdHelp(sender, "/jinro_ad data-edit set <Path> <data ...>", "data.ymlの<Path>を<data>に変更します。");
+					return true;
+				}
+			}
 		} else if(arg0.equalsIgnoreCase("list")) {
 			sender.sendMessage(ChatColor.RED + "================================================");
 			int JinroC = 0;
@@ -879,7 +944,7 @@ public class Jinro extends JavaPlugin {
 					JinroC++;
 					JinroKyoC++;
 					AllC++;
-				} else if (p_yaku.equals(Yakusyoku.村人) || p_yaku.equals(Yakusyoku.狩人)
+				} else if (p_yaku.equals(Yakusyoku.村人) || p_yaku.equals(Yakusyoku.狩人) || p_yaku.equals(Yakusyoku.狩人) || p_yaku.equals(Yakusyoku.聴狂人) || p_yaku.equals(Yakusyoku.狂信者)  || p_yaku.equals(Yakusyoku.狂人)
 						|| p_yaku.equals(Yakusyoku.占い師) || p_yaku.equals(Yakusyoku.共有者) || p_yaku.equals(Yakusyoku.人形使い)
 						|| p_yaku.equals(Yakusyoku.爆弾魔) || p_yaku.equals(Yakusyoku.霊能者) || p_yaku.equals(Yakusyoku.コスプレイヤー)
 						|| p_yaku.equals(Yakusyoku.ニワトリ)) {

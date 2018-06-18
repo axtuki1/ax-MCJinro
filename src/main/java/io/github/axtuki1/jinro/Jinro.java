@@ -12,6 +12,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.configuration.MemorySection;
@@ -259,7 +261,7 @@ public class Jinro extends JavaPlugin {
 	}
     
     private static String[] AdminCmdList = new String[]{
-    	"start" /* ,"stop" MEMO:誤爆防止 */,"pause","map","gamemode","initialization","touhyou","yakusyoku","co","reload","debug","option","tp","next","open","list","spec","challenge"};
+    	"start" /* ,"stop" MEMO:誤爆防止 */,"pause","map","gamemode","initialization","touhyou","yakusyoku","co","reload","debug","option","tp","next","open","list","spec","challenge","data-edit"};
 	
 	private static String[] getAdminCmdList(){
 		return AdminCmdList;
@@ -865,17 +867,79 @@ public class Jinro extends JavaPlugin {
 						sender.sendMessage( ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.GREEN + "(root):");
 						Data.getConfig().getKeys(false).forEach((String key) -> {
 							Object c = Data.get(key);
-							sender.sendMessage( ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.WHITE + " - " + ChatColor.YELLOW + key + ": " + ChatColor.WHITE + (c != null ? (c instanceof MemorySection ? ChatColor.LIGHT_PURPLE + "Array" : c.toString()) : "null"));
+//							sender.sendMessage( ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.WHITE + " - " + ChatColor.YELLOW + key + ": " + ChatColor.WHITE + (c != null ? (c instanceof MemorySection ? ChatColor.LIGHT_PURPLE + "Array" : c.toString()) : "null"));
+							String text = "";
+							net.md_5.bungee.api.ChatColor color = net.md_5.bungee.api.ChatColor.WHITE;
+							if(c != null){
+								if(c instanceof MemorySection){
+									text = "Array";
+									color = net.md_5.bungee.api.ChatColor.LIGHT_PURPLE;
+								} else {
+									text = c.toString();
+								}
+							} else {
+								text = "null";
+							}
+							TextComponent msg = new TextComponent(key);
+							msg.setColor(net.md_5.bungee.api.ChatColor.YELLOW);
+							if( c instanceof MemorySection ){
+								msg.setUnderlined(true);
+								msg.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/jinro_ad data-edit get " + key));
+							}
+							TextComponent t = new TextComponent(ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.WHITE + " - ");
+							t.addExtra(msg);
+							TextComponent coro = new TextComponent(": ");
+							t.addExtra(coro);
+							TextComponent data = new TextComponent(text);
+							data.setColor(color);
+							t.addExtra(data);
+							((Player) sender).spigot().sendMessage(t);
 						});
 						return true;
 					}
 					Object out = Data.get(args[2]);
 					if( out instanceof MemorySection ){
-						sender.sendMessage( ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.GREEN + args[2] + ":");
+						TextComponent msgh = new TextComponent(args[2]);
+						msgh.setColor(net.md_5.bungee.api.ChatColor.GREEN);
+						//msgh.setUnderlined(true);
+						//msgh.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/jinro_ad data-edit get "));
+						TextComponent th = new TextComponent(ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] ");
+						th.addExtra(msgh);
+
+						TextComponent coroh = new TextComponent(":");
+						coroh.setColor(net.md_5.bungee.api.ChatColor.GREEN);
+						th.addExtra(coroh);
+
+						((Player) sender).spigot().sendMessage(th);
 						MemorySection memse = (MemorySection) out;
 						memse.getKeys(false).forEach((String key) -> {
 							Object c = Data.get(args[2] + "." + key);
-							sender.sendMessage( ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.WHITE + " - " + ChatColor.YELLOW + key + ": " + ChatColor.WHITE + (c != null ? (c instanceof MemorySection ? ChatColor.LIGHT_PURPLE + "Array" : c.toString()) : "null"));
+							String text = "";
+							net.md_5.bungee.api.ChatColor color = net.md_5.bungee.api.ChatColor.WHITE;
+							if(c != null){
+								if(c instanceof MemorySection){
+									text = "Array";
+									color = net.md_5.bungee.api.ChatColor.LIGHT_PURPLE;
+								} else {
+									text = c.toString();
+								}
+							} else {
+								text = "null";
+							}
+							TextComponent msg = new TextComponent(key);
+							msg.setColor(net.md_5.bungee.api.ChatColor.YELLOW);
+							if( c instanceof MemorySection ){
+								msg.setUnderlined(true);
+								msg.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/jinro_ad data-edit get " + args[2] + "." + key));
+							}
+							TextComponent t = new TextComponent(ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.WHITE + " - ");
+							t.addExtra(msg);
+							TextComponent coro = new TextComponent(": ");
+							t.addExtra(coro);
+							TextComponent data = new TextComponent(text);
+							data.setColor(color);
+							t.addExtra(data);
+							((Player) sender).spigot().sendMessage(t);
 						});
 					} else {
 						sender.sendMessage( ChatColor.GREEN + "[" + ChatColor.AQUA + "YAMLEditor" + ChatColor.GREEN + "] " + ChatColor.GREEN + args[2] + ":");
@@ -2202,6 +2266,16 @@ public class Jinro extends JavaPlugin {
 				} else if(args.length == 4){
 					String arg = args[3].toLowerCase();
 					for ( String name : new String[]{"true","false"}  ) {
+						if ( name.toLowerCase().startsWith(arg) ) {
+							view.add(name);
+						}
+					}
+					return view;
+				}
+			} else if(args[0].equalsIgnoreCase("data-edit")){
+				if(args.length == 2){
+					String arg = args[1].toLowerCase();
+					for ( String name : new String[]{"get","set"}  ) {
 						if ( name.toLowerCase().startsWith(arg) ) {
 							view.add(name);
 						}

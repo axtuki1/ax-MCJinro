@@ -257,11 +257,21 @@ public class Jinro extends JavaPlugin {
 			rep = JinroAdminCmd(sender,commandLabel, args);
 			return rep;
 		}
+		if(cmd.getName().equalsIgnoreCase("c")){
+			if( args.length == 0 ){
+				Yakusyoku.sendYakuHelp(sender);
+				sender.sendMessage(getPrefix() + ChatColor.AQUA + "観戦: kansen");
+				return true;
+			} else {
+				sendMsgToYakuALL(Utility.CommandText(args, 1), args[0], sender);
+				return true;
+			}
+		}
 		return false;
 	}
     
     private static String[] AdminCmdList = new String[]{
-    	"start" /* ,"stop" MEMO:誤爆防止 */,"pause","map","gamemode","initialization","touhyou","yakusyoku","co","reload","debug","option","tp","next","open","list","spec","challenge","data-edit"};
+    	"start" /* ,"stop" MEMO:誤爆防止 */,"pause","map","gamemode","initialization","touhyou","yakusyoku","co","reload","debug","option","tp","next","open","list","spec","challenge","data-edit","c"};
 	
 	private static String[] getAdminCmdList(){
 		return AdminCmdList;
@@ -626,6 +636,15 @@ public class Jinro extends JavaPlugin {
 			}
 			sender.sendMessage(Jinro.getPrefix() + "Configを再読込しました。");
 			return true;
+		} else if(arg0.equalsIgnoreCase("c")){
+			if( args.length == 1 ){
+				Yakusyoku.sendYakuHelp(sender);
+				sender.sendMessage(getPrefix() + ChatColor.AQUA + "観戦: kansen");
+				return true;
+			} else {
+				sendMsgToYakuALL(Utility.CommandText(args, 2), args[1], sender);
+				return true;
+			}
 		} else if(arg0.equalsIgnoreCase("kill")){
 			if( !GameMode.getGameMode().equals(GameMode.MinecraftJinro) ){
 				sendMessage(sender, "このゲームモードでは使用できません。", LogLevel.ERROR, true);
@@ -1213,11 +1232,10 @@ public class Jinro extends JavaPlugin {
 				sender.sendMessage(Jinro.getPrefix() + ChatColor.RED + "まだ使用できません。");
 				return true;
 			}
-
-					if(Yakusyoku.getYaku( Utility.getPlayer( sender.getName() ) ) != Yakusyoku.占い師){
-						sendMessage(sender, "あなたは占い師ではありません。", LogLevel.ERROR);
-						return true;
-					}
+			if(Yakusyoku.getYaku( Utility.getPlayer( sender.getName() ) ) != Yakusyoku.占い師){
+				sendMessage(sender, "あなたは占い師ではありません。", LogLevel.ERROR);
+				return true;
+			}
 			if (args.length == 1) {
 				sendMessage(sender, "プレイヤーを指定してください。", LogLevel.ERROR);
 			} else if(args[1].equalsIgnoreCase("syoniti##")) {
@@ -1631,7 +1649,7 @@ public class Jinro extends JavaPlugin {
 			sender.sendMessage(ChatColor.GOLD    + "MinecraftJinro " + ChatColor.AQUA + "v" + getDescription().getVersion());sender.sendMessage(ChatColor.GOLD    + "");
 			sender.sendMessage(ChatColor.AQUA    + "Original Game: Mafia");
 			sender.sendMessage(ChatColor.AQUA    + "Base Game: Are You a Werewolf?");
-			sender.sendMessage(ChatColor.AQUA    + "Respected by MinecraftJinro (by Midorikun)");
+			sender.sendMessage(ChatColor.AQUA    + "Respected for MinecraftJinro (by Midorikun)"); // 文法むずかち
 			sender.sendMessage(ChatColor.GREEN   + "Author: axtuki1");
 			sender.sendMessage(ChatColor.GREEN   + "Development started: 2017/05/25");
 			sender.sendMessage(ChatColor.RED     + "===================================");
@@ -1701,10 +1719,45 @@ public class Jinro extends JavaPlugin {
 		return out;
 	}
 
+	public static void sendMsgToYakuALL(String msg, String yaku, CommandSender sender){
+		if(msg.equalsIgnoreCase("")){
+			sendMessage(sender, "メッセージがありません。", LogLevel.ERROR);
+			return;
+		} else {
+			if( yaku.equalsIgnoreCase("kansen") ){
+				sender.sendMessage(ChatColor.YELLOW + "[GM -> 観戦] <"+sender.getName()+"> "+msg);
+				for(Player p :Yakusyoku.getSpecPlayers()) {
+					p.sendMessage(ChatColor.YELLOW + "[GM -> 観戦] <"+sender.getName()+"> "+msg);
+				}
+				return;
+			} else {
+				Yakusyoku y = Yakusyoku.getNameToYaku(yaku);
+				sender.sendMessage(ChatColor.YELLOW + "[GM -> "+Yakusyoku.getYaku2moji(y)+"] <"+sender.getName()+"> "+msg);
+				for(Player p :Yakusyoku.getPlayers(y)) {
+					p.sendMessage(ChatColor.YELLOW + "[GM -> "+Yakusyoku.getYaku2moji(y)+"] <"+sender.getName()+"> "+msg);
+				}
+				return;
+			}
+		}
+	}
+
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args){
 		List<String> view = new ArrayList<>();
-		if(cmd.getName().equalsIgnoreCase("jinro")){
+		if(cmd.getName().equalsIgnoreCase("c")){
+            if(args.length == 1) {
+                String arg = args[0].toLowerCase();
+                ArrayList<String> a = new ArrayList<String>();
+                Collections.addAll(a, Yakusyoku.getYakuList());
+                a.add("kansen");
+                for ( String name : a ) {
+                    if ( name.toLowerCase().startsWith(arg) ) {
+                        view.add(name);
+                    }
+                }
+                return view;
+            }
+        } else if(cmd.getName().equalsIgnoreCase("jinro")){
 			//sender.sendMessage("args.length = " + args.length);
 			if(args.length == 1) {
 				// jinro
@@ -1910,6 +1963,19 @@ public class Jinro extends JavaPlugin {
 			} else if(args[0].equalsIgnoreCase("open")) {
 				view.add("");
 				return view;
+			} else if(args[0].equalsIgnoreCase("c")){
+				if(args.length == 2) {
+					String arg = args[1].toLowerCase();
+					ArrayList<String> a = new ArrayList<String>();
+					Collections.addAll(a, Yakusyoku.getYakuList());
+					a.add("kansen");
+					for ( String name : a ) {
+						if ( name.toLowerCase().startsWith(arg) ) {
+							view.add(name);
+						}
+					}
+					return view;
+				}
 			} else if(args[0].equalsIgnoreCase("kill")){
 				if(args.length == 2){
 					String arg = args[1].toLowerCase();

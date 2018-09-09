@@ -21,3 +21,7 @@ commands:
         description: GameMaster
         permission: axtuki1.Jinro.GameMaster
         usage: GM向けのコマンドやで 一般会員は使えないやで
+    c:
+        description: 指定役職全体通知
+        permission: axtuki1.Jinro.GameMaster
+        usage: GM向けやで

@@ -79,6 +79,10 @@ public class Utility {
 		for(int i = start; i < args.length ; i++){
 			out.append(args[i]).append(" ");
 		}
-		return out.toString().substring(0,out.length() - 1);
+		if( (out.length() - 1) <= 0 ){
+			return out.toString();
+		} else {
+			return out.toString().substring(0,out.length() - 1);
+		}
 	}
 }

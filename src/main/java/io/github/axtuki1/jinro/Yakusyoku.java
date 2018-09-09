@@ -1,7 +1,6 @@
 package io.github.axtuki1.jinro;
 
 import java.util.*;
-import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -500,7 +499,7 @@ public enum Yakusyoku {
 			Jinro.sendMessage(attacker, "プレイヤーが見つかりませんでした。", LogLevel.ERROR);
 			return true;
 		}
-		if (p.getName() == attacker.getName()) {
+		if (p.getUniqueId() == attacker.getUniqueId()) {
 			Jinro.sendMessage(attacker, "自分を噛むことはできません。", LogLevel.ERROR);
 			return true;
 		}
@@ -629,7 +628,7 @@ public enum Yakusyoku {
 		return;
 	}
 
-	public static boolean Admin(CommandSender sender, String commandLabel, String[] args) {
+	public static void Admin(CommandSender sender, String commandLabel, String[] args) {
 		// jinro_ad yakusyoku 
 		Player p = null;
 		Yakusyoku yaku = null;
@@ -640,12 +639,12 @@ public enum Yakusyoku {
 		*/
 		if( !Status.getStatus().equals(Status.GameStandby) ){
 			Jinro.sendMessage(sender, "現在役を振ることはできません。", LogLevel.ERROR );
-			return true;
+			return;
 		}
 
 		if (args.length <= 2) {
 			sendYakuHelp(sender);
-			return true;
+			return;
 		} else {
 			if(args[1].equalsIgnoreCase("ToolImport") ){
 				if(args.length >= 3){
@@ -675,10 +674,10 @@ public enum Yakusyoku {
 						}
 					}
 					sender.sendMessage(ChatColor.RED + "===================================");
-					return true;
+					return;
 				}
 				Jinro.sendMessage(sender, "フォーマットが不正です。", LogLevel.ERROR);
-				return true;
+				return;
 			}
 
 
@@ -687,20 +686,20 @@ public enum Yakusyoku {
 				if(args[1].equalsIgnoreCase("del") ){
 					Jinro.sendMessage(sender, "初日犠牲者の役職を削除しました。", LogLevel.SUCCESSFUL);
 					removeSyoniti();
-					return true;
+					return;
 				}
 				yaku = getNameToYaku(args[1]);
 				if(yaku == null){
 					sendYakuHelp(sender);
-					return true;
+					return;
 				}
 				if( ( yaku == Yakusyoku.人狼 || yaku == Yakusyoku.妖狐 ) && !Jinro.getDebug() ){
 					Jinro.sendMessage(sender, "初日犠牲者には役職[ " + yaku.name() + " ]を設定できません。", LogLevel.ERROR);
-					return true;
+					return;
 				}
 				Yakusyoku.setSyoniti(yaku);
 				Jinro.sendMessage(sender, "初日犠牲者 を役職[ " + yaku.name() + " ]に設定しました。", LogLevel.SUCCESSFUL);
-				return true;
+				return;
 			}
 			p = Utility.getPlayer(args[2]);
 			yaku = getNameToYaku(args[1]);
@@ -708,12 +707,11 @@ public enum Yakusyoku {
 		if(args[1].equalsIgnoreCase("del") ){
 			if( getYaku(p) == null ){
 				sender.sendMessage(Jinro.getPrefix() + ChatColor.AQUA + p.getName() + "の役職を削除しました。");
-				return true;
+				return;
 			}
 			removeYaku(p);
 			Jinro.sendMessage(p, "あなたの役職は取り消されました", LogLevel.INFO);
 			Jinro.sendMessage(sender, p.getName() + "の役職を削除しました。", LogLevel.SUCCESSFUL);
-			return true;
 		} else if( args[1].equalsIgnoreCase("random") ){
 			yaku = getNameToYaku(args[2]);
 			ArrayList<Player> out = new ArrayList<Player>();
@@ -726,11 +724,11 @@ public enum Yakusyoku {
 			ArrayList<Player> neetplayers = getNEETPlayers();
 			if(neetplayers.size() == 0){
 				Jinro.sendMessage(sender, "待機プレイヤーがいません。", LogLevel.ERROR);
-				return true;
+				return;
 			}
 			if(neetplayers.size() < max){
                 Jinro.sendMessage(sender, "数が合いません。", LogLevel.ERROR);
-                return true;
+                return;
             }
 			for( int i = 0; i < max; i++ ){
 				int random = new Random().nextInt(neetplayers.size());
@@ -754,11 +752,11 @@ public enum Yakusyoku {
 		} else {
 			if (p == null) {
 				Jinro.sendMessage(sender, "プレイヤーが見つかりませんでした。", LogLevel.ERROR);
-				return true;
+				return;
 			}
 			if (yaku == null) {
 				sendYakuHelp(sender);
-				return true;
+				return;
 			}
 			// [DEBUG] sender.sendMessage(p.toString());
 			Yakusyoku.addYaku(p, yaku);
@@ -766,9 +764,7 @@ public enum Yakusyoku {
 			if (p instanceof Player) {
 				p.sendMessage(ChatColor.RED + "=== " + ChatColor.WHITE + "あなたは " + Yakusyoku.getYakuColor(yaku) + "[" + yaku.name() + "]" + ChatColor.WHITE + " です。" + ChatColor.RED + " ===");
 			}
-			return true;
 		}
-		return true;
 	}
 
 	public static void sendYakuHelp(CommandSender sender) {

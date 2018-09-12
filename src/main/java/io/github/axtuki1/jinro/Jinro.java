@@ -305,12 +305,14 @@ public class Jinro extends JavaPlugin {
 		if(yaku == Yakusyoku.狩人 || yaku == Yakusyoku.コスプレイヤー){
 			out.add("goei");
 		}
+		if( !Status.getStatus().equals(Status.GamePlaying) ){
+			out.add("challenge");
+			out.add("stats");
+		}
 		out.add("chat");
 		out.add("co");
 		out.add("touhyou");
-		out.add("challenge");
 		out.add("list");
-		out.add("stats");
 		out.add("option");
 		out.add("ver");
 		return out;
@@ -1724,17 +1726,27 @@ public class Jinro extends JavaPlugin {
 			sendMessage(sender, "メッセージがありません。", LogLevel.ERROR);
 			return;
 		} else {
-			if( yaku.equalsIgnoreCase("kansen") ){
+			if( yaku.equalsIgnoreCase("kansen") || yaku.equalsIgnoreCase("spec") ){
 				sender.sendMessage(ChatColor.YELLOW + "[GM -> 観戦] <"+sender.getName()+"> "+msg);
 				for(Player p :Yakusyoku.getSpecPlayers()) {
 					p.sendMessage(ChatColor.YELLOW + "[GM -> 観戦] <"+sender.getName()+"> "+msg);
 				}
 				return;
+			} else if( yaku.equalsIgnoreCase("reikai") ){
+				sender.sendMessage(ChatColor.YELLOW + "[GM -> 霊界] <"+sender.getName()+"> "+msg);
+				for(Player p :Yakusyoku.getDeathPlayers()) {
+					p.sendMessage(ChatColor.YELLOW + "[GM -> 霊界] <"+sender.getName()+"> "+msg);
+				}
+				return;
 			} else {
 				Yakusyoku y = Yakusyoku.getNameToYaku(yaku);
-				sender.sendMessage(ChatColor.YELLOW + "[GM -> "+Yakusyoku.getYaku2moji(y)+"] <"+sender.getName()+"> "+msg);
-				for(Player p :Yakusyoku.getPlayers(y)) {
-					p.sendMessage(ChatColor.YELLOW + "[GM -> "+Yakusyoku.getYaku2moji(y)+"] <"+sender.getName()+"> "+msg);
+				if( y != null ){
+					sender.sendMessage(ChatColor.YELLOW + "[GM -> "+Yakusyoku.getYaku2moji(y)+"] <"+sender.getName()+"> "+msg);
+					for(Player p :Yakusyoku.getPlayers(y)) {
+						p.sendMessage(ChatColor.YELLOW + "[GM -> "+Yakusyoku.getYaku2moji(y)+"] <"+sender.getName()+"> "+msg);
+					}
+				} else {
+					sender.sendMessage(ChatColor.RED + "[GM -> 宛先不明] <"+sender.getName()+"> "+msg);
 				}
 				return;
 			}
@@ -1750,6 +1762,7 @@ public class Jinro extends JavaPlugin {
                 ArrayList<String> a = new ArrayList<String>();
                 Collections.addAll(a, Yakusyoku.getYakuList());
                 a.add("kansen");
+				a.add("reikai");
                 for ( String name : a ) {
                     if ( name.toLowerCase().startsWith(arg) ) {
                         view.add(name);
